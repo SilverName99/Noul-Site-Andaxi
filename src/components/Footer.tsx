@@ -5,11 +5,8 @@ const Footer = () => (
   <footer className="border-t border-white/10 bg-black">
     <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 px-6 py-14 lg:flex-row lg:items-start lg:justify-between lg:px-8">
       <div className="max-w-sm">
-        <Link to="/" className="flex items-center gap-2.5">
-          <span className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white">
-            <span className="h-3 w-3 rounded-full bg-white" />
-          </span>
-          <span className="text-lg font-medium text-white">Andaxi</span>
+        <Link to="/" className="inline-flex items-center">
+          <img src="/logo.png" alt="Andaxi" className="h-11 w-auto" />
         </Link>
         <p className="mt-4 text-sm leading-relaxed text-white/60">
           Web design accesibil și frumos, fără să-ți golească portofelul.

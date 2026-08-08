@@ -179,11 +179,11 @@ const Erp = () => {
     <div className="bg-black font-sans">
       {/* ===== Hero ===== */}
       <section className="relative flex min-h-screen w-full flex-col overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_-10%,rgba(31,111,235,0.35),transparent)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_-10%,var(--accent-glow),transparent)]" />
 
         <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col items-center justify-center px-6 pb-16 pt-40 text-center lg:px-8">
           <Reveal>
-            <p className="mb-4 text-xs uppercase tracking-tight text-[#64CEFB] md:text-sm">
+            <p className="mb-4 text-xs uppercase tracking-tight text-[color:var(--accent)] md:text-sm">
               ANDAXI ERP · Online, complet, conform ANAF
             </p>
           </Reveal>
@@ -197,7 +197,7 @@ const Erp = () => {
             </span>
             <ShinyText
               text="într-un singur program."
-              color="#1F6FEB"
+              color="var(--accent-strong)"
               shineColor="#ffffff"
               speed={3}
               spread={100}
@@ -216,7 +216,7 @@ const Erp = () => {
           <Reveal delay={0.45} className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-[#1F6FEB] px-6 py-3 text-sm font-medium text-white transition-colors duration-300 hover:bg-[#3b82f6] md:px-8 md:py-4 md:text-base"
+              className="group inline-flex items-center gap-2 rounded-full bg-[color:var(--accent-strong)] px-6 py-3 text-sm font-medium text-white transition-colors duration-300 hover:bg-[color:var(--accent-strong-hover)] md:px-8 md:py-4 md:text-base"
             >
               Cere o demonstrație
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -232,7 +232,7 @@ const Erp = () => {
 
           <Reveal delay={0.55}>
             <p className="mt-8 flex items-center justify-center gap-2 text-xs text-white/50 md:text-sm">
-              <ShieldCheck className="h-4 w-4 text-[#64CEFB]" />
+              <ShieldCheck className="h-4 w-4 text-[color:var(--accent)]" />
               Conform e-Factura și SAF-T. Datele tale, pe serverul tău.
             </p>
           </Reveal>
@@ -273,11 +273,11 @@ const Erp = () => {
                 <motion.div
                   whileHover={{ y: -6 }}
                   transition={{ duration: 0.3, ease: 'easeOut' }}
-                  className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-8 transition-colors duration-300 hover:border-[#1F6FEB]/60"
+                  className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-8 transition-colors duration-300 hover:border-[color:var(--accent-border)]"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#1F6FEB]/15">
-                      <Icon className="h-5 w-5 text-[#64CEFB]" />
+                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[color:var(--accent-tint)]">
+                      <Icon className="h-5 w-5 text-[color:var(--accent)]" />
                     </span>
                     <div>
                       <h3 className="text-lg font-medium text-white">{title}</h3>
@@ -287,7 +287,7 @@ const Erp = () => {
                   <ul className="mt-5 flex flex-col gap-2.5">
                     {items.map((item) => (
                       <li key={item} className="flex gap-2.5 text-sm leading-relaxed text-white/60">
-                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#64CEFB]" />
+                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[color:var(--accent)]" />
                         {item}
                       </li>
                     ))}
@@ -374,7 +374,7 @@ const Erp = () => {
             {TECH.map(({ icon: Icon, title, text }) => (
               <StaggerItem key={title}>
                 <div className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-8">
-                  <Icon className="h-6 w-6 text-[#64CEFB]" />
+                  <Icon className="h-6 w-6 text-[color:var(--accent)]" />
                   <h3 className="mt-4 text-lg font-medium text-white">{title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-white/60">{text}</p>
                 </div>
@@ -387,7 +387,7 @@ const Erp = () => {
       {/* ===== CTA final ===== */}
       <section className="border-t border-white/10">
         <div className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_50%_110%,rgba(31,111,235,0.3),transparent)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_50%_110%,var(--accent-glow),transparent)]" />
           <div className="relative mx-auto flex w-full max-w-7xl flex-col items-center px-6 py-24 text-center lg:px-8 lg:py-32">
             <h2 className="max-w-3xl text-4xl font-medium tracking-tighter text-white md:text-6xl">
               <AnimatedText text="Un singur program pentru tot ce ține firma ta." />
@@ -400,7 +400,7 @@ const Erp = () => {
             <Reveal delay={0.35} className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
               <Link
                 to="/contact"
-                className="group inline-flex items-center gap-2 rounded-full bg-[#1F6FEB] px-8 py-4 text-sm font-medium text-white transition-colors duration-300 hover:bg-[#3b82f6] md:text-base"
+                className="group inline-flex items-center gap-2 rounded-full bg-[color:var(--accent-strong)] px-8 py-4 text-sm font-medium text-white transition-colors duration-300 hover:bg-[color:var(--accent-strong-hover)] md:text-base"
               >
                 Cere o demonstrație
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

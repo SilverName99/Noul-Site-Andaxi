@@ -20,11 +20,8 @@ const Navbar = () => {
     <header className="absolute inset-x-0 top-0 z-50">
       <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-6 lg:px-8">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2.5" onClick={() => setMenuOpen(false)}>
-          <span className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white">
-            <span className="h-3 w-3 rounded-full bg-white" />
-          </span>
-          <span className="text-lg font-medium text-white">Andaxi</span>
+        <Link to="/" className="flex items-center" onClick={() => setMenuOpen(false)}>
+          <img src="/logo.png" alt="Andaxi" className="h-11 w-auto" />
         </Link>
 
         {/* Desktop links */}

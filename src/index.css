@@ -2,6 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Tema implicită: culorile logo-ului (portocaliu). */
+:root,
+:root[data-theme='brand'] {
+  --accent: #f5891e;
+  --accent-strong: #e27100;
+  --accent-strong-hover: #f5891e;
+  --accent-deep: #3d2405;
+  --accent-glow: rgba(245, 137, 30, 0.3);
+  --accent-glow-soft: rgba(245, 137, 30, 0.12);
+  --accent-tint: rgba(245, 137, 30, 0.15);
+  --accent-border: rgba(245, 137, 30, 0.4);
+}
+
+/* Tema alternativă: albastrul original. */
+:root[data-theme='blue'] {
+  --accent: #64cefb;
+  --accent-strong: #1f6feb;
+  --accent-strong-hover: #3b82f6;
+  --accent-deep: #0b2e4f;
+  --accent-glow: rgba(31, 111, 235, 0.35);
+  --accent-glow-soft: rgba(100, 206, 251, 0.12);
+  --accent-tint: rgba(31, 111, 235, 0.15);
+  --accent-border: rgba(31, 111, 235, 0.4);
+}
+
 body {
   margin: 0;
   background-color: #000000;
@@ -11,7 +36,7 @@ body {
 }
 
 ::selection {
-  background-color: #64cefb;
+  background-color: var(--accent);
   color: #000000;
 }
 

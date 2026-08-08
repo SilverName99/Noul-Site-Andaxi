@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import ThemeSwitch from './components/ThemeSwitch'
+import { ThemeProvider } from './theme'
 import PageTransition from './components/motion/PageTransition'
 import Home from './pages/Home'
 import Erp from './pages/Erp'
@@ -61,14 +63,17 @@ const AnimatedRoutes = () => {
 
 function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <div className="relative min-h-screen bg-black">
-        <Navbar />
-        <AnimatedRoutes />
-        <Footer />
-      </div>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <div className="relative min-h-screen bg-black">
+          <Navbar />
+          <AnimatedRoutes />
+          <Footer />
+          <ThemeSwitch />
+        </div>
+      </BrowserRouter>
+    </ThemeProvider>
   )
 }
 

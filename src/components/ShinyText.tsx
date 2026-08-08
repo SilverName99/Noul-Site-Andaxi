@@ -15,7 +15,7 @@ interface ShinyTextProps {
 
 const ShinyText = ({
   text,
-  color = '#64CEFB',
+  color = 'var(--accent)',
   shineColor = '#ffffff',
   speed = 3,
   spread = 100,

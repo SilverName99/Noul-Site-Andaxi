@@ -8,7 +8,7 @@ import AnimatedText from '../components/motion/AnimatedText'
 const CONTACT_EMAIL = 'contact@andaxi.ro'
 
 const inputClass =
-  'w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3.5 text-sm text-white placeholder:text-white/35 outline-none transition-colors duration-200 focus:border-[#64CEFB]/70 focus:bg-white/[0.06] md:text-base'
+  'w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3.5 text-sm text-white placeholder:text-white/35 outline-none transition-colors duration-200 focus:border-[color:var(--accent)] focus:bg-white/[0.06] md:text-base'
 
 const Contact = () => {
   const [name, setName] = useState('')
@@ -41,7 +41,7 @@ const Contact = () => {
   return (
     <div className="bg-black font-sans">
       <section className="relative min-h-screen w-full overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_80%_0%,rgba(100,206,251,0.12),transparent)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_80%_0%,var(--accent-glow-soft),transparent)]" />
 
         <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-16 px-6 pb-24 pt-40 lg:grid-cols-2 lg:px-8">
           {/* Left — info */}
@@ -71,7 +71,7 @@ const Contact = () => {
                   href="tel:+40755885973"
                   className="group flex items-center gap-4 text-white/80 transition-colors hover:text-white"
                 >
-                  <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15 transition-colors duration-300 group-hover:border-[#64CEFB]">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15 transition-colors duration-300 group-hover:border-[color:var(--accent)]">
                     <Phone className="h-5 w-5" />
                   </span>
                   <span>

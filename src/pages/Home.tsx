@@ -120,7 +120,7 @@ const Home = () => {
               </span>
               <ShinyText
                 text="către oameni."
-                color="#64CEFB"
+                color="var(--accent)"
                 shineColor="#ffffff"
                 speed={3}
                 spread={100}
@@ -165,7 +165,7 @@ const Home = () => {
                 transition={{ duration: 0.3, ease: 'easeOut' }}
                 className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-colors duration-300 hover:border-white/25"
               >
-                <Icon className="h-6 w-6 text-[#64CEFB]" />
+                <Icon className="h-6 w-6 text-[color:var(--accent)]" />
                 <h3 className="mt-4 text-lg font-medium text-white">{title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-white/60">{text}</p>
               </motion.div>
@@ -191,7 +191,7 @@ const Home = () => {
                   <span className="text-sm text-white/30 md:w-10">
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <Icon className="h-6 w-6 shrink-0 text-[#64CEFB]" />
+                  <Icon className="h-6 w-6 shrink-0 text-[color:var(--accent)]" />
                   <h3 className="text-xl font-medium text-white md:w-80 md:text-2xl">
                     {title}
                   </h3>
@@ -261,9 +261,9 @@ const Home = () => {
         <Reveal>
           <Link
             to="/erp"
-            className="group block overflow-hidden rounded-3xl border border-[#1F6FEB]/40 bg-gradient-to-br from-[#0B2E4F] to-black p-10 transition-colors duration-300 hover:border-[#1F6FEB] md:p-16"
+            className="group block overflow-hidden rounded-3xl border border-[color:var(--accent-border)] bg-gradient-to-br from-[color:var(--accent-deep)] to-black p-10 transition-colors duration-300 hover:border-[color:var(--accent-strong)] md:p-16"
           >
-            <p className="text-xs uppercase tracking-wider text-[#64CEFB]">ANDAXI ERP</p>
+            <p className="text-xs uppercase tracking-wider text-[color:var(--accent)]">ANDAXI ERP</p>
             <h2 className="mt-4 max-w-2xl text-3xl font-medium tracking-tight text-white md:text-5xl">
               Facturare, gestiune și contabilitate — într-un singur program.
             </h2>
