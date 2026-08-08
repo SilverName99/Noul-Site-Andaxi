@@ -81,7 +81,7 @@ const Home = () => {
       <section className="relative h-screen w-full overflow-hidden">
         <video
           className="absolute inset-0 h-full w-full object-cover"
-          style={{ filter: 'var(--video-filter)' }}
+          style={{ filter: 'var(--video-filter)', transition: 'filter 0.55s ease' }}
           src="/hero-video.mp4"
           autoPlay
           loop

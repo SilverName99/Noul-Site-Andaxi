@@ -78,6 +78,24 @@ body {
   color: #000000;
 }
 
+/* Tranziție lină la schimbarea temei. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.5s;
+}
+
+html.theme-anim,
+html.theme-anim *,
+html.theme-anim *::before,
+html.theme-anim *::after {
+  transition:
+    background-color 0.55s ease,
+    color 0.55s ease,
+    border-color 0.55s ease,
+    box-shadow 0.55s ease,
+    filter 0.55s ease !important;
+}
+
 @keyframes marquee {
   from {
     transform: translateX(0);
