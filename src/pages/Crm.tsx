@@ -4,11 +4,11 @@ import { motion } from 'framer-motion'
 import {
   ArrowDown,
   ArrowRight,
-  ClipboardList,
   FileSpreadsheet,
   Globe,
   Link2,
   LockKeyhole,
+  Map,
   PieChart,
   ShieldCheck,
   UserCheck,
@@ -19,17 +19,20 @@ import Reveal from '../components/motion/Reveal'
 import AnimatedText from '../components/motion/AnimatedText'
 import { StaggerContainer, StaggerItem } from '../components/motion/Stagger'
 import Marquee from '../components/Marquee'
+import ScrollShowcase from '../components/ScrollShowcase'
+import type { ShowcaseStep } from '../components/ScrollShowcase'
 
-const MODULES = [
+const MODULES: ShowcaseStep[] = [
   {
-    icon: ClipboardList,
-    title: 'Comenzi & vânzări pe agent',
-    tagline: 'Vezi ce s-a comandat azi și cine a vândut.',
+    icon: Map,
+    title: 'Hartă interactivă cu stopuri',
+    tagline: 'Alocă fiecărui agent un traseu în fiecare zi',
     items: [
-      'Comenzile primite, pe zi, detaliate până la nivel de produs.',
-      'Vânzări pe agent, pe zonă și pe client, defalcate pe luni.',
-      'Valori fără TVA, gata de comparat între agenți și perioade.',
+      'Check-in automat cu preluare de oră',
+      'Hartă interactivă, intuitivă și la zi',
+      'Rute pentru fiecare agent în parte',
     ],
+    image: '/crm/01-harta-interactiva.jpg',
   },
   {
     icon: FileSpreadsheet,
@@ -40,6 +43,7 @@ const MODULES = [
       'Istoric al importurilor — activezi importul curent, descarci sau ștergi oricare.',
       'Consolidezi date din surse diferite într-o singură imagine a vânzărilor.',
     ],
+    image: '/crm/02-placeholder.jpg',
   },
   {
     icon: PieChart,
@@ -50,6 +54,7 @@ const MODULES = [
       'Grupări pentru vânzările fără agent (Online, Auto, sediu ș.a.).',
       'Totaluri și evoluție în timp, dintr-o privire.',
     ],
+    image: '/crm/03-placeholder.jpg',
   },
   {
     icon: UserCheck,
@@ -60,6 +65,7 @@ const MODULES = [
       'Mapare automată a numelor (aliasuri) — potrivești denumiri diferite din surse externe la același agent.',
       'Atribuire partajată — împarți o vânzare între doi agenți când e cazul.',
     ],
+    image: '/crm/04-placeholder.jpg',
   },
   {
     icon: LockKeyhole,
@@ -69,6 +75,7 @@ const MODULES = [
       'Fiecare agent își vede propriile comenzi și vânzări, securizat.',
       'Controlezi câte luni în urmă poate vedea fiecare agent.',
     ],
+    image: '/crm/05-placeholder.jpg',
   },
   {
     icon: Link2,
@@ -78,6 +85,7 @@ const MODULES = [
       'Stocul din ERP, vizibil în CRM.',
       'Legătură cu nomenclatorul de parteneri și cu facturarea — fără dublă introducere.',
     ],
+    image: '/crm/06-placeholder.jpg',
   },
 ]
 
@@ -237,38 +245,7 @@ const Crm = () => {
             <AnimatedText text="Ce poți face cu ANDAXI CRM" />
           </h2>
 
-          <StaggerContainer className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
-            {MODULES.map(({ icon: Icon, title, tagline, items }) => (
-              <StaggerItem key={title}>
-                <motion.div
-                  whileHover={{ y: -6 }}
-                  transition={{ duration: 0.3, ease: 'easeOut' }}
-                  className="h-full rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] p-8 transition-colors duration-300 hover:border-[color:var(--accent-border)]"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[color:var(--accent-tint)]">
-                      <Icon className="h-5 w-5 text-[color:var(--accent)]" />
-                    </span>
-                    <div>
-                      <h3 className="text-lg font-medium text-[color:var(--text-1)]">{title}</h3>
-                      <p className="text-sm text-[color:var(--text-4)]">{tagline}</p>
-                    </div>
-                  </div>
-                  <ul className="mt-5 flex flex-col gap-2.5">
-                    {items.map((item) => (
-                      <li
-                        key={item}
-                        className="flex gap-2.5 text-sm leading-relaxed text-[color:var(--text-3)]"
-                      >
-                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[color:var(--accent)]" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+          <ScrollShowcase steps={MODULES} />
         </div>
       </section>
 
