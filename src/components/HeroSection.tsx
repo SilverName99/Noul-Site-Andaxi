@@ -2,8 +2,7 @@ import { useState } from 'react'
 import { ArrowRight, ArrowUpRight, Menu, X } from 'lucide-react'
 import ShinyText from './ShinyText'
 
-const VIDEO_URL =
-  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_105406_16f4600d-7a92-4292-b96e-b19156c7830a.mp4'
+const VIDEO_URL = '/hero-video.mp4'
 
 const NAV_LINKS = [
   'Home',
