@@ -8,7 +8,7 @@ import AnimatedText from '../components/motion/AnimatedText'
 const CONTACT_EMAIL = 'contact@andaxi.ro'
 
 const inputClass =
-  'w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3.5 text-sm text-white placeholder:text-white/35 outline-none transition-colors duration-200 focus:border-[color:var(--accent)] focus:bg-white/[0.06] md:text-base'
+  'w-full rounded-xl border border-[color:var(--border)] bg-[color:var(--surface)] px-4 py-3.5 text-sm text-[color:var(--text-1)] placeholder:text-[color:var(--text-5)] outline-none transition-colors duration-200 focus:border-[color:var(--accent)] focus:bg-[color:var(--surface-hover)] md:text-base'
 
 const Contact = () => {
   const [name, setName] = useState('')
@@ -39,7 +39,7 @@ const Contact = () => {
   }
 
   return (
-    <div className="bg-black font-sans">
+    <div className="bg-[color:var(--bg)] font-sans">
       <section className="relative min-h-screen w-full overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_80%_0%,var(--accent-glow-soft),transparent)]" />
 
@@ -47,18 +47,18 @@ const Contact = () => {
           {/* Left — info */}
           <div>
             <Reveal>
-              <p className="text-xs uppercase tracking-tight text-white/60 md:text-sm">
+              <p className="text-xs uppercase tracking-tight text-[color:var(--text-3)] md:text-sm">
                 Contact
               </p>
             </Reveal>
             <h1
-              className="mt-4 text-5xl font-medium tracking-tighter text-white sm:text-6xl md:text-7xl"
+              className="mt-4 text-5xl font-medium tracking-tighter text-[color:var(--text-1)] sm:text-6xl md:text-7xl"
               style={{ lineHeight: 0.9 }}
             >
               <AnimatedText text="Hai să vorbim." delay={0.1} />
             </h1>
             <Reveal delay={0.3}>
-              <p className="mt-6 max-w-md text-sm leading-relaxed text-white/60 md:text-base">
+              <p className="mt-6 max-w-md text-sm leading-relaxed text-[color:var(--text-3)] md:text-base">
                 Vrei un website, ai nevoie de o demonstrație ANDAXI ERP sau
                 pur și simplu ai o întrebare? Scrie-ne sau sună-ne — răspundem
                 repede și comunicăm clar.
@@ -69,13 +69,13 @@ const Contact = () => {
               <Reveal delay={0.4}>
                 <a
                   href="tel:+40755885973"
-                  className="group flex items-center gap-4 text-white/80 transition-colors hover:text-white"
+                  className="group flex items-center gap-4 text-[color:var(--text-2)] transition-colors hover:text-[color:var(--text-1)]"
                 >
-                  <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15 transition-colors duration-300 group-hover:border-[color:var(--accent)]">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[color:var(--border)] transition-colors duration-300 group-hover:border-[color:var(--accent)]">
                     <Phone className="h-5 w-5" />
                   </span>
                   <span>
-                    <span className="block text-xs uppercase tracking-wider text-white/40">
+                    <span className="block text-xs uppercase tracking-wider text-[color:var(--text-4)]">
                       Telefon
                     </span>
                     <span className="text-lg font-medium md:text-xl">0755 885 973</span>
@@ -83,12 +83,12 @@ const Contact = () => {
                 </a>
               </Reveal>
               <Reveal delay={0.5}>
-                <div className="flex items-center gap-4 text-white/80">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15">
+                <div className="flex items-center gap-4 text-[color:var(--text-2)]">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[color:var(--border)]">
                     <MapPin className="h-5 w-5" />
                   </span>
                   <span>
-                    <span className="block text-xs uppercase tracking-wider text-white/40">
+                    <span className="block text-xs uppercase tracking-wider text-[color:var(--text-4)]">
                       Unde lucrăm
                     </span>
                     <span className="text-lg font-medium md:text-xl">România · Grecia</span>
@@ -96,12 +96,12 @@ const Contact = () => {
                 </div>
               </Reveal>
               <Reveal delay={0.6}>
-                <div className="flex items-center gap-4 text-white/80">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15">
+                <div className="flex items-center gap-4 text-[color:var(--text-2)]">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[color:var(--border)]">
                     <Clock className="h-5 w-5" />
                   </span>
                   <span>
-                    <span className="block text-xs uppercase tracking-wider text-white/40">
+                    <span className="block text-xs uppercase tracking-wider text-[color:var(--text-4)]">
                       Timp de răspuns
                     </span>
                     <span className="text-lg font-medium md:text-xl">
@@ -117,11 +117,11 @@ const Contact = () => {
           <Reveal delay={0.25}>
             <form
               onSubmit={handleSubmit}
-              className="rounded-3xl border border-white/10 bg-white/[0.03] p-8 md:p-10"
+              className="rounded-3xl border border-[color:var(--border)] bg-[color:var(--surface)] p-8 md:p-10"
             >
               <div className="flex flex-col gap-5">
                 <div>
-                  <label htmlFor="name" className="mb-2 block text-sm text-white/70">
+                  <label htmlFor="name" className="mb-2 block text-sm text-[color:var(--text-3)]">
                     Nume
                   </label>
                   <input
@@ -136,7 +136,7 @@ const Contact = () => {
                 </div>
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="email" className="mb-2 block text-sm text-white/70">
+                    <label htmlFor="email" className="mb-2 block text-sm text-[color:var(--text-3)]">
                       Email
                     </label>
                     <input
@@ -150,8 +150,8 @@ const Contact = () => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="phone" className="mb-2 block text-sm text-white/70">
-                      Telefon <span className="text-white/35">(opțional)</span>
+                    <label htmlFor="phone" className="mb-2 block text-sm text-[color:var(--text-3)]">
+                      Telefon <span className="text-[color:var(--text-5)]">(opțional)</span>
                     </label>
                     <input
                       id="phone"
@@ -164,7 +164,7 @@ const Contact = () => {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="message" className="mb-2 block text-sm text-white/70">
+                  <label htmlFor="message" className="mb-2 block text-sm text-[color:var(--text-3)]">
                     Mesaj
                   </label>
                   <textarea
@@ -179,12 +179,12 @@ const Contact = () => {
                 </div>
                 <button
                   type="submit"
-                  className="group mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-medium text-black transition-colors duration-300 hover:bg-gray-200 md:text-base"
+                  className="group mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-[color:var(--btn-bg)] px-8 py-4 text-sm font-medium text-[color:var(--btn-text)] transition-colors duration-300 hover:bg-[color:var(--btn-bg-hover)] md:text-base"
                 >
                   Trimite mesajul
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </button>
-                <p className="text-center text-xs text-white/40">
+                <p className="text-center text-xs text-[color:var(--text-4)]">
                   Se deschide aplicația ta de email cu mesajul precompletat.
                 </p>
               </div>

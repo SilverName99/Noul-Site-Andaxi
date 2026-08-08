@@ -76,7 +76,7 @@ const Home = () => {
   }, [])
 
   return (
-    <div className="bg-black font-sans">
+    <div className="bg-[color:var(--bg)] font-sans">
       {/* ===== Hero ===== */}
       <section className="relative h-screen w-full overflow-hidden">
         <video
@@ -151,9 +151,9 @@ const Home = () => {
       {/* ===== De ce Andaxi ===== */}
       <section className="mx-auto w-full max-w-7xl px-6 py-24 lg:px-8 lg:py-32">
         <Reveal>
-          <p className="text-xs uppercase tracking-wider text-white/50">De ce Andaxi</p>
+          <p className="text-xs uppercase tracking-wider text-[color:var(--text-4)]">De ce Andaxi</p>
         </Reveal>
-        <h2 className="mt-4 max-w-3xl text-3xl font-medium tracking-tight text-white md:text-5xl">
+        <h2 className="mt-4 max-w-3xl text-3xl font-medium tracking-tight text-[color:var(--text-1)] md:text-5xl">
           <AnimatedText text="Prețuim interacțiunea umană și atenția la detalii." />
         </h2>
 
@@ -163,11 +163,11 @@ const Home = () => {
               <motion.div
                 whileHover={{ y: -6 }}
                 transition={{ duration: 0.3, ease: 'easeOut' }}
-                className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-colors duration-300 hover:border-white/25"
+                className="h-full rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] p-6 transition-colors duration-300 hover:border-[color:var(--border-strong)]"
               >
                 <Icon className="h-6 w-6 text-[color:var(--accent)]" />
-                <h3 className="mt-4 text-lg font-medium text-white">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/60">{text}</p>
+                <h3 className="mt-4 text-lg font-medium text-[color:var(--text-1)]">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[color:var(--text-3)]">{text}</p>
               </motion.div>
             </StaggerItem>
           ))}
@@ -175,37 +175,37 @@ const Home = () => {
       </section>
 
       {/* ===== Servicii ===== */}
-      <section className="border-t border-white/10">
+      <section className="border-t border-[color:var(--border)]">
         <div className="mx-auto w-full max-w-7xl px-6 py-24 lg:px-8 lg:py-32">
           <Reveal>
-            <p className="text-xs uppercase tracking-wider text-white/50">Ce facem</p>
+            <p className="text-xs uppercase tracking-wider text-[color:var(--text-4)]">Ce facem</p>
           </Reveal>
-          <h2 className="mt-4 max-w-3xl text-3xl font-medium tracking-tight text-white md:text-5xl">
+          <h2 className="mt-4 max-w-3xl text-3xl font-medium tracking-tight text-[color:var(--text-1)] md:text-5xl">
             <AnimatedText text="Proiecte digitale pentru orice misiune." />
           </h2>
 
           <div className="mt-14 flex flex-col">
             {SERVICES.map(({ icon: Icon, title, text }, i) => (
               <Reveal key={title} delay={i * 0.05}>
-                <div className="group flex flex-col gap-4 border-t border-white/10 py-8 transition-colors duration-300 last:border-b hover:bg-white/[0.02] md:flex-row md:items-center md:gap-10 md:py-10">
-                  <span className="text-sm text-white/30 md:w-10">
+                <div className="group flex flex-col gap-4 border-t border-[color:var(--border)] py-8 transition-colors duration-300 last:border-b hover:bg-[color:var(--surface)] md:flex-row md:items-center md:gap-10 md:py-10">
+                  <span className="text-sm text-[color:var(--text-5)] md:w-10">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <Icon className="h-6 w-6 shrink-0 text-[color:var(--accent)]" />
-                  <h3 className="text-xl font-medium text-white md:w-80 md:text-2xl">
+                  <h3 className="text-xl font-medium text-[color:var(--text-1)] md:w-80 md:text-2xl">
                     {title}
                   </h3>
-                  <p className="flex-1 text-sm leading-relaxed text-white/60 md:text-base">
+                  <p className="flex-1 text-sm leading-relaxed text-[color:var(--text-3)] md:text-base">
                     {text}
                   </p>
-                  <ArrowUpRight className="hidden h-5 w-5 text-white/30 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-white md:block" />
+                  <ArrowUpRight className="hidden h-5 w-5 text-[color:var(--text-5)] transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-[color:var(--text-1)] md:block" />
                 </div>
               </Reveal>
             ))}
           </div>
 
           <Reveal delay={0.1} className="mt-10">
-            <p className="max-w-2xl text-sm leading-relaxed text-white/60 md:text-base">
+            <p className="max-w-2xl text-sm leading-relaxed text-[color:var(--text-3)] md:text-base">
               Ne ocupăm de toate detaliile tehnice — de la înregistrarea
               domeniului și configurarea emailului, până la integrarea cu
               Google Analytics și optimizarea SEO. Tu te concentrezi pe
@@ -216,17 +216,17 @@ const Home = () => {
       </section>
 
       {/* ===== Despre ===== */}
-      <section className="border-t border-white/10">
+      <section className="border-t border-[color:var(--border)]">
         <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-12 px-6 py-24 lg:grid-cols-2 lg:px-8 lg:py-32">
           <div>
             <Reveal>
-              <p className="text-xs uppercase tracking-wider text-white/50">Despre noi</p>
+              <p className="text-xs uppercase tracking-wider text-[color:var(--text-4)]">Despre noi</p>
             </Reveal>
-            <h2 className="mt-4 text-3xl font-medium tracking-tight text-white md:text-5xl">
+            <h2 className="mt-4 text-3xl font-medium tracking-tight text-[color:var(--text-1)] md:text-5xl">
               <AnimatedText text="O echipă, multe cafele și o misiune simplă." />
             </h2>
           </div>
-          <div className="flex flex-col gap-6 text-sm leading-relaxed text-white/60 md:text-base">
+          <div className="flex flex-col gap-6 text-sm leading-relaxed text-[color:var(--text-3)] md:text-base">
             <Reveal>
               <p>
                 În spatele numelui Andaxi nu se ascunde un birou rece plin de
@@ -280,22 +280,22 @@ const Home = () => {
       </section>
 
       {/* ===== CTA final ===== */}
-      <section className="border-t border-white/10">
+      <section className="border-t border-[color:var(--border)]">
         <div className="mx-auto flex w-full max-w-7xl flex-col items-center px-6 py-24 text-center lg:px-8 lg:py-32">
-          <h2 className="max-w-3xl text-4xl font-medium tracking-tighter text-white md:text-6xl">
+          <h2 className="max-w-3xl text-4xl font-medium tracking-tighter text-[color:var(--text-1)] md:text-6xl">
             <AnimatedText text="Hai să transformăm viziunea ta într-o experiență digitală frumoasă." />
           </h2>
           <Reveal delay={0.3} className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-medium text-black transition-colors duration-300 hover:bg-gray-200 md:text-base"
+              className="group inline-flex items-center gap-2 rounded-full bg-[color:var(--btn-bg)] px-8 py-4 text-sm font-medium text-[color:var(--btn-text)] transition-colors duration-300 hover:bg-[color:var(--btn-bg-hover)] md:text-base"
             >
               Hai să vorbim
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
             <a
               href="tel:+40755885973"
-              className="text-sm text-white/60 transition-colors hover:text-white md:text-base"
+              className="text-sm text-[color:var(--text-3)] transition-colors hover:text-[color:var(--text-1)] md:text-base"
             >
               sau sună-ne: 0755 885 973
             </a>

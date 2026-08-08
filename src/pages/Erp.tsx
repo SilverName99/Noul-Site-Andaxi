@@ -176,7 +176,7 @@ const Erp = () => {
   }, [])
 
   return (
-    <div className="bg-black font-sans">
+    <div className="bg-[color:var(--bg)] font-sans">
       {/* ===== Hero ===== */}
       <section className="relative flex min-h-screen w-full flex-col overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_-10%,var(--accent-glow),transparent)]" />
@@ -192,13 +192,13 @@ const Erp = () => {
             className="max-w-5xl text-4xl tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl"
             style={{ lineHeight: 0.95 }}
           >
-            <span className="block font-medium text-white">
+            <span className="block font-medium text-[color:var(--text-1)]">
               <AnimatedText text="Facturare, gestiune și contabilitate —" delay={0.15} />
             </span>
             <ShinyText
               text="într-un singur program."
               color="var(--accent-strong)"
-              shineColor="#ffffff"
+              shineColor="var(--shine)"
               speed={3}
               spread={100}
               className="font-medium"
@@ -206,7 +206,7 @@ const Erp = () => {
           </h1>
 
           <Reveal delay={0.35}>
-            <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-white/70 md:text-base">
+            <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-[color:var(--text-3)] md:text-base">
               Emiți facturi, ții stocurile, faci contabilitatea și trimiți
               declarațiile la ANAF — dintr-un singur program online, conform
               cu legislația din România.
@@ -223,7 +223,7 @@ const Erp = () => {
             </Link>
             <a
               href="#functionalitati"
-              className="group inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3 text-sm text-white/90 transition-colors duration-300 hover:border-white hover:text-white md:px-8 md:py-4 md:text-base"
+              className="group inline-flex items-center gap-2 rounded-full border border-[color:var(--border-strong)] px-6 py-3 text-sm text-[color:var(--text-2)] transition-colors duration-300 hover:border-[color:var(--text-1)] hover:text-[color:var(--text-1)] md:px-8 md:py-4 md:text-base"
             >
               Vezi funcționalitățile
               <ArrowDown className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" />
@@ -231,7 +231,7 @@ const Erp = () => {
           </Reveal>
 
           <Reveal delay={0.55}>
-            <p className="mt-8 flex items-center justify-center gap-2 text-xs text-white/50 md:text-sm">
+            <p className="mt-8 flex items-center justify-center gap-2 text-xs text-[color:var(--text-4)] md:text-sm">
               <ShieldCheck className="h-4 w-4 text-[color:var(--accent)]" />
               Conform e-Factura și SAF-T. Datele tale, pe serverul tău.
             </p>
@@ -242,11 +242,11 @@ const Erp = () => {
       {/* ===== Intro ===== */}
       <section className="mx-auto w-full max-w-7xl px-6 py-24 lg:px-8">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
-          <h2 className="text-3xl font-medium tracking-tight text-white md:text-5xl">
+          <h2 className="text-3xl font-medium tracking-tight text-[color:var(--text-1)] md:text-5xl">
             <AnimatedText text="Mai mult decât un program de facturare." />
           </h2>
           <Reveal delay={0.15}>
-            <p className="text-sm leading-relaxed text-white/60 md:text-base">
+            <p className="text-sm leading-relaxed text-[color:var(--text-3)] md:text-base">
               Facturarea e doar începutul. ANDAXI ERP acoperă tot fluxul
               firmei — de la emiterea facturii, la stocuri, casă și bancă,
               contabilitate și declarații ANAF — fără să sari între programe
@@ -258,12 +258,12 @@ const Erp = () => {
       </section>
 
       {/* ===== Module ===== */}
-      <section id="functionalitati" className="border-t border-white/10">
+      <section id="functionalitati" className="border-t border-[color:var(--border)]">
         <div className="mx-auto w-full max-w-7xl px-6 py-24 lg:px-8">
           <Reveal>
-            <p className="text-xs uppercase tracking-wider text-white/50">Funcționalități</p>
+            <p className="text-xs uppercase tracking-wider text-[color:var(--text-4)]">Funcționalități</p>
           </Reveal>
-          <h2 className="mt-4 text-3xl font-medium tracking-tight text-white md:text-5xl">
+          <h2 className="mt-4 text-3xl font-medium tracking-tight text-[color:var(--text-1)] md:text-5xl">
             <AnimatedText text="Ce poți face cu ANDAXI ERP" />
           </h2>
 
@@ -273,20 +273,20 @@ const Erp = () => {
                 <motion.div
                   whileHover={{ y: -6 }}
                   transition={{ duration: 0.3, ease: 'easeOut' }}
-                  className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-8 transition-colors duration-300 hover:border-[color:var(--accent-border)]"
+                  className="h-full rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] p-8 transition-colors duration-300 hover:border-[color:var(--accent-border)]"
                 >
                   <div className="flex items-center gap-3">
                     <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[color:var(--accent-tint)]">
                       <Icon className="h-5 w-5 text-[color:var(--accent)]" />
                     </span>
                     <div>
-                      <h3 className="text-lg font-medium text-white">{title}</h3>
-                      <p className="text-sm text-white/50">{tagline}</p>
+                      <h3 className="text-lg font-medium text-[color:var(--text-1)]">{title}</h3>
+                      <p className="text-sm text-[color:var(--text-4)]">{tagline}</p>
                     </div>
                   </div>
                   <ul className="mt-5 flex flex-col gap-2.5">
                     {items.map((item) => (
-                      <li key={item} className="flex gap-2.5 text-sm leading-relaxed text-white/60">
+                      <li key={item} className="flex gap-2.5 text-sm leading-relaxed text-[color:var(--text-3)]">
                         <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[color:var(--accent)]" />
                         {item}
                       </li>
@@ -300,13 +300,13 @@ const Erp = () => {
       </section>
 
       {/* ===== Conformitate ===== */}
-      <section className="border-t border-white/10 py-20">
+      <section className="border-t border-[color:var(--border)] py-20">
         <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
           <Reveal>
-            <h2 className="text-center text-2xl font-medium tracking-tight text-white md:text-4xl">
+            <h2 className="text-center text-2xl font-medium tracking-tight text-[color:var(--text-1)] md:text-4xl">
               Conform cu legislația din România — inclus
             </h2>
-            <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-white/60 md:text-base">
+            <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-[color:var(--text-3)] md:text-base">
               Fără module separate pentru declarații. Toate se generează din
               datele pe care le introduci o singură dată — programul se ocupă
               de forma cerută de ANAF și rămâne la zi cu legislația.
@@ -319,20 +319,20 @@ const Erp = () => {
       </section>
 
       {/* ===== De ce ===== */}
-      <section className="border-t border-white/10">
+      <section className="border-t border-[color:var(--border)]">
         <div className="mx-auto w-full max-w-7xl px-6 py-24 lg:px-8">
-          <h2 className="text-3xl font-medium tracking-tight text-white md:text-5xl">
+          <h2 className="text-3xl font-medium tracking-tight text-[color:var(--text-1)] md:text-5xl">
             <AnimatedText text="De ce ANDAXI ERP" />
           </h2>
           <StaggerContainer className="mt-12 flex flex-col">
             {WHY.map(({ title, text }, i) => (
               <StaggerItem key={title}>
-                <div className="group flex flex-col gap-2 border-t border-white/10 py-7 last:border-b md:flex-row md:items-baseline md:gap-10">
-                  <span className="text-sm text-white/30 md:w-10">
+                <div className="group flex flex-col gap-2 border-t border-[color:var(--border)] py-7 last:border-b md:flex-row md:items-baseline md:gap-10">
+                  <span className="text-sm text-[color:var(--text-5)] md:w-10">
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <h3 className="text-xl font-medium text-white md:w-72">{title}</h3>
-                  <p className="flex-1 text-sm leading-relaxed text-white/60 md:text-base">
+                  <h3 className="text-xl font-medium text-[color:var(--text-1)] md:w-72">{title}</h3>
+                  <p className="flex-1 text-sm leading-relaxed text-[color:var(--text-3)] md:text-base">
                     {text}
                   </p>
                 </div>
@@ -343,9 +343,9 @@ const Erp = () => {
       </section>
 
       {/* ===== Pentru cine ===== */}
-      <section className="border-t border-white/10">
+      <section className="border-t border-[color:var(--border)]">
         <div className="mx-auto w-full max-w-7xl px-6 py-24 lg:px-8">
-          <h2 className="text-3xl font-medium tracking-tight text-white md:text-5xl">
+          <h2 className="text-3xl font-medium tracking-tight text-[color:var(--text-1)] md:text-5xl">
             <AnimatedText text="Pentru cine este" />
           </h2>
           <StaggerContainer className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -354,7 +354,7 @@ const Erp = () => {
                 <motion.div
                   whileHover={{ y: -6 }}
                   transition={{ duration: 0.3, ease: 'easeOut' }}
-                  className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-8 text-sm leading-relaxed text-white/70 transition-colors duration-300 hover:border-white/25 md:text-base"
+                  className="h-full rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] p-8 text-sm leading-relaxed text-[color:var(--text-3)] transition-colors duration-300 hover:border-[color:var(--border-strong)] md:text-base"
                 >
                   {text}
                 </motion.div>
@@ -365,18 +365,18 @@ const Erp = () => {
       </section>
 
       {/* ===== Tehnologie ===== */}
-      <section className="border-t border-white/10">
+      <section className="border-t border-[color:var(--border)]">
         <div className="mx-auto w-full max-w-7xl px-6 py-24 lg:px-8">
-          <h2 className="text-3xl font-medium tracking-tight text-white md:text-5xl">
+          <h2 className="text-3xl font-medium tracking-tight text-[color:var(--text-1)] md:text-5xl">
             <AnimatedText text="Tehnologie & siguranță" />
           </h2>
           <StaggerContainer className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
             {TECH.map(({ icon: Icon, title, text }) => (
               <StaggerItem key={title}>
-                <div className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-8">
+                <div className="h-full rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] p-8">
                   <Icon className="h-6 w-6 text-[color:var(--accent)]" />
-                  <h3 className="mt-4 text-lg font-medium text-white">{title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/60">{text}</p>
+                  <h3 className="mt-4 text-lg font-medium text-[color:var(--text-1)]">{title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[color:var(--text-3)]">{text}</p>
                 </div>
               </StaggerItem>
             ))}
@@ -385,15 +385,15 @@ const Erp = () => {
       </section>
 
       {/* ===== CTA final ===== */}
-      <section className="border-t border-white/10">
+      <section className="border-t border-[color:var(--border)]">
         <div className="relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_50%_110%,var(--accent-glow),transparent)]" />
           <div className="relative mx-auto flex w-full max-w-7xl flex-col items-center px-6 py-24 text-center lg:px-8 lg:py-32">
-            <h2 className="max-w-3xl text-4xl font-medium tracking-tighter text-white md:text-6xl">
+            <h2 className="max-w-3xl text-4xl font-medium tracking-tighter text-[color:var(--text-1)] md:text-6xl">
               <AnimatedText text="Un singur program pentru tot ce ține firma ta." />
             </h2>
             <Reveal delay={0.25}>
-              <p className="mt-5 max-w-xl text-sm text-white/60 md:text-base">
+              <p className="mt-5 max-w-xl text-sm text-[color:var(--text-3)] md:text-base">
                 Cere o demonstrație și vezi ANDAXI ERP pe datele tale.
               </p>
             </Reveal>
@@ -407,7 +407,7 @@ const Erp = () => {
               </Link>
               <a
                 href="#functionalitati"
-                className="text-sm text-white/60 transition-colors hover:text-white md:text-base"
+                className="text-sm text-[color:var(--text-3)] transition-colors hover:text-[color:var(--text-1)] md:text-base"
               >
                 Vezi funcționalitățile
               </a>

@@ -10,7 +10,7 @@ const Marquee = ({ items }: MarqueeProps) => {
       {items.map((item, i) => (
         <span
           key={i}
-          className="mx-3 flex items-center gap-3 whitespace-nowrap rounded-full border border-white/15 px-5 py-2.5 text-sm text-white/70"
+          className="mx-3 flex items-center gap-3 whitespace-nowrap rounded-full border border-[color:var(--border)] px-5 py-2.5 text-sm text-[color:var(--text-3)]"
         >
           {item}
         </span>

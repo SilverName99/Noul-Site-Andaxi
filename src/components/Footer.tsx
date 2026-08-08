@@ -2,45 +2,45 @@ import { Link } from 'react-router-dom'
 import { Phone } from 'lucide-react'
 
 const Footer = () => (
-  <footer className="border-t border-white/10 bg-black">
+  <footer className="border-t border-[color:var(--border)] bg-[color:var(--bg)]">
     <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 px-6 py-14 lg:flex-row lg:items-start lg:justify-between lg:px-8">
       <div className="max-w-sm">
         <Link to="/" className="inline-flex items-center">
           <img src="/logo.png" alt="Andaxi" className="h-11 w-auto" />
         </Link>
-        <p className="mt-4 text-sm leading-relaxed text-white/60">
+        <p className="mt-4 text-sm leading-relaxed text-[color:var(--text-3)]">
           Web design accesibil și frumos, fără să-ți golească portofelul.
           Pentru noi, web design-ul e simplu: de la oameni, către oameni.
         </p>
       </div>
 
       <div className="flex flex-col gap-3">
-        <span className="text-xs uppercase tracking-wider text-white/40">Navigare</span>
-        <Link to="/" className="text-sm text-white/70 transition-colors hover:text-white">
+        <span className="text-xs uppercase tracking-wider text-[color:var(--text-4)]">Navigare</span>
+        <Link to="/" className="text-sm text-[color:var(--text-3)] transition-colors hover:text-[color:var(--text-1)]">
           Acasă
         </Link>
-        <Link to="/erp" className="text-sm text-white/70 transition-colors hover:text-white">
+        <Link to="/erp" className="text-sm text-[color:var(--text-3)] transition-colors hover:text-[color:var(--text-1)]">
           ANDAXI ERP
         </Link>
-        <Link to="/contact" className="text-sm text-white/70 transition-colors hover:text-white">
+        <Link to="/contact" className="text-sm text-[color:var(--text-3)] transition-colors hover:text-[color:var(--text-1)]">
           Contact
         </Link>
       </div>
 
       <div className="flex flex-col gap-3">
-        <span className="text-xs uppercase tracking-wider text-white/40">Contact</span>
+        <span className="text-xs uppercase tracking-wider text-[color:var(--text-4)]">Contact</span>
         <a
           href="tel:+40755885973"
-          className="flex items-center gap-2 text-sm text-white/70 transition-colors hover:text-white"
+          className="flex items-center gap-2 text-sm text-[color:var(--text-3)] transition-colors hover:text-[color:var(--text-1)]"
         >
           <Phone className="h-4 w-4" />
           0755 885 973
         </a>
-        <span className="text-sm text-white/50">România · Grecia</span>
+        <span className="text-sm text-[color:var(--text-4)]">România · Grecia</span>
       </div>
     </div>
 
-    <div className="border-t border-white/10 py-6 text-center text-xs text-white/40">
+    <div className="border-t border-[color:var(--border)] py-6 text-center text-xs text-[color:var(--text-4)]">
       © {new Date().getFullYear()} Andaxi. Toate drepturile rezervate.
     </div>
   </footer>

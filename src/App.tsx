@@ -66,7 +66,7 @@ function App() {
     <ThemeProvider>
       <BrowserRouter>
         <ScrollToTop />
-        <div className="relative min-h-screen bg-black">
+        <div className="relative min-h-screen bg-[color:var(--bg)]">
           <Navbar />
           <AnimatedRoutes />
           <Footer />
