@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { ArrowUpRight, Menu, X } from 'lucide-react'
 
 const NAV_LINKS = [
-  { to: '/', label: 'Acasă' },
+  { to: '/', label: 'ACASĂ' },
   { to: '/erp', label: 'ANDAXI ERP' },
   { to: '/crm', label: 'ANDAXI CRM' },
 ]
@@ -36,7 +36,7 @@ const Navbar = () => {
             to="/contact"
             className={({ isActive }) => `flex items-center gap-1 ${linkClass(isActive)}`}
           >
-            Contact
+            CONTACT
             <ArrowUpRight className="h-4 w-4" />
           </NavLink>
         </div>
@@ -55,7 +55,7 @@ const Navbar = () => {
       {/* Mobile menu */}
       {menuOpen && (
         <div className="mx-6 flex flex-col gap-4 rounded-2xl border border-[color:var(--border)] bg-[color:var(--menu-bg)] p-6 backdrop-blur-md lg:hidden">
-          {[...NAV_LINKS, { to: '/contact', label: 'Contact' }].map(({ to, label }) => (
+          {[...NAV_LINKS, { to: '/contact', label: 'CONTACT' }].map(({ to, label }) => (
             <NavLink
               key={to}
               to={to}

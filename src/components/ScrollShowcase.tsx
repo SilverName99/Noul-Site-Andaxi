@@ -9,6 +9,7 @@ import {
 } from 'framer-motion'
 import type { LucideIcon } from 'lucide-react'
 import Reveal from './motion/Reveal'
+import MagnifyImage from './MagnifyImage'
 
 export interface ShowcaseStep {
   icon: LucideIcon
@@ -175,20 +176,18 @@ const ScrollShowcase = ({ steps }: ScrollShowcaseProps) => {
                   className="absolute inset-0 overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] shadow-2xl shadow-black/20"
                   style={{ backfaceVisibility: 'hidden' }}
                 >
-                  <img
+                  <MagnifyImage
                     src={steps[faces.front].image}
                     alt={steps[faces.front].title}
-                    className="h-full w-full object-cover"
                   />
                 </div>
                 <div
                   className="absolute inset-0 overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] shadow-2xl shadow-black/20"
                   style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
                 >
-                  <img
+                  <MagnifyImage
                     src={steps[faces.back].image}
                     alt={steps[faces.back].title}
-                    className="h-full w-full object-cover"
                   />
                 </div>
               </motion.div>

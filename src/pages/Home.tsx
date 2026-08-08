@@ -103,7 +103,7 @@ const Home = () => {
             </Reveal>
             <Reveal delay={0.15}>
               <p className="text-sm text-[color:var(--text-2)] md:text-base lg:text-right">
-                Agenție de web design · România & Grecia
+                Agenție web · România & Grecia
               </p>
             </Reveal>
           </div>
