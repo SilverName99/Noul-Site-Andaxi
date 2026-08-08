@@ -111,7 +111,7 @@ const Home = () => {
           <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col items-center justify-center px-6 text-center lg:px-8">
             <Reveal>
               <p className="mb-4 text-xs uppercase tracking-tight text-[color:var(--text-2)] md:text-sm">
-                Web design accesibil și frumos
+                SOLUȚII WEB
               </p>
             </Reveal>
 
