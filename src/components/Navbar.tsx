@@ -5,32 +5,17 @@ import { ArrowUpRight, Menu, X } from 'lucide-react'
 const NAV_LINKS = [
   { to: '/', label: 'Acasă' },
   { to: '/erp', label: 'ANDAXI ERP' },
+  { to: '/crm', label: 'ANDAXI CRM' },
 ]
+
+const linkClass = (isActive: boolean) =>
+  `text-sm transition-colors duration-200 hover:text-[color:var(--text-1)] ${
+    isActive ? 'text-[color:var(--text-1)]' : 'text-[color:var(--text-2)]'
+  }`
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
-
-  // On the home page the navbar sits over the dark hero video in both
-  // themes, so it keeps white styling there; elsewhere it follows the theme.
-  const overVideo = location.pathname === '/'
-
-  const linkClass = (isActive: boolean) =>
-    overVideo
-      ? `text-sm transition-colors duration-200 hover:text-white ${
-          isActive ? 'text-white' : 'text-white/80'
-        }`
-      : `text-sm transition-colors duration-200 hover:text-[color:var(--text-1)] ${
-          isActive ? 'text-[color:var(--text-1)]' : 'text-[color:var(--text-2)]'
-        }`
-
-  const pillClass = overVideo
-    ? 'border-gray-700 bg-black/30'
-    : 'border-[color:var(--border)] bg-[color:var(--pill-bg)]'
-
-  const menuClass = overVideo
-    ? 'border-gray-700 bg-black/85'
-    : 'border-[color:var(--border)] bg-[color:var(--menu-bg)]'
 
   return (
     <header className="absolute inset-x-0 top-0 z-50">
@@ -41,9 +26,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop links */}
-        <div
-          className={`hidden items-center gap-6 rounded-full border px-6 py-2.5 backdrop-blur-md lg:flex ${pillClass}`}
-        >
+        <div className="hidden items-center gap-6 rounded-full border border-[color:var(--border)] bg-[color:var(--pill-bg)] px-6 py-2.5 backdrop-blur-md lg:flex">
           {NAV_LINKS.map(({ to, label }) => (
             <NavLink key={to} to={to} className={({ isActive }) => linkClass(isActive)}>
               {label}
@@ -61,7 +44,7 @@ const Navbar = () => {
         {/* Mobile hamburger */}
         <button
           type="button"
-          className={overVideo ? 'text-white lg:hidden' : 'text-[color:var(--text-1)] lg:hidden'}
+          className="text-[color:var(--text-1)] lg:hidden"
           aria-label="Deschide meniul"
           onClick={() => setMenuOpen((open) => !open)}
         >
@@ -71,9 +54,7 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div
-          className={`mx-6 flex flex-col gap-4 rounded-2xl border p-6 backdrop-blur-md lg:hidden ${menuClass}`}
-        >
+        <div className="mx-6 flex flex-col gap-4 rounded-2xl border border-[color:var(--border)] bg-[color:var(--menu-bg)] p-6 backdrop-blur-md lg:hidden">
           {[...NAV_LINKS, { to: '/contact', label: 'Contact' }].map(({ to, label }) => (
             <NavLink
               key={to}

@@ -8,6 +8,7 @@ import { ThemeProvider } from './theme'
 import PageTransition from './components/motion/PageTransition'
 import Home from './pages/Home'
 import Erp from './pages/Erp'
+import Crm from './pages/Crm'
 import Contact from './pages/Contact'
 
 const ScrollToTop = () => {
@@ -37,6 +38,14 @@ const AnimatedRoutes = () => {
           element={
             <PageTransition>
               <Erp />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/crm"
+          element={
+            <PageTransition>
+              <Crm />
             </PageTransition>
           }
         />

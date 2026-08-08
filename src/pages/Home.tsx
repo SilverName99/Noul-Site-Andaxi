@@ -81,24 +81,28 @@ const Home = () => {
       <section className="relative h-screen w-full overflow-hidden">
         <video
           className="absolute inset-0 h-full w-full object-cover"
+          style={{ filter: 'var(--video-filter)' }}
           src="/hero-video.mp4"
           autoPlay
           loop
           muted
           playsInline
         />
-        <div className="absolute inset-0 bg-black/40" />
+        <div
+          className="absolute inset-0"
+          style={{ background: 'var(--hero-overlay)' }}
+        />
 
         <div className="relative z-10 flex h-full flex-col">
           <div className="mx-auto mt-28 grid w-full max-w-7xl grid-cols-1 gap-4 px-6 lg:grid-cols-2 lg:px-8">
             <Reveal>
-              <p className="max-w-md text-sm text-white/80 md:text-base">
+              <p className="max-w-md text-sm text-[color:var(--text-2)] md:text-base">
                 Website-uri personalizate, rapide și ușor de folosit, la un
                 preț corect — pentru afaceri din România și Grecia.
               </p>
             </Reveal>
             <Reveal delay={0.15}>
-              <p className="text-sm text-white/80 md:text-base lg:text-right">
+              <p className="text-sm text-[color:var(--text-2)] md:text-base lg:text-right">
                 Agenție de web design · România & Grecia
               </p>
             </Reveal>
@@ -106,7 +110,7 @@ const Home = () => {
 
           <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col items-center justify-center px-6 text-center lg:px-8">
             <Reveal>
-              <p className="mb-4 text-xs uppercase tracking-tight text-white/80 md:text-sm">
+              <p className="mb-4 text-xs uppercase tracking-tight text-[color:var(--text-2)] md:text-sm">
                 Web design accesibil și frumos
               </p>
             </Reveal>
@@ -115,13 +119,13 @@ const Home = () => {
               className="text-5xl tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl"
               style={{ lineHeight: 0.9 }}
             >
-              <span className="block font-medium text-white">
+              <span className="block font-medium text-[color:var(--text-1)]">
                 <AnimatedText text="De la oameni," delay={0.2} />
               </span>
               <ShinyText
                 text="către oameni."
                 color="var(--accent)"
-                shineColor="#ffffff"
+                shineColor="var(--shine)"
                 speed={3}
                 spread={100}
                 className="font-medium"
@@ -131,14 +135,14 @@ const Home = () => {
             <Reveal delay={0.4} className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
               <Link
                 to="/contact"
-                className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-colors duration-300 hover:bg-gray-200 md:px-8 md:py-4 md:text-base"
+                className="group inline-flex items-center gap-2 rounded-full bg-[color:var(--btn-bg)] px-6 py-3 text-sm font-medium text-[color:var(--btn-text)] transition-colors duration-300 hover:bg-[color:var(--btn-bg-hover)] md:px-8 md:py-4 md:text-base"
               >
                 Hai să vorbim
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 md:h-5 md:w-5" />
               </Link>
               <Link
                 to="/erp"
-                className="group inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3 text-sm text-white/90 transition-colors duration-300 hover:border-white hover:text-white md:px-8 md:py-4 md:text-base"
+                className="group inline-flex items-center gap-2 rounded-full border border-[color:var(--border-strong)] px-6 py-3 text-sm text-[color:var(--text-2)] transition-colors duration-300 hover:border-[color:var(--text-1)] hover:text-[color:var(--text-1)] md:px-8 md:py-4 md:text-base"
               >
                 Descoperă ANDAXI ERP
                 <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -256,23 +260,42 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ===== ERP teaser ===== */}
-      <section className="mx-auto w-full max-w-7xl px-6 pb-24 lg:px-8 lg:pb-32">
+      {/* ===== Produse: ERP & CRM ===== */}
+      <section className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-6 px-6 pb-24 md:grid-cols-2 lg:px-8 lg:pb-32">
         <Reveal>
           <Link
             to="/erp"
-            className="group block overflow-hidden rounded-3xl border border-[color:var(--accent-border)] bg-gradient-to-br from-[color:var(--accent-deep)] to-black p-10 transition-colors duration-300 hover:border-[color:var(--accent-strong)] md:p-16"
+            className="group block h-full overflow-hidden rounded-3xl border border-[color:var(--accent-border)] bg-gradient-to-br from-[color:var(--accent-deep)] to-black p-10 transition-colors duration-300 hover:border-[color:var(--accent-strong)] md:p-14"
           >
             <p className="text-xs uppercase tracking-wider text-[color:var(--accent)]">ANDAXI ERP</p>
-            <h2 className="mt-4 max-w-2xl text-3xl font-medium tracking-tight text-white md:text-5xl">
+            <h2 className="mt-4 text-3xl font-medium tracking-tight text-white md:text-4xl">
               Facturare, gestiune și contabilitate — într-un singur program.
             </h2>
-            <p className="mt-4 max-w-xl text-sm text-white/60 md:text-base">
+            <p className="mt-4 text-sm text-white/60 md:text-base">
               ERP online, complet și conform cu legislația din România. De la
               factură la bilanț și declarații ANAF — automat.
             </p>
             <span className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-white md:text-base">
               Descoperă ANDAXI ERP
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </span>
+          </Link>
+        </Reveal>
+        <Reveal delay={0.12}>
+          <Link
+            to="/crm"
+            className="group block h-full overflow-hidden rounded-3xl border border-[color:var(--accent-border)] bg-gradient-to-br from-[color:var(--accent-deep)] to-black p-10 transition-colors duration-300 hover:border-[color:var(--accent-strong)] md:p-14"
+          >
+            <p className="text-xs uppercase tracking-wider text-[color:var(--accent)]">ANDAXI CRM</p>
+            <h2 className="mt-4 text-3xl font-medium tracking-tight text-white md:text-4xl">
+              Vezi exact ce vinde fiecare agent.
+            </h2>
+            <p className="mt-4 text-sm text-white/60 md:text-base">
+              CRM de vânzări pentru echipe de agenți, conectat la ERP.
+              Comenzi, vânzări pe zone și clienți, analize pe agent — la zi.
+            </p>
+            <span className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-white md:text-base">
+              Descoperă ANDAXI CRM
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </span>
           </Link>
