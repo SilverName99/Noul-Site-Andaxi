@@ -25,6 +25,9 @@ const Footer = () => (
         <Link to="/crm" className="text-sm text-[color:var(--text-3)] transition-colors hover:text-[color:var(--text-1)]">
           ANDAXI CRM
         </Link>
+        <Link to="/preturi" className="text-sm text-[color:var(--text-3)] transition-colors hover:text-[color:var(--text-1)]">
+          PREȚURI
+        </Link>
         <Link to="/contact" className="text-sm text-[color:var(--text-3)] transition-colors hover:text-[color:var(--text-1)]">
           CONTACT
         </Link>
