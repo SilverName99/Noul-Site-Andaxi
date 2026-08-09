@@ -5,22 +5,11 @@ import { ArrowRight, CheckCircle2, Clock, MapPin, Phone } from 'lucide-react'
 import Reveal from '../components/motion/Reveal'
 import AnimatedText from '../components/motion/AnimatedText'
 
-// Adresa pe care ajung mesajele din formular — de înlocuit cu emailul firmei.
 const CONTACT_EMAIL = 'contact@andaxi.ro'
 
-/**
- * Trimitere directă prin EmailJS (gratuit, cu auto-reply către vizitator).
- * Cât timp cheile de mai jos sunt REPLACE_*, formularul cade elegant pe
- * mailto (deschide clientul de email) ca să rămână funcțional.
- */
-const EMAILJS = {
-  serviceId: 'REPLACE_SERVICE_ID',
-  templateId: 'REPLACE_TEMPLATE_ID',
-  publicKey: 'REPLACE_PUBLIC_KEY',
-}
-const emailJsConfigured = !Object.values(EMAILJS).some((v) =>
-  v.startsWith('REPLACE'),
-)
+// Endpoint PHP de pe subdomeniul api.andaxi.ro — trimite prin SMTP Hostinger
+// (vezi server/send-contact.php din repo).
+const CONTACT_API = 'https://api.andaxi.ro/send-contact.php'
 
 type Status = 'idle' | 'sending' | 'success' | 'error'
 
@@ -38,39 +27,32 @@ const Contact = () => {
     document.title = 'Contact — Andaxi'
   }, [])
 
+  const mailtoHref = () => {
+    const subject = `Mesaj de pe site — ${name}`
+    const body = [
+      `Nume: ${name}`,
+      `Email: ${email}`,
+      phone ? `Telefon: ${phone}` : null,
+      '',
+      message,
+    ]
+      .filter((line) => line !== null)
+      .join('\n')
+    return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+      subject,
+    )}&body=${encodeURIComponent(body)}`
+  }
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-
-    if (!emailJsConfigured) {
-      const subject = `Mesaj de pe site — ${name}`
-      const body = [
-        `Nume: ${name}`,
-        `Email: ${email}`,
-        phone ? `Telefon: ${phone}` : null,
-        '',
-        message,
-      ]
-        .filter((line) => line !== null)
-        .join('\n')
-      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
-        subject,
-      )}&body=${encodeURIComponent(body)}`
-      return
-    }
-
     setStatus('sending')
     try {
-      const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      const res = await fetch(CONTACT_API, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          service_id: EMAILJS.serviceId,
-          template_id: EMAILJS.templateId,
-          user_id: EMAILJS.publicKey,
-          template_params: { name, email, phone, message },
-        }),
+        body: JSON.stringify({ name, email, phone, message }),
       })
-      if (!res.ok) throw new Error(`EmailJS ${res.status}`)
+      if (!res.ok) throw new Error(`API ${res.status}`)
       setStatus('success')
       setName('')
       setEmail('')
@@ -268,17 +250,15 @@ const Contact = () => {
                       </button>
                       {status === 'error' && (
                         <p className="text-center text-sm text-red-500">
-                          Mesajul nu a putut fi trimis. Încearcă din nou sau
-                          sună-ne direct la{' '}
+                          Mesajul nu a putut fi trimis. Încearcă din nou,{' '}
+                          <a href={mailtoHref()} className="underline">
+                            trimite-l pe email
+                          </a>{' '}
+                          sau sună-ne la{' '}
                           <a href="tel:+40755885973" className="underline">
                             0755 885 973
                           </a>
                           .
-                        </p>
-                      )}
-                      {!emailJsConfigured && (
-                        <p className="text-center text-xs text-[color:var(--text-4)]">
-                          Se deschide aplicația ta de email cu mesajul precompletat.
                         </p>
                       )}
                     </div>
