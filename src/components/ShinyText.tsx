@@ -31,6 +31,10 @@ const ShinyText = ({
         backgroundClip: 'text',
         WebkitTextFillColor: 'transparent',
         color: 'transparent',
+        // Tight line-heights shrink the box below the glyphs; since the text
+        // is painted through the background, descenders would be clipped.
+        paddingBottom: '0.18em',
+        marginBottom: '-0.18em',
       }}
       animate={{ backgroundPosition: ['100% 50%', '-100% 50%'] }}
       transition={{

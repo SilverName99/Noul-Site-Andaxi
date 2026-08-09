@@ -27,7 +27,7 @@ const AnimatedText = ({ text, className = '', delay = 0 }: AnimatedTextProps) =>
       transition={{ staggerChildren: 0.06, delayChildren: delay }}
     >
       {words.map((word, i) => (
-        <span key={i} className="inline-block overflow-hidden pb-[0.1em] -mb-[0.1em] align-bottom">
+        <span key={i} className="inline-block overflow-hidden pb-[0.2em] -mb-[0.2em] align-bottom">
           <motion.span
             className="inline-block"
             variants={{
