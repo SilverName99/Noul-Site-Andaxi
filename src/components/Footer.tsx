@@ -17,7 +17,7 @@ const Footer = () => (
       <div className="flex flex-col gap-3">
         <span className="text-xs uppercase tracking-wider text-[color:var(--text-4)]">Navigare</span>
         <Link to="/" className="text-sm text-[color:var(--text-3)] transition-colors hover:text-[color:var(--text-1)]">
-          Acasă
+          ACASĂ
         </Link>
         <Link to="/erp" className="text-sm text-[color:var(--text-3)] transition-colors hover:text-[color:var(--text-1)]">
           ANDAXI ERP
@@ -26,7 +26,7 @@ const Footer = () => (
           ANDAXI CRM
         </Link>
         <Link to="/contact" className="text-sm text-[color:var(--text-3)] transition-colors hover:text-[color:var(--text-1)]">
-          Contact
+          CONTACT
         </Link>
       </div>
 

@@ -23,22 +23,22 @@ const VALUES = [
   {
     icon: HandCoins,
     title: 'Prețuri corecte',
-    text: 'Creăm site-uri de calitate fără să coste o avere.',
+    text: 'Site-uri de calitate care nu îți golesc portofelul — știi de la început cât plătești.',
   },
   {
     icon: Rocket,
     title: 'Viteză',
-    text: 'Un website standard în 2-3 săptămâni, un site de eveniment în doar 5-7 zile.',
+    text: 'Website-ul tău e gata în 2-3 săptămâni. Un site de eveniment, în doar 5-7 zile.',
   },
   {
     icon: Gem,
     title: 'Personalizare 100%',
-    text: 'Fiecare pixel e creat special pentru tine — nu lucrăm cu template-uri generice.',
+    text: 'Zero template-uri generice. Fiecare pixel e desenat pentru brandul tău.',
   },
   {
     icon: MessagesSquare,
     title: 'Suport real',
-    text: 'Comunicăm clar, răspundem repede și suntem aici și după ce site-ul este online.',
+    text: 'Vorbești cu oameni, nu cu tichete. Răspundem repede — și după lansare.',
   },
 ]
 
@@ -46,27 +46,27 @@ const SERVICES = [
   {
     icon: CalendarHeart,
     title: 'Website-uri pentru evenimente',
-    text: 'Nunți, botezuri, petreceri private — cu intrări animate, formulare RSVP personalizate, timeline-uri interactive și cărți de oaspeți digitale.',
+    text: 'Nunți, botezuri, petreceri — cu intrări animate, RSVP personalizat, timeline interactiv și carte de oaspeți digitală. Gata în 5-7 zile.',
   },
   {
     icon: ShoppingBag,
     title: 'Magazine online',
-    text: 'Ușor de administrat, optimizate pentru vânzări și pentru dispozitive mobile.',
+    text: 'Vinzi simplu: magazin ușor de administrat, optimizat pentru mobil și gândit să transforme vizitele în comenzi.',
   },
   {
     icon: MousePointerClick,
     title: 'Website-uri cu rezervări online',
-    text: 'Pentru restaurante, clinici, săli de sport, pensiuni sau orice serviciu care are nevoie de programări automate.',
+    text: 'Programări automate pentru restaurante, clinici, săli de sport sau pensiuni — fără telefoane pierdute.',
   },
   {
     icon: Sparkles,
     title: 'Website-uri interactive',
-    text: 'Platforme care îmbină informația cu elemente ludice — quiz-uri, recompense virtuale, interacțiuni vizuale atractive.',
+    text: 'Quiz-uri, recompense virtuale și interacțiuni care transformă vizitatorii în participanți.',
   },
   {
     icon: LayoutTemplate,
     title: 'Website-uri de prezentare',
-    text: 'Simple, elegante, focusate pe imaginea brandului și pe transmiterea mesajului corect.',
+    text: 'Simple și elegante — brandul tău, mesajul corect, fără zgomot.',
   },
 ]
 
@@ -159,7 +159,7 @@ const Home = () => {
           <p className="text-xs uppercase tracking-wider text-[color:var(--text-4)]">De ce Andaxi</p>
         </Reveal>
         <h2 className="mt-4 max-w-3xl text-3xl font-medium tracking-tight text-[color:var(--text-1)] md:text-5xl">
-          <AnimatedText text="Prețuim interacțiunea umană și atenția la detalii." />
+          <AnimatedText text="Fără birouri reci și jargon tehnic. Doar treabă făcută bine." />
         </h2>
 
         <StaggerContainer className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -186,7 +186,7 @@ const Home = () => {
             <p className="text-xs uppercase tracking-wider text-[color:var(--text-4)]">Ce facem</p>
           </Reveal>
           <h2 className="mt-4 max-w-3xl text-3xl font-medium tracking-tight text-[color:var(--text-1)] md:text-5xl">
-            <AnimatedText text="Proiecte digitale pentru orice misiune." />
+            <AnimatedText text="Orice misiune, aceeași țintă: o experiență online memorabilă." />
           </h2>
 
           <div className="mt-14 flex flex-col">
@@ -211,10 +211,9 @@ const Home = () => {
 
           <Reveal delay={0.1} className="mt-10">
             <p className="max-w-2xl text-sm leading-relaxed text-[color:var(--text-3)] md:text-base">
-              Ne ocupăm de toate detaliile tehnice — de la înregistrarea
-              domeniului și configurarea emailului, până la integrarea cu
-              Google Analytics și optimizarea SEO. Tu te concentrezi pe
-              afacerea ta; noi ne asigurăm că site-ul e gata de lansare.
+              Ne ocupăm de toate detaliile tehnice — domeniu, email, Google
+              Analytics, SEO. Tu te concentrezi pe afacerea ta; noi îți
+              predăm site-ul gata de lansare.
             </p>
           </Reveal>
         </div>
