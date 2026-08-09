@@ -109,7 +109,7 @@ const Home = () => {
             </Reveal>
             <Reveal delay={0.15}>
               <p className="text-sm text-[color:var(--text-2)] md:text-base lg:text-right">
-                Website-uri · ERP · CRM
+                WEBSITE · ERP · CRM
               </p>
             </Reveal>
           </div>
