@@ -4,15 +4,15 @@ import { motion } from 'framer-motion'
 import {
   ArrowRight,
   ArrowUpRight,
-  CalendarHeart,
+  Calculator,
   Gem,
   HandCoins,
   LayoutTemplate,
+  Map,
   MessagesSquare,
-  MousePointerClick,
   Rocket,
   ShoppingBag,
-  Sparkles,
+  Tag,
 } from 'lucide-react'
 import ShinyText from '../components/ShinyText'
 import Reveal from '../components/motion/Reveal'
@@ -28,7 +28,7 @@ const VALUES = [
   {
     icon: Rocket,
     title: 'Viteză',
-    text: 'Website-ul tău e gata în 2-3 săptămâni. Un site de eveniment, în doar 5-7 zile.',
+    text: 'Website-ul tău e gata în 2-3 săptămâni.',
   },
   {
     icon: Gem,
@@ -44,29 +44,34 @@ const VALUES = [
 
 const SERVICES = [
   {
-    icon: CalendarHeart,
-    title: 'Website-uri pentru evenimente',
-    text: 'Nunți, botezuri, petreceri — cu intrări animate, RSVP personalizat, timeline interactiv și carte de oaspeți digitală. Gata în 5-7 zile.',
+    icon: LayoutTemplate,
+    title: 'Website-uri',
+    text: 'De prezentare, pentru evenimente, cu rezervări sau interactive — personalizate 100%, gata în câteva săptămâni.',
+    to: '/contact',
   },
   {
     icon: ShoppingBag,
     title: 'Magazine online',
     text: 'Vinzi simplu: magazin ușor de administrat, optimizat pentru mobil și gândit să transforme vizitele în comenzi.',
+    to: '/contact',
   },
   {
-    icon: MousePointerClick,
-    title: 'Website-uri cu rezervări online',
-    text: 'Programări automate pentru restaurante, clinici, săli de sport sau pensiuni — fără telefoane pierdute.',
+    icon: Calculator,
+    title: 'ANDAXI ERP',
+    text: 'Facturare, gestiune și contabilitate — într-un singur program, conform cu legislația din România.',
+    to: '/erp',
   },
   {
-    icon: Sparkles,
-    title: 'Website-uri interactive',
-    text: 'Quiz-uri, recompense virtuale și interacțiuni care transformă vizitatorii în participanți.',
+    icon: Map,
+    title: 'ANDAXI CRM',
+    text: 'Vânzările echipei tale pe teren: hartă cu rute, stocuri per agent, chat — conectat la ERP.',
+    to: '/crm',
   },
   {
-    icon: LayoutTemplate,
-    title: 'Website-uri de prezentare',
-    text: 'Simple și elegante — brandul tău, mesajul corect, fără zgomot.',
+    icon: Tag,
+    title: 'Prețuri',
+    text: 'Corecte și transparente, fără costuri ascunse — vezi cât ar costa proiectul tău.',
+    to: '/preturi',
   },
 ]
 
@@ -97,14 +102,14 @@ const Home = () => {
           <div className="mx-auto mt-28 grid w-full max-w-7xl grid-cols-1 gap-4 px-6 lg:grid-cols-2 lg:px-8">
             <Reveal>
               <p className="max-w-md text-sm text-[color:var(--text-2)] md:text-base">
-                Fiecare pixel e creat special pentru tine. Website-uri rapide,
-                gata în 2-3 săptămâni, cu prețuri corecte și suport real și
-                după lansare.
+                De la website-uri și magazine online, la ERP și CRM —
+                construim soluții web complete, cu prețuri corecte și suport
+                real după lansare.
               </p>
             </Reveal>
             <Reveal delay={0.15}>
               <p className="text-sm text-[color:var(--text-2)] md:text-base lg:text-right">
-                Website-uri · ERP · CRM — România
+                Website-uri · ERP · CRM
               </p>
             </Reveal>
           </div>
@@ -190,9 +195,12 @@ const Home = () => {
           </h2>
 
           <div className="mt-14 flex flex-col">
-            {SERVICES.map(({ icon: Icon, title, text }, i) => (
+            {SERVICES.map(({ icon: Icon, title, text, to }, i) => (
               <Reveal key={title} delay={i * 0.05}>
-                <div className="group flex flex-col gap-4 border-t border-[color:var(--border)] py-8 transition-colors duration-300 last:border-b hover:bg-[color:var(--surface)] md:flex-row md:items-center md:gap-10 md:py-10">
+                <Link
+                  to={to}
+                  className="group flex flex-col gap-4 border-t border-[color:var(--border)] py-8 transition-colors duration-300 last:border-b hover:bg-[color:var(--surface)] md:flex-row md:items-center md:gap-10 md:py-10"
+                >
                   <span className="text-sm text-[color:var(--text-5)] md:w-10">
                     {String(i + 1).padStart(2, '0')}
                   </span>
@@ -204,7 +212,7 @@ const Home = () => {
                     {text}
                   </p>
                   <ArrowUpRight className="hidden h-5 w-5 text-[color:var(--text-5)] transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-[color:var(--text-1)] md:block" />
-                </div>
+                </Link>
               </Reveal>
             ))}
           </div>

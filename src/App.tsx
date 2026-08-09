@@ -9,6 +9,7 @@ import PageTransition from './components/motion/PageTransition'
 import Home from './pages/Home'
 import Erp from './pages/Erp'
 import Crm from './pages/Crm'
+import Preturi from './pages/Preturi'
 import Contact from './pages/Contact'
 
 const ScrollToTop = () => {
@@ -48,6 +49,14 @@ const AnimatedRoutes = () => {
           element={
             <PageTransition>
               <Crm />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/preturi"
+          element={
+            <PageTransition>
+              <Preturi />
             </PageTransition>
           }
         />
