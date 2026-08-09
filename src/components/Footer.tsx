@@ -9,8 +9,8 @@ const Footer = () => (
           <img src="/logo.png" alt="Andaxi" className="h-11 w-auto" />
         </Link>
         <p className="mt-4 text-sm leading-relaxed text-[color:var(--text-3)]">
-          Web design accesibil și frumos, fără să-ți golească portofelul.
-          Pentru noi, web design-ul e simplu: de la oameni, către oameni.
+          Soluții web, fără să-ți golească portofelul. Motto-ul nostru: de la
+          oameni, către oameni.
         </p>
       </div>
 
