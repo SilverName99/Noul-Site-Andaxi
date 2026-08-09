@@ -100,12 +100,12 @@ const ScrollShowcase = ({ steps }: ScrollShowcaseProps) => {
     <div className="flex flex-col gap-16">
       {steps.map((step) => (
         <Reveal key={step.title}>
-          <div className="overflow-hidden rounded-2xl border border-[color:var(--border)]">
+          <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)]">
             <img
               src={step.image}
               alt={step.title}
               loading="lazy"
-              className="aspect-[16/10] w-full object-cover"
+              className="h-auto w-full"
             />
           </div>
           <div className="mt-6">

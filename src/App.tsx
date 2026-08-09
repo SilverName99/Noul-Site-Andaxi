@@ -14,7 +14,9 @@ import Contact from './pages/Contact'
 const ScrollToTop = () => {
   const { pathname } = useLocation()
   useEffect(() => {
-    window.scrollTo(0, 0)
+    // Instant, so route changes don't visibly scroll through the page
+    // (html has scroll-behavior: smooth for in-page anchors).
+    window.scrollTo({ top: 0, behavior: 'instant' })
   }, [pathname])
   return null
 }

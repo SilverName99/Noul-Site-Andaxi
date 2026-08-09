@@ -18,11 +18,14 @@ interface MagnifyImageProps {
   className?: string
 }
 
-/** Image with a magnifier lens on hover: a circle follows the cursor showing
- *  the image zoomed in, while everything outside the lens dims slightly. */
+/** Image (object-contain) with a magnifier lens on hover: a circle follows
+ *  the cursor showing the image zoomed in, while everything outside the lens
+ *  dims slightly. The lens math accounts for the letterboxed drawn rect. */
 const MagnifyImage = ({ src, alt, className = '' }: MagnifyImageProps) => {
   const containerRef = useRef<HTMLDivElement>(null)
-  const sizeRef = useRef({ w: 0, h: 0 })
+  const imgRef = useRef<HTMLImageElement>(null)
+  // Rect actually covered by the contained image inside the container.
+  const drawnRef = useRef({ ox: 0, oy: 0, dw: 1, dh: 1 })
   const [hovering, setHovering] = useState(false)
 
   const mx = useMotionValue(0)
@@ -30,18 +33,31 @@ const MagnifyImage = ({ src, alt, className = '' }: MagnifyImageProps) => {
   const x = useSpring(mx, { stiffness: 350, damping: 35, mass: 0.4 })
   const y = useSpring(my, { stiffness: 350, damping: 35, mass: 0.4 })
 
-  // Lens top-left corner follows the (sprung) cursor position.
   const lensX = useTransform(x, (v) => v - LENS_SIZE / 2)
   const lensY = useTransform(y, (v) => v - LENS_SIZE / 2)
 
-  // Keep the magnified point under the lens center in sync with the cursor.
-  const bgX = useTransform(x, (v) => -(v * ZOOM - LENS_SIZE / 2))
-  const bgY = useTransform(y, (v) => -(v * ZOOM - LENS_SIZE / 2))
+  // Keep the magnified point under the lens center in sync with the cursor,
+  // relative to the drawn image rect (not the whole container).
+  const bgX = useTransform(
+    x,
+    (v) => -((v - drawnRef.current.ox) * ZOOM - LENS_SIZE / 2),
+  )
+  const bgY = useTransform(
+    y,
+    (v) => -((v - drawnRef.current.oy) * ZOOM - LENS_SIZE / 2),
+  )
   const backgroundPosition = useMotionTemplate`${bgX}px ${bgY}px`
 
   const measure = () => {
-    const rect = containerRef.current?.getBoundingClientRect()
-    if (rect) sizeRef.current = { w: rect.width, h: rect.height }
+    const container = containerRef.current
+    const img = imgRef.current
+    if (!container || !img || !img.naturalWidth) return
+    const cw = container.clientWidth
+    const ch = container.clientHeight
+    const scale = Math.min(cw / img.naturalWidth, ch / img.naturalHeight)
+    const dw = img.naturalWidth * scale
+    const dh = img.naturalHeight * scale
+    drawnRef.current = { ox: (cw - dw) / 2, oy: (ch - dh) / 2, dw, dh }
   }
 
   const handleMove = (e: MouseEvent) => {
@@ -57,15 +73,23 @@ const MagnifyImage = ({ src, alt, className = '' }: MagnifyImageProps) => {
       className="relative h-full w-full cursor-none overflow-hidden"
       onMouseEnter={(e) => {
         measure()
-        handleMove(e)
-        mx.jump(e.clientX - (containerRef.current?.getBoundingClientRect().left ?? 0))
-        my.jump(e.clientY - (containerRef.current?.getBoundingClientRect().top ?? 0))
+        const rect = containerRef.current?.getBoundingClientRect()
+        if (rect) {
+          mx.jump(e.clientX - rect.left)
+          my.jump(e.clientY - rect.top)
+        }
         setHovering(true)
       }}
       onMouseMove={handleMove}
       onMouseLeave={() => setHovering(false)}
     >
-      <img src={src} alt={alt} className={`h-full w-full object-cover ${className}`} />
+      <img
+        ref={imgRef}
+        src={src}
+        alt={alt}
+        onLoad={measure}
+        className={`h-full w-full object-contain ${className}`}
+      />
 
       <AnimatePresence>
         {hovering && (
@@ -81,7 +105,7 @@ const MagnifyImage = ({ src, alt, className = '' }: MagnifyImageProps) => {
             />
             {/* Magnifier lens */}
             <motion.div
-              className="pointer-events-none absolute left-0 top-0 rounded-full border-2 border-white/70 shadow-2xl shadow-black/50 ring-2 ring-[color:var(--accent)]/60"
+              className="pointer-events-none absolute left-0 top-0 rounded-full border-2 border-white/70 bg-[color:var(--bg)] shadow-2xl shadow-black/50 ring-2 ring-[color:var(--accent)]/60"
               style={{
                 width: LENS_SIZE,
                 height: LENS_SIZE,
@@ -89,7 +113,7 @@ const MagnifyImage = ({ src, alt, className = '' }: MagnifyImageProps) => {
                 y: lensY,
                 backgroundImage: `url(${src})`,
                 backgroundRepeat: 'no-repeat',
-                backgroundSize: `${sizeRef.current.w * ZOOM}px ${sizeRef.current.h * ZOOM}px`,
+                backgroundSize: `${drawnRef.current.dw * ZOOM}px ${drawnRef.current.dh * ZOOM}px`,
                 backgroundPosition,
               }}
               initial={{ opacity: 0, scale: 0.6 }}
