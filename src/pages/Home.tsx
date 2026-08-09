@@ -97,13 +97,14 @@ const Home = () => {
           <div className="mx-auto mt-28 grid w-full max-w-7xl grid-cols-1 gap-4 px-6 lg:grid-cols-2 lg:px-8">
             <Reveal>
               <p className="max-w-md text-sm text-[color:var(--text-2)] md:text-base">
-                Website-uri personalizate, rapide și ușor de folosit, la un
-                preț corect — pentru afaceri din România și Grecia.
+                Fiecare pixel e creat special pentru tine. Website-uri rapide,
+                gata în 2-3 săptămâni, cu prețuri corecte și suport real și
+                după lansare.
               </p>
             </Reveal>
             <Reveal delay={0.15}>
               <p className="text-sm text-[color:var(--text-2)] md:text-base lg:text-right">
-                Agenție web · România & Grecia
+                Website-uri · ERP · CRM — România
               </p>
             </Reveal>
           </div>
@@ -243,9 +244,8 @@ const Home = () => {
               <p>
                 Așa s-a născut Andaxi — cu scopul de a oferi website-uri
                 personalizate, rapide și ușor de folosit, la un preț corect.
-                Majoritatea proiectelor noastre sunt din România, dar drumul
-                ne-a purtat și prin Grecia, unde am ajutat clienți să își
-                spună povestea în spațiul digital.
+                Ajutăm afaceri din toată România să își spună povestea în
+                spațiul digital.
               </p>
             </Reveal>
             <Reveal delay={0.2}>

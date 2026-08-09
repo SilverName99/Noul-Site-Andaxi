@@ -39,7 +39,7 @@ const Footer = () => (
           <Phone className="h-4 w-4" />
           0755 885 973
         </a>
-        <span className="text-sm text-[color:var(--text-4)]">România · Grecia</span>
+        <span className="text-sm text-[color:var(--text-4)]">România</span>
       </div>
     </div>
 

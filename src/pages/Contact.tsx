@@ -91,7 +91,7 @@ const Contact = () => {
                     <span className="block text-xs uppercase tracking-wider text-[color:var(--text-4)]">
                       Unde lucrăm
                     </span>
-                    <span className="text-lg font-medium md:text-xl">România · Grecia</span>
+                    <span className="text-lg font-medium md:text-xl">Oriunde în România</span>
                   </span>
                 </div>
               </Reveal>
