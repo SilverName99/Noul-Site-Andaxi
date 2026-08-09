@@ -32,7 +32,7 @@ const MODULES: ShowcaseStep[] = [
       'Hartă interactivă, intuitivă și la zi',
       'Rute pentru fiecare agent în parte',
     ],
-    image: '/crm/01-harta-interactiva.jpg',
+    image: '/img/crm/01-harta-interactiva.jpg',
   },
   {
     icon: Boxes,
@@ -43,7 +43,7 @@ const MODULES: ShowcaseStep[] = [
       'Ușor de manageriat, cu istoric pentru fiecare acțiune',
       'Sistem de cereri și aprobări ale stocului',
     ],
-    image: '/crm/02-stocuri.jpg',
+    image: '/img/crm/02-stocuri.jpg',
   },
   {
     icon: UserCheck,
@@ -54,7 +54,7 @@ const MODULES: ShowcaseStep[] = [
       'Detaliile preluate direct din ERP, automat',
       'Împărțite și detaliate pe fiecare produs în parte',
     ],
-    image: '/crm/03-vanzarile-mele.jpg',
+    image: '/img/crm/03-vanzarile-mele.jpg',
   },
   {
     icon: CloudUpload,
@@ -64,7 +64,7 @@ const MODULES: ShowcaseStep[] = [
       'Încarcă fișiere și împarte-le în foldere',
       'Fiecare agent are acces oricând la ele',
     ],
-    image: '/crm/04-cloud.jpg',
+    image: '/img/crm/04-cloud.jpg',
   },
   {
     icon: MessagesSquare,
@@ -75,7 +75,7 @@ const MODULES: ShowcaseStep[] = [
       'Ordine și spațiu pentru fiecare angajat',
       'Interfață intuitivă, cu sunet pentru mesajele noi',
     ],
-    image: '/crm/05-chat.jpg',
+    image: '/img/crm/05-chat.jpg',
   },
   {
     icon: Link2,
@@ -86,7 +86,7 @@ const MODULES: ShowcaseStep[] = [
       'Scapă de Excel-uri făcute manual',
       'Distribuie fiecărui agent doar ce este al lui',
     ],
-    image: '/crm/06-erp-integrare.jpg',
+    image: '/img/crm/06-erp-integrare.jpg',
   },
 ]
 
