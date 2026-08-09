@@ -105,7 +105,7 @@ const ScrollShowcase = ({ steps }: ScrollShowcaseProps) => {
               src={step.image}
               alt={step.title}
               loading="lazy"
-              className="h-auto w-full"
+              className="aspect-[16/10] w-full object-cover"
             />
           </div>
           <div className="mt-6">
@@ -172,9 +172,11 @@ const ScrollShowcase = ({ steps }: ScrollShowcaseProps) => {
                 className="relative aspect-[16/10] w-full"
                 style={{ rotateY, transformStyle: 'preserve-3d' }}
               >
+                {/* translateZ separates the two faces so they never z-fight
+                    (coplanar faces shimmer when hover layers appear). */}
                 <div
                   className="absolute inset-0 overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] shadow-2xl shadow-black/20"
-                  style={{ backfaceVisibility: 'hidden' }}
+                  style={{ backfaceVisibility: 'hidden', transform: 'translateZ(2px)' }}
                 >
                   <MagnifyImage
                     src={steps[faces.front].image}
@@ -183,7 +185,10 @@ const ScrollShowcase = ({ steps }: ScrollShowcaseProps) => {
                 </div>
                 <div
                   className="absolute inset-0 overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] shadow-2xl shadow-black/20"
-                  style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+                  style={{
+                    backfaceVisibility: 'hidden',
+                    transform: 'rotateY(180deg) translateZ(2px)',
+                  }}
                 >
                   <MagnifyImage
                     src={steps[faces.back].image}

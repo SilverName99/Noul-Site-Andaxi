@@ -106,20 +106,20 @@ const HIGHLIGHTS = [
 
 const WHY = [
   {
-    title: 'Conectat la ERP',
-    text: 'Date reale din facturare și stoc, fără dublă introducere.',
+    title: 'Scapă de Excel-uri făcute manual',
+    text: 'Gata cu vânzările adunate din fișiere trimise pe email sau WhatsApp — datele se leagă singure, direct din ERP.',
   },
   {
-    title: 'Atribuire corectă',
-    text: 'Aliasuri și partajare între agenți — fiecare vânzare ajunge la agentul potrivit.',
+    title: 'Trasee clare, în fiecare zi',
+    text: 'Hartă interactivă cu stopuri și check-in automat cu oră — fiecare agent știe exact unde merge și ce are de făcut.',
   },
   {
-    title: 'Analiză pe orice dimensiune',
-    text: 'Agent, zonă, client, produs, lună — dintr-o privire.',
+    title: 'Fiecare agent vede doar ce e al lui',
+    text: 'Organizare și confidențialitate în aceeași frază: stocuri, vânzări și fișiere distribuite individual, securizat.',
   },
   {
-    title: 'Transparență pentru echipă',
-    text: 'Fiecare agent își vede rezultatele, cu acces controlat.',
+    title: 'Gândit din practică, nu din teorie',
+    text: 'Detalii care contează în lucrul de zi cu zi — de la sunetul pentru mesajele noi din chat, la istoricul fiecărei acțiuni pe stoc.',
   },
 ]
 

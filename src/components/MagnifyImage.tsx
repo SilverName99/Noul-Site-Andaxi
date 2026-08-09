@@ -18,9 +18,9 @@ interface MagnifyImageProps {
   className?: string
 }
 
-/** Image (object-contain) with a magnifier lens on hover: a circle follows
+/** Image (object-cover) with a magnifier lens on hover: a circle follows
  *  the cursor showing the image zoomed in, while everything outside the lens
- *  dims slightly. The lens math accounts for the letterboxed drawn rect. */
+ *  dims slightly. The lens math accounts for the cover-cropped drawn rect. */
 const MagnifyImage = ({ src, alt, className = '' }: MagnifyImageProps) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const imgRef = useRef<HTMLImageElement>(null)
@@ -54,7 +54,7 @@ const MagnifyImage = ({ src, alt, className = '' }: MagnifyImageProps) => {
     if (!container || !img || !img.naturalWidth) return
     const cw = container.clientWidth
     const ch = container.clientHeight
-    const scale = Math.min(cw / img.naturalWidth, ch / img.naturalHeight)
+    const scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight)
     const dw = img.naturalWidth * scale
     const dh = img.naturalHeight * scale
     drawnRef.current = { ox: (cw - dw) / 2, oy: (ch - dh) / 2, dw, dh }
@@ -88,7 +88,7 @@ const MagnifyImage = ({ src, alt, className = '' }: MagnifyImageProps) => {
         src={src}
         alt={alt}
         onLoad={measure}
-        className={`h-full w-full object-contain ${className}`}
+        className={`h-full w-full object-cover ${className}`}
       />
 
       <AnimatePresence>
