@@ -4,11 +4,18 @@ import { motion } from 'framer-motion'
 import {
   ArrowRight,
   ArrowUpRight,
+  BadgeCheck,
+  Calculator,
   Check,
   Cpu,
+  Database,
+  Gift,
   LayoutTemplate,
   LifeBuoy,
+  LockKeyhole,
   Mail,
+  Map,
+  PlayCircle,
   RefreshCw,
   Rocket,
   Server,
@@ -19,6 +26,7 @@ import Reveal from '../components/motion/Reveal'
 import AnimatedText from '../components/motion/AnimatedText'
 import ShinyText from '../components/ShinyText'
 import { StaggerContainer, StaggerItem } from '../components/motion/Stagger'
+import ErpCalculator from '../components/ErpCalculator'
 
 const PACKAGES = [
   {
@@ -111,6 +119,68 @@ const MAINTENANCE = [
   },
 ]
 
+const ERP_FREE = [
+  {
+    icon: Gift,
+    title: 'Implementare & customizare',
+    text: 'Le facem noi, gratuit — programul se adaptează firmei tale, nu invers.',
+  },
+  {
+    icon: Check,
+    title: 'Toate modulele incluse',
+    text: 'Facturare, stocuri, casă & bancă, contabilitate — nimic nu se plătește separat.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'e-Factura, SAF-T & declarații',
+    text: 'Conform ANAF, cu actualizări de legislație incluse permanent.',
+  },
+  {
+    icon: Server,
+    title: 'Server dedicat',
+    text: 'Datele firmei tale, izolate — nu la comun cu alte firme.',
+  },
+  {
+    icon: RefreshCw,
+    title: 'Migrarea datelor + instruire',
+    text: 'Îți aducem datele și îți învățăm echipa, fără costuri suplimentare.',
+  },
+  {
+    icon: LifeBuoy,
+    title: 'Backup & suport',
+    text: 'Copii de siguranță automate și oameni care răspund când ai nevoie.',
+  },
+]
+
+const ERP_BENEFITS = [
+  {
+    icon: BadgeCheck,
+    title: 'Fără contract pe termen lung',
+    text: 'Anulezi oricând.',
+  },
+  {
+    icon: PlayCircle,
+    title: 'Demonstrație gratuită',
+    text: 'Îți arătăm ERP-ul înainte să decizi.',
+  },
+  {
+    icon: LockKeyhole,
+    title: 'Conturi cu acces limitat',
+    text: 'De exemplu, contabilul tău vede doar contabilitatea.',
+  },
+  {
+    icon: Database,
+    title: 'Spațiu extra la cerere',
+    text: 'Ai nevoie de mai mult spațiu? Discutăm și găsim varianta potrivită.',
+  },
+]
+
+const PRICE_NAV = [
+  { href: '#website-uri', label: 'Website-uri', icon: LayoutTemplate },
+  { href: '#erp', label: 'ANDAXI ERP', icon: Calculator },
+  { href: '#crm', label: 'ANDAXI CRM', icon: Map },
+]
+
 const NOTES = [
   'Prețurile sunt exprimate în euro.',
   'Plata în două tranșe: 50% la începerea proiectului, 50% la predare.',
@@ -188,8 +258,29 @@ const Preturi = () => {
         </div>
       </section>
 
+      {/* ===== Navigator sticky ===== */}
+      <div className="pointer-events-none sticky top-4 z-40 flex justify-center px-6">
+        <Reveal className="pointer-events-auto">
+          <nav className="flex items-center gap-1 rounded-full border border-[color:var(--border)] bg-[color:var(--menu-bg)] p-1.5 shadow-lg shadow-black/10 backdrop-blur-md">
+            {PRICE_NAV.map(({ href, label, icon: Icon }) => (
+              <a
+                key={href}
+                href={href}
+                className="flex items-center gap-2 rounded-full px-4 py-2 text-sm text-[color:var(--text-3)] transition-colors duration-200 hover:bg-[color:var(--accent-tint)] hover:text-[color:var(--text-1)]"
+              >
+                <Icon className="h-4 w-4 text-[color:var(--accent)]" />
+                <span className="hidden sm:inline">{label}</span>
+              </a>
+            ))}
+          </nav>
+        </Reveal>
+      </div>
+
       {/* ===== Pricing cards ===== */}
-      <section className="mx-auto w-full max-w-7xl px-6 pb-24 lg:px-8">
+      <section
+        id="website-uri"
+        className="mx-auto w-full max-w-7xl scroll-mt-24 px-6 pb-24 pt-10 lg:px-8"
+      >
         <StaggerContainer className="grid grid-cols-1 items-start gap-6 lg:grid-cols-3">
           {PACKAGES.map(({ icon: Icon, name, price, monthly, tagline, featured, features }) => (
             <StaggerItem key={name}>
@@ -286,39 +377,101 @@ const Preturi = () => {
         </div>
       </section>
 
-      {/* ===== ERP & CRM ===== */}
-      <section className="border-t border-[color:var(--border)]">
+      {/* ===== ANDAXI ERP ===== */}
+      <section id="erp" className="scroll-mt-24 border-t border-[color:var(--border)]">
+        <div className="mx-auto w-full max-w-7xl px-6 py-24 lg:px-8">
+          <Reveal>
+            <p className="text-xs uppercase tracking-wider text-[color:var(--accent)]">
+              ANDAXI ERP
+            </p>
+          </Reveal>
+          <h2 className="mt-4 max-w-4xl text-3xl font-medium tracking-tight md:text-5xl">
+            <span className="block text-[color:var(--text-1)]">
+              <AnimatedText text="Programul e gratis." />
+            </span>
+            <ShinyText
+              text="Plătești doar utilizatorii."
+              color="var(--accent-strong)"
+              shineColor="var(--shine)"
+              speed={3}
+              spread={100}
+              className="font-medium"
+            />
+          </h2>
+          <Reveal delay={0.15}>
+            <p className="mt-5 max-w-2xl text-sm leading-relaxed text-[color:var(--text-3)] md:text-base">
+              Fără licențe, fără costuri de implementare, fără module plătite
+              separat. Alegi câți utilizatori are firma ta — atât plătești,
+              restul e inclus.
+            </p>
+          </Reveal>
+
+          {/* Ce e gratis */}
+          <StaggerContainer className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {ERP_FREE.map(({ icon: Icon, title, text }) => (
+              <StaggerItem key={title}>
+                <div className="h-full rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] p-6">
+                  <Icon className="h-6 w-6 text-[color:var(--accent)]" />
+                  <h3 className="mt-4 text-base font-medium text-[color:var(--text-1)]">
+                    {title}
+                    <span className="ml-2 rounded-full bg-[color:var(--accent-tint)] px-2.5 py-0.5 text-xs font-medium text-[color:var(--accent)]">
+                      gratis
+                    </span>
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[color:var(--text-3)]">{text}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+
+          {/* Calculator */}
+          <Reveal delay={0.1} className="mt-12">
+            <ErpCalculator />
+          </Reveal>
+
+          {/* Beneficii */}
+          <StaggerContainer className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {ERP_BENEFITS.map(({ icon: Icon, title, text }) => (
+              <StaggerItem key={title}>
+                <div className="flex h-full items-start gap-3 rounded-2xl border border-[color:var(--border)] p-5">
+                  <Icon className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--accent)]" />
+                  <div>
+                    <h3 className="text-sm font-medium text-[color:var(--text-1)]">{title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-[color:var(--text-4)]">
+                      {text}
+                    </p>
+                  </div>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* ===== ANDAXI CRM ===== */}
+      <section id="crm" className="scroll-mt-24 border-t border-[color:var(--border)]">
         <div className="mx-auto w-full max-w-7xl px-6 py-24 lg:px-8">
           <Reveal>
             <div className="flex flex-col items-start justify-between gap-8 rounded-3xl border border-[color:var(--accent-border)] bg-gradient-to-br from-[color:var(--accent-deep)] to-black p-10 md:p-14 lg:flex-row lg:items-center">
               <div className="max-w-2xl">
                 <p className="text-xs uppercase tracking-wider text-[color:var(--accent)]">
-                  ANDAXI ERP & CRM
+                  ANDAXI CRM
                 </p>
                 <h2 className="mt-3 text-3xl font-medium tracking-tight text-white md:text-4xl">
-                  Ai nevoie de ERP sau CRM?
+                  Prețurile CRM — în curând.
                 </h2>
                 <p className="mt-3 text-sm leading-relaxed text-white/60 md:text-base">
-                  Prețurile se stabilesc în funcție de mărimea firmei și de
-                  nevoile tale — spune-ne cum lucrezi și îți facem o ofertă
-                  personalizată, cu demonstrație pe datele tale.
+                  Până atunci, spune-ne câți agenți ai pe teren și cum
+                  lucrezi — îți facem o ofertă personalizată, cu demonstrație
+                  gratuită.
                 </p>
-                <div className="mt-5 flex flex-wrap gap-5">
-                  <Link
-                    to="/erp"
-                    className="group inline-flex items-center gap-1 text-sm text-white/80 transition-colors hover:text-white"
-                  >
-                    Descoperă ANDAXI ERP
-                    <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </Link>
-                  <Link
-                    to="/crm"
-                    className="group inline-flex items-center gap-1 text-sm text-white/80 transition-colors hover:text-white"
-                  >
-                    Descoperă ANDAXI CRM
-                    <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </Link>
-                </div>
+                <Link
+                  to="/crm"
+                  className="group mt-5 inline-flex items-center gap-1 text-sm text-white/80 transition-colors hover:text-white"
+                >
+                  Descoperă ANDAXI CRM
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </Link>
               </div>
               <Link
                 to="/contact"
