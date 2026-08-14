@@ -179,7 +179,6 @@ const Preturi = () => {
                   Toate site-urile rulează pe CMS-ul nostru dezvoltat custom
                 </h2>
                 <p className="mt-1 text-sm leading-relaxed text-[color:var(--text-3)]">
-                  Îți administrezi singur conținutul, fără cunoștințe tehnice.
                   Încărcare fulgerătoare, fără licențe lunare ca la
                   platformele mari — și actualizări incluse.
                 </p>
