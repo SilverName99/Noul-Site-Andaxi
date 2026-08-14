@@ -2,8 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Tema implicită: culorile logo-ului — portocaliu pe fundal alb. */
-:root,
+/* Tema portocalie — accente în culorile logo-ului, pe fundal alb. */
 :root[data-theme='brand'] {
   --accent: #f5891e;
   --accent-strong: #e27100;
@@ -34,7 +33,8 @@
   --hero-overlay: rgba(255, 255, 255, 0.4);
 }
 
-/* Tema alternativă: albastrul original pe fundal negru. */
+/* Tema implicită: albastru pe fundal negru (dark). */
+:root,
 :root[data-theme='blue'] {
   --accent: #64cefb;
   --accent-strong: #1f6feb;

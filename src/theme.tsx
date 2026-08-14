@@ -13,7 +13,7 @@ const ThemeContext = createContext<{
 
 const getInitialTheme = (): Theme => {
   const stored = localStorage.getItem(STORAGE_KEY)
-  return stored === 'blue' ? 'blue' : 'brand'
+  return stored === 'brand' ? 'brand' : 'blue'
 }
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
