@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { ArrowRight, Database, Users } from 'lucide-react'
 
 const TIERS = [
@@ -130,19 +130,16 @@ const ErpCalculator = () => {
 
       {/* Rezultat */}
       <div className="mt-10 flex flex-col items-center text-center">
-        <AnimatePresence mode="popLayout">
-          <motion.p
-            key={`${total}-${period}`}
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="text-5xl font-medium tracking-tighter text-[color:var(--text-1)] md:text-6xl"
-          >
-            {fmt(total)}€
-            <span className="text-xl text-[color:var(--text-4)] md:text-2xl">/lună</span>
-          </motion.p>
-        </AnimatePresence>
+        <motion.p
+          key={`${total}-${period}`}
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          className="text-5xl font-medium tracking-tighter text-[color:var(--text-1)] md:text-6xl"
+        >
+          {fmt(total)}€
+          <span className="text-xl text-[color:var(--text-4)] md:text-2xl">/lună</span>
+        </motion.p>
 
         <p className="mt-3 text-sm text-[color:var(--text-3)]">
           {fmt(perUser)}€ / utilizator / lună

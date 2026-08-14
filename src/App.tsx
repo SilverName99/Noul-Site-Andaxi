@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
-import { AnimatePresence } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ThemeSwitch from './components/ThemeSwitch'
@@ -26,8 +25,10 @@ const AnimatedRoutes = () => {
   const location = useLocation()
 
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
+    // Fără AnimatePresence: pagina nouă intră animat (PageTransition), dar
+    // montarea ei nu mai depinde de terminarea vreunei animații de ieșire —
+    // un exit blocat lăsa pagina goală.
+    <Routes location={location} key={location.pathname}>
         <Route
           path="/"
           element={
@@ -77,7 +78,6 @@ const AnimatedRoutes = () => {
           }
         />
       </Routes>
-    </AnimatePresence>
   )
 }
 
