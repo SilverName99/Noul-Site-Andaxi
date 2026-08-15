@@ -22,8 +22,9 @@ const Navbar = () => {
     <header className="absolute inset-x-0 top-0 z-50">
       <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-6 lg:px-8">
         {/* Logo */}
+        {/* Marca fără slogan: la dimensiunea din navbar sloganul ar fi ilizibil. */}
         <Link to="/" className="flex items-center" onClick={() => setMenuOpen(false)}>
-          <img src="/logo.png" alt="Andaxi" className="h-11 w-auto" />
+          <img src="/logo-mark.png" alt="Andaxi Web Solutions" className="h-10 w-auto md:h-12" />
         </Link>
 
         {/* Desktop links */}
