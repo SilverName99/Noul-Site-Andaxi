@@ -11,7 +11,7 @@ const Footer = () => (
         {/* Sloganul ca text real — lizibil la orice dimensiune, spre deosebire
             de varianta încorporată în imagine. */}
         <p className="mt-3 text-xs uppercase tracking-[0.18em] text-[color:var(--accent)]">
-          Your trusted partner in digital solutions
+          De la oameni, către oameni.
         </p>
         <p className="mt-4 text-sm leading-relaxed text-[color:var(--text-3)]">
           Soluții web, fără să-ți golească portofelul. Motto-ul nostru: de la
