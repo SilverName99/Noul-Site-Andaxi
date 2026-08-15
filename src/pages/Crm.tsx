@@ -15,6 +15,7 @@ import {
   Layers,
 } from 'lucide-react'
 import ShinyText from '../components/ShinyText'
+import { setPageMeta } from '../seo'
 import Reveal from '../components/motion/Reveal'
 import AnimatedText from '../components/motion/AnimatedText'
 import { StaggerContainer, StaggerItem } from '../components/motion/Stagger'
@@ -149,7 +150,11 @@ const TECH = [
 
 const Crm = () => {
   useEffect(() => {
-    document.title = 'ANDAXI CRM — Vânzările tale, pe agent, la zi'
+    setPageMeta(
+      'ANDAXI CRM — Vânzări pe agent, cu hartă și rute, conectat la ERP',
+      'CRM pentru echipe de agenți pe teren: hartă interactivă cu stopuri și check-in, stocuri per agent, vânzări preluate automat din ERP, fișiere și chat integrat.',
+      '/crm',
+    )
   }, [])
 
   return (

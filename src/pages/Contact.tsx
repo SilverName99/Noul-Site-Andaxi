@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Clock, MapPin, Phone } from 'lucide-react'
 import Reveal from '../components/motion/Reveal'
 import AnimatedText from '../components/motion/AnimatedText'
+import { setPageMeta } from '../seo'
 
 const CONTACT_EMAIL = 'contact@andaxi.ro'
 
@@ -24,7 +25,11 @@ const Contact = () => {
   const [status, setStatus] = useState<Status>('idle')
 
   useEffect(() => {
-    document.title = 'Contact — Andaxi'
+    setPageMeta(
+      'Contact — Andaxi | Hai să vorbim despre proiectul tău',
+      'Scrie-ne sau sună-ne la 0755 885 973 — răspundem de obicei în aceeași zi. Website-uri, magazine online, ERP și CRM pentru firma ta.',
+      '/contact',
+    )
   }, [])
 
   const mailtoHref = () => {

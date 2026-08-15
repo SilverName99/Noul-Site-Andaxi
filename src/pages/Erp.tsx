@@ -18,6 +18,7 @@ import {
   Wallet,
 } from 'lucide-react'
 import ShinyText from '../components/ShinyText'
+import { setPageMeta } from '../seo'
 import Reveal from '../components/motion/Reveal'
 import AnimatedText from '../components/motion/AnimatedText'
 import { StaggerContainer, StaggerItem } from '../components/motion/Stagger'
@@ -172,7 +173,11 @@ const TECH = [
 
 const Erp = () => {
   useEffect(() => {
-    document.title = 'ANDAXI ERP — Facturare, gestiune și contabilitate'
+    setPageMeta(
+      'ANDAXI ERP — Program de facturare, gestiune și contabilitate conform ANAF',
+      'ERP online complet: facturare cu e-Factura, stocuri, casă & bancă, contabilitate și declarații ANAF (SAF-T, D100-D394) — într-un singur program, cu server dedicat.',
+      '/erp',
+    )
   }, [])
 
   return (

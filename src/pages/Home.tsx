@@ -15,6 +15,7 @@ import {
   Tag,
 } from 'lucide-react'
 import ShinyText from '../components/ShinyText'
+import { setPageMeta } from '../seo'
 import Reveal from '../components/motion/Reveal'
 import AnimatedText from '../components/motion/AnimatedText'
 import { StaggerContainer, StaggerItem } from '../components/motion/Stagger'
@@ -77,7 +78,11 @@ const SERVICES = [
 
 const Home = () => {
   useEffect(() => {
-    document.title = 'Andaxi — Web design de la oameni, către oameni'
+    setPageMeta(
+      'Andaxi — Creare website-uri, ERP și CRM pentru firme din România',
+      'Soluții web complete: website-uri personalizate, magazine online, ANDAXI ERP (facturare, gestiune, contabilitate conform ANAF) și ANDAXI CRM pentru echipe de vânzări.',
+      '/',
+    )
   }, [])
 
   return (

@@ -25,6 +25,7 @@ import {
 import Reveal from '../components/motion/Reveal'
 import AnimatedText from '../components/motion/AnimatedText'
 import ShinyText from '../components/ShinyText'
+import { setPageMeta } from '../seo'
 import { StaggerContainer, StaggerItem } from '../components/motion/Stagger'
 import ErpCalculator from '../components/ErpCalculator'
 
@@ -191,7 +192,11 @@ const NOTES = [
 
 const Preturi = () => {
   useEffect(() => {
-    document.title = 'Prețuri — Andaxi'
+    setPageMeta(
+      'Prețuri — Website-uri, magazine online, ERP și CRM | Andaxi',
+      'Prețuri corecte, fără surprize: landing page de la 250€, site de prezentare de la 500€, magazin online 3.000€ și ANDAXI ERP gratuit — plătești doar utilizatorii.',
+      '/preturi',
+    )
   }, [])
 
   return (
