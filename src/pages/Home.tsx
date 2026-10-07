@@ -292,8 +292,8 @@ const Home = () => {
             </h2>
             <p className="mt-4 text-sm text-white/60 md:text-base">
               ERP online, conform cu legislația din România: e-Factura direct
-              în SPV, stoc pe loturi, declarații gata de depus. Pornești doar
-              ce folosești.
+              în SPV, stoc pe loturi, declarații gata de depus. Folosești doar
+              ce-ți trebuie.
             </p>
             <span className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-white md:text-base">
               Descoperă ANDAXI ERP

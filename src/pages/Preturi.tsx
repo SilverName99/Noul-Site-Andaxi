@@ -471,7 +471,7 @@ const Preturi = () => {
               <p className="mt-5 flex items-start gap-2 text-sm leading-relaxed text-[color:var(--text-3)]">
                 <Users className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--accent)]" />
                 Plătești doar conturile active: un cont dezactivat nu se mai
-                numără. Pornești doar modulele de care ai nevoie, iar restul nu-ți
+                numără. Folosești doar modulele de care ai nevoie, iar restul nu-ți
                 încurcă meniul.
               </p>
             </div>
