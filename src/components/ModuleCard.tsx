@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowRight, Link2 } from 'lucide-react'
 import { getModule } from '../data/erpModules'
-import { PRETURI_MODULE, PRET_BAZA } from '../data/erpPricing'
+import { PRET_BAZA, etichetaPret } from '../data/erpPricing'
 import type { ErpModule } from '../data/erpModules'
 
 interface ModuleCardProps {
@@ -81,7 +81,7 @@ const ModuleCard = ({ module, toggle }: ModuleCardProps) => {
           <span className="rounded-full bg-[color:var(--accent-tint)] px-2.5 py-1 text-xs font-medium tabular-nums text-[color:var(--accent)]">
             {module.key === 'core'
               ? `baza · ${PRET_BAZA} €/lună`
-              : `${PRETURI_MODULE[module.key].pret} €/lună`}
+              : etichetaPret(module.key, true)}
           </span>
         )}
       </div>

@@ -12,6 +12,7 @@ import {
   PRET_IMPLEMENTARE,
   calculeaza,
   cuDependente,
+  etichetaPret,
   eur,
   lei,
   pretPlan,
@@ -338,7 +339,7 @@ const ErpCalculator = () => {
                         </span>
                         <span className="min-w-0">
                           <span className="block text-sm font-medium text-[color:var(--text-1)]">
-                            {numeModul(k)} · <span className="tabular-nums">{eur(PRETURI_MODULE[k].pret)}</span>
+                            {numeModul(k)} · <span className="tabular-nums">{etichetaPret(k)}</span>
                           </span>
                           <span className="block text-xs text-[color:var(--text-4)]">
                             {PRETURI_MODULE[k].scurt}
@@ -446,6 +447,12 @@ const ErpCalculator = () => {
                       <span>Economisești cu pachetul</span>
                       <span className="shrink-0 tabular-nums">{eur(r.economiePachet)}/lună</span>
                     </div>
+                  )}
+                  {sel.has('chatbot') && (
+                    <p className="text-xs text-[color:var(--text-4)]">
+                      Asistentul AI nu intră în suma lunară: plătești doar întrebările la care a
+                      răspuns.
+                    </p>
                   )}
                   {r.inPlus.length > 0 && (
                     <p className="text-xs text-[color:var(--text-4)]">

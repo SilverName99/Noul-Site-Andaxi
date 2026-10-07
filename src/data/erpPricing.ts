@@ -28,6 +28,9 @@ export interface PretModul {
   scurt: string
   /** Ce se mai poate adăuga la modul, pe bucată (aparate, magazine). */
   extra?: { eticheta: string; pret: number }
+  /** Nu are preț lunar: se plătește fiecare întrebare reușită (asistentul AI).
+   *  Prețul pe întrebare îl stabilim la ofertă, de aceea nu apare pe site. */
+  peIntrebare?: boolean
 }
 
 export const PRETURI_MODULE: Record<ModulPlatit, PretModul> = {
@@ -50,8 +53,14 @@ export const PRETURI_MODULE: Record<ModulPlatit, PretModul> = {
   reguli_vanzare: { pret: 15, scurt: 'prețuri pe client, agenți, echipe' },
   transformari: { pret: 20, scurt: 'producție: rețete, lot și cost' },
   crm: { pret: 10, scurt: 'legătura cu ANDAXI CRM al agenților' },
-  chatbot: { pret: 8, scurt: 'răspunde din manual, în program' },
+  chatbot: { pret: 0, scurt: 'răspunde din manual, în program', peIntrebare: true },
 }
+
+/** Prețul modulului, scurt: „15 €” sau „pe întrebare”. */
+export const etichetaPret = (k: ModulPlatit, peLuna = false) =>
+  PRETURI_MODULE[k].peIntrebare
+    ? 'pe întrebare'
+    : `${PRETURI_MODULE[k].pret} €${peLuna ? '/lună' : ''}`
 
 export interface PlanErp {
   key: string

@@ -27,7 +27,7 @@ import AnimatedText from '../components/motion/AnimatedText'
 import ShinyText from '../components/ShinyText'
 import { usePageMeta } from '../seo'
 import { CORE, MODULES } from '../data/erpModules'
-import { PRETURI_MODULE, PRET_BAZA } from '../data/erpPricing'
+import { PRET_BAZA, etichetaPret } from '../data/erpPricing'
 import { StaggerContainer, StaggerItem } from '../components/motion/Stagger'
 import ErpCalculator from '../components/ErpCalculator'
 import NoWrapDomain from '../components/NoWrapDomain'
@@ -412,8 +412,8 @@ const Preturi = () => {
               Fără licențe. Baza cu facturi, contabilitate și declarații
               costă {PRET_BAZA} € pe lună, cu primul om inclus. Adaugi doar
               modulele de care ai nevoie sau iei un pachet gata făcut, care iese
-              mai ieftin. Aplicația ANDAXI CRM pentru agenții de pe teren se
-              plătește separat.
+              mai ieftin. Asistentul AI se plătește pe întrebare, iar aplicația
+              ANDAXI CRM pentru agenții de pe teren, separat.
             </p>
           </Reveal>
 
@@ -463,7 +463,7 @@ const Preturi = () => {
                     <m.icon className="h-4 w-4 text-[color:var(--accent)]" />
                     {m.alwaysOn ? 'Baza (trunchiul ERP)' : m.name}
                     <span className="text-xs tabular-nums text-[color:var(--accent)]">
-                      · {m.key === 'core' ? PRET_BAZA : PRETURI_MODULE[m.key].pret} €
+                      · {m.key === 'core' ? `${PRET_BAZA} €` : etichetaPret(m.key)}
                     </span>
                   </li>
                 ))}
