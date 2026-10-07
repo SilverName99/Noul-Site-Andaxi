@@ -448,7 +448,7 @@ const Erp = () => {
           <Reveal delay={0.35}>
             <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-[color:var(--text-3)] md:text-base">
               Trimiți facturile în e-Factura, ții stocul pe loturi, faci
-              contabilitatea și scoți declarațiile gata de depus. Pornești
+              contabilitatea și scoți declarațiile gata de depus. Folosești
               doar modulele de care ai nevoie.
             </p>
           </Reveal>
