@@ -1,5 +1,6 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import {
   ArrowRight,
   ArrowUpRight,
@@ -192,6 +193,41 @@ const PRICE_NAV = [
   { href: '#crm', label: 'ANDAXI CRM', icon: Map },
 ]
 
+/**
+ * Zona paginii în care ești: ultima secțiune din navigator al cărei început a
+ * trecut de linia de la o treime din ecran. Deasupra primei secțiuni (în capul
+ * paginii) nu e niciuna; după ultima rămâne ultima.
+ */
+const useZonaActiva = (ids: string[]) => {
+  const [activ, setActiv] = useState<string | null>(null)
+  useEffect(() => {
+    let cadru = 0
+    const calculeaza = () => {
+      cadru = 0
+      const linie = window.innerHeight / 3
+      let gasit: string | null = null
+      for (const id of ids) {
+        const el = document.getElementById(id)
+        if (el && el.getBoundingClientRect().top <= linie) gasit = id
+      }
+      setActiv(gasit)
+    }
+    const laDerulare = () => {
+      if (!cadru) cadru = requestAnimationFrame(calculeaza)
+    }
+    calculeaza()
+    window.addEventListener('scroll', laDerulare, { passive: true })
+    window.addEventListener('resize', laDerulare)
+    return () => {
+      window.removeEventListener('scroll', laDerulare)
+      window.removeEventListener('resize', laDerulare)
+      if (cadru) cancelAnimationFrame(cadru)
+    }
+    // Lista e constantă pe pagină: observatorul se pune o singură dată.
+  }, [])
+  return activ
+}
+
 const NOTES = [
   'Prețurile sunt exprimate în euro.',
   'Plata în două tranșe: 50% la începerea proiectului, 50% la predare.',
@@ -202,6 +238,8 @@ const NOTES = [
 
 const Preturi = () => {
   usePageMeta('/preturi')
+  const reduceMotion = useReducedMotion()
+  const zona = useZonaActiva(PRICE_NAV.map((n) => n.href.slice(1)))
 
   return (
     <div className="bg-[color:var(--bg)] font-sans">
@@ -271,16 +309,31 @@ const Preturi = () => {
       <div className="pointer-events-none sticky top-4 z-40 flex justify-center px-6">
         <Reveal className="pointer-events-auto">
           <nav className="flex items-center gap-1 rounded-full border border-[color:var(--border)] bg-[color:var(--menu-bg)] p-1.5 shadow-lg shadow-black/10 backdrop-blur-md">
-            {PRICE_NAV.map(({ href, label, icon: Icon }) => (
-              <a
-                key={href}
-                href={href}
-                className="flex items-center gap-2 rounded-full px-4 py-2 text-sm text-[color:var(--text-3)] transition-colors duration-200 hover:bg-[color:var(--accent-tint)] hover:text-[color:var(--text-1)]"
-              >
-                <Icon className="h-4 w-4 text-[color:var(--accent)]" />
-                <span className="hidden sm:inline">{label}</span>
-              </a>
-            ))}
+            {PRICE_NAV.map(({ href, label, icon: Icon }) => {
+              const activ = zona === href.slice(1)
+              return (
+                <a
+                  key={href}
+                  href={href}
+                  aria-current={activ ? 'location' : undefined}
+                  className={`relative flex items-center gap-2 rounded-full px-4 py-2 text-sm transition-colors duration-200 ${
+                    activ
+                      ? 'text-[color:var(--text-1)]'
+                      : 'text-[color:var(--text-3)] hover:bg-[color:var(--accent-tint)] hover:text-[color:var(--text-1)]'
+                  }`}
+                >
+                  {activ && (
+                    <motion.span
+                      layoutId={reduceMotion ? undefined : 'pret-zona'}
+                      className="absolute inset-0 rounded-full border border-[color:var(--accent-border)] bg-[color:var(--accent-tint)]"
+                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                    />
+                  )}
+                  <Icon className="relative h-4 w-4 text-[color:var(--accent)]" />
+                  <span className="relative hidden sm:inline">{label}</span>
+                </a>
+              )
+            })}
           </nav>
         </Reveal>
       </div>
