@@ -8,7 +8,7 @@ import {
   useMotionValue,
   useReducedMotion,
 } from 'framer-motion'
-import { ArrowUpRight, Lock, Pause, Play } from 'lucide-react'
+import { ArrowUpRight, ChevronLeft, ChevronRight, Lock, Pause, Play } from 'lucide-react'
 import type { ErpShot } from '../data/erpShots'
 import { getModule } from '../data/erpModules'
 
@@ -112,21 +112,38 @@ const ShotImage = ({ shot }: { shot: ErpShot }) => {
       src={shot.image}
       alt={`${shot.title} — ecran din ANDAXI ERP`}
       decoding="async"
+      // Fără tragerea nativă a imaginii: altfel ea înghite gestul de glisare.
+      draggable={false}
       onError={() => setFailed(true)}
-      className="h-full w-full object-cover object-left-top"
+      className="h-full w-full select-none object-cover object-left-top"
     />
   )
 }
+
+/** Ecranul intră din partea în care mergi: înainte din dreapta, înapoi din stânga. */
+const slide = {
+  enter: (dir: number) => ({ opacity: 0, x: 48 * dir, scale: 0.985 }),
+  center: { opacity: 1, x: 0, scale: 1 },
+  exit: (dir: number) => ({ opacity: 0, x: -48 * dir, scale: 0.985 }),
+}
+const fade = { enter: { opacity: 0 }, center: { opacity: 1 }, exit: { opacity: 0 } }
+
+/** Cât trebuie tras cu degetul ca să treacă la ecranul vecin. */
+const SWIPE = 60
 
 /**
  * Prezentarea programului: o fereastră de browser cu file pe pașii firmei
  * (Vinzi → ANAF). Ecranele se schimbă singure, cu bara de progres sub filă;
  * se opresc la hover, la focus, când secțiunea nu se vede și la butonul de
- * pauză. Cu „reduce motion”, nu pornesc singure și se schimbă fără mișcare.
+ * pauză. Săgețile (și tragerea cu degetul, pe telefon) mută la ecranul vecin
+ * fără să aștepți. Cu „reduce motion”, nu pornesc singure și se schimbă fără
+ * mișcare.
  */
 const ErpShowcase = ({ shots, labels }: ErpShowcaseProps) => {
   const reduceMotion = useReducedMotion()
   const [active, setActive] = useState(0)
+  /** Sensul ultimei treceri: 1 înainte, -1 înapoi. */
+  const [dir, setDir] = useState(1)
   const [hovered, setHovered] = useState(false)
   const [focused, setFocused] = useState(false)
   const [paused, setPaused] = useState(false)
@@ -154,6 +171,7 @@ const ErpShowcase = ({ shots, labels }: ErpShowcaseProps) => {
     const next = progress.get() + Math.min(delta, 100) / DURATION
     if (next >= 1) {
       progress.set(0)
+      setDir(1)
       setActive((a) => (a + 1) % shots.length)
     } else {
       progress.set(next)
@@ -169,16 +187,22 @@ const ErpShowcase = ({ shots, labels }: ErpShowcaseProps) => {
     list.scrollTo({ left: tab.offsetLeft - 24, behavior: reduceMotion ? 'auto' : 'smooth' })
   }, [activeFlow, reduceMotion])
 
-  // Următorul ecran se încarcă dinainte, ca trecerea să nu arate un cadru gol.
+  // Ecranele vecine se încarcă dinainte, ca trecerea să nu arate un cadru gol.
   useEffect(() => {
-    const next = shots[(active + 1) % shots.length]?.image
-    if (next) new Image().src = next
+    for (const d of [1, -1]) {
+      const img = shots[(active + d + shots.length) % shots.length]?.image
+      if (img) new Image().src = img
+    }
   }, [active, shots])
 
-  const select = (i: number) => {
+  const select = (i: number, sens = i >= active ? 1 : -1) => {
     progress.set(0)
+    setDir(sens)
     setActive(i)
   }
+
+  /** La ecranul vecin, cu săgețile: după ultimul vine primul. */
+  const step = (d: 1 | -1) => select((active + d + shots.length) % shots.length, d)
 
   const onTabKey = (e: KeyboardEvent<HTMLButtonElement>, f: number) => {
     const delta = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0
@@ -304,22 +328,54 @@ const ErpShowcase = ({ shots, labels }: ErpShowcaseProps) => {
                 <span className="text-[color:var(--text-2)]">{shot.path}</span>
               </span>
             </div>
-            <span className="hidden w-[42px] md:block" aria-hidden />
+            <span className="hidden w-[42px] text-right text-[11px] tabular-nums text-[color:var(--text-4)] md:block">
+              {active + 1}/{shots.length}
+            </span>
           </div>
 
           <div className="relative aspect-[16/10] w-full overflow-hidden">
-            <AnimatePresence initial={false}>
+            <AnimatePresence initial={false} custom={dir}>
               <motion.div
                 key={shot.key}
                 className="absolute inset-0"
-                initial={reduceMotion ? { opacity: 0 } : { opacity: 0, x: 48, scale: 0.985 }}
-                animate={reduceMotion ? { opacity: 1 } : { opacity: 1, x: 0, scale: 1 }}
-                exit={reduceMotion ? { opacity: 0 } : { opacity: 0, x: -48, scale: 0.985 }}
+                custom={dir}
+                variants={reduceMotion ? fade : slide}
+                initial="enter"
+                animate="center"
+                exit="exit"
                 transition={{ duration: reduceMotion ? 0.2 : 0.7, ease: EASE }}
+                // Pe telefon: tragi spre stânga pentru următorul, spre dreapta
+                // pentru cel dinainte. Derularea paginii în sus și în jos merge.
+                drag={reduceMotion ? false : 'x'}
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.25}
+                onDragEnd={(_, info) => {
+                  if (info.offset.x <= -SWIPE) step(1)
+                  else if (info.offset.x >= SWIPE) step(-1)
+                }}
               >
                 <ShotImage shot={shot} />
               </motion.div>
             </AnimatePresence>
+
+            {/* Săgețile: la ecranul vecin, fără să aștepți */}
+            {(
+              [
+                [-1, 'left-2 md:left-3', ChevronLeft, 'Ecranul anterior'],
+                [1, 'right-2 md:right-3', ChevronRight, 'Ecranul următor'],
+              ] as const
+            ).map(([d, pos, Icon, label]) => (
+              <button
+                key={d}
+                type="button"
+                onClick={() => step(d)}
+                aria-label={label}
+                title={label}
+                className={`absolute top-1/2 ${pos} z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-[color:var(--border-strong)] bg-[color:var(--menu-bg)] text-[color:var(--text-1)] shadow-lg shadow-black/20 backdrop-blur-md transition-all duration-200 hover:scale-105 hover:border-[color:var(--accent-border)] hover:text-[color:var(--accent)] md:h-11 md:w-11`}
+              >
+                <Icon className="h-4 w-4 md:h-5 md:w-5" />
+              </button>
+            ))}
           </div>
         </div>
       </div>
