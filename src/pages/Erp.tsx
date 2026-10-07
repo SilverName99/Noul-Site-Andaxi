@@ -50,17 +50,17 @@ const MODULE_STEPS = [
   {
     icon: Power,
     title: 'Pornește în câteva minute',
-    text: 'Ne spui ce-ți trebuie, iar modulul apare în meniu în câteva minute. Nu reinstalezi nimic și nu muți nicio dată.',
+    text: 'Ne spui ce-ți trebuie, iar modulul apare în meniu în câteva minute. Nu pierzi nimic și nu migrezi nimic.',
   },
   {
     icon: ShieldCheck,
     title: 'Se oprește cu preaviz, fără să pierzi nimic',
-    text: 'Nu se mai începe nimic nou pe el, dar ce ai în lucru se termină normal. Documentele rămân de citit și de tipărit.',
+    text: 'Nu se mai începe nimic nou pe el, dar ce ai în lucru nu se pierde. Documentele rămân de citit și de tipărit.',
   },
   {
     icon: Bell,
     title: 'Anunț în program la fiecare schimbare',
-    text: 'La clopoțelul din colț afli exact ce se schimbă pentru tine. Nu dintr-un buton care a dispărut peste noapte.',
+    text: 'La clopoțelul din colț afli exact ce se schimbă pentru tine.',
   },
 ]
 
@@ -249,7 +249,7 @@ const FlowNav = () => {
   )
 }
 
-/** Pachetele pe tip de firmă: file + modulele fiecăruia. */
+/** Modulele pe tip de firmă: file + modulele fiecăruia, cu prețul lor adunat. */
 const Bundles = () => {
   const [activeKey, setActiveKey] = useState(BUNDLES[0].key)
   const reduceMotion = useReducedMotion()
@@ -302,7 +302,7 @@ const Bundles = () => {
         >
           <div className="flex flex-col">
             <p className="text-xs uppercase tracking-wider text-[color:var(--accent)]">
-              Pachetul {bundle.name}
+              {bundle.name}
             </p>
             <h3 className="mt-3 text-2xl font-medium tracking-tight text-[color:var(--text-1)] md:text-4xl">
               {bundle.tagline}
@@ -315,7 +315,10 @@ const Bundles = () => {
             </p>
             <p className="mt-4 text-3xl font-medium tracking-tight text-[color:var(--text-1)]">
               {bundle.pret} €
-              <span className="text-sm font-normal text-[color:var(--text-4)]"> / lună, cu primul om</span>
+              <span className="text-sm font-normal text-[color:var(--text-4)]">
+                {' '}
+                / lună, cu primul om: fundația + modulele, la prețul lor
+              </span>
             </p>
             {!bundle.modules.includes('contabilitate') && (
               <p className="mt-1 text-sm text-[color:var(--text-4)]">
@@ -333,7 +336,7 @@ const Bundles = () => {
                 to={contactHref}
                 className="group inline-flex items-center gap-2 rounded-full bg-[color:var(--accent-strong)] px-6 py-3 text-sm font-medium text-white transition-colors duration-300 hover:bg-[color:var(--accent-strong-hover)]"
               >
-                Vreau pachetul {bundle.name}
+                Vreau modulele astea
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </div>
@@ -715,7 +718,7 @@ const Erp = () => {
       <section id="pachete" className="scroll-mt-8 border-t border-[color:var(--border)]">
         <div className="mx-auto w-full max-w-7xl px-6 py-24 lg:px-8">
           <Reveal>
-            <p className="text-xs uppercase tracking-wider text-[color:var(--text-4)]">Pachete</p>
+            <p className="text-xs uppercase tracking-wider text-[color:var(--text-4)]">Tipul firmei</p>
           </Reveal>
           <h2 className="mt-4 max-w-3xl text-3xl font-medium tracking-tight text-[color:var(--text-1)] md:text-5xl">
             <AnimatedText text="Pe tipul tău de firmă." />

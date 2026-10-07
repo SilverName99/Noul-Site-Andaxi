@@ -2,12 +2,13 @@ import type { ModuleKey } from './erpModules'
 
 /**
  * Abonamentul ANDAXI ERP pe module. Toate prețurile stau aici: calculatorul de
- * pe /preturi, cardurile pachetelor și datele structurate (src/seo.ts) citesc
+ * pe /preturi, tipurile de firmă de pe /erp și datele structurate (src/seo.ts) citesc
  * de aici. Prețurile sunt în euro, pe lună, fără TVA.
  *
- * Abonamentul = fundația (cu primul om) + modulele alese (sau un pachet, dacă iese
- * mai ieftin) + aparatele și magazinele în plus + oamenii în plus, apoi
- * reducerea perioadei de plată.
+ * Abonamentul = fundația (cu primul om) + modulele alese, fiecare la prețul
+ * lui + aparatele și magazinele în plus + oamenii în plus, apoi reducerea
+ * perioadei de plată. Fără pachete și fără reduceri de pachet: tipurile de
+ * firmă de mai jos doar bifează modulele potrivite.
  */
 
 /** Cursul folosit doar ca să arătăm aproximativ și suma în lei. */
@@ -64,80 +65,82 @@ export const etichetaPret = (k: ModulPlatit, peLuna = false) =>
     ? 'pe întrebare'
     : `${PRETURI_MODULE[k].pret} €${peLuna ? '/lună' : ''}`
 
-export interface PlanErp {
+/** Tipul firmei: o scurtătură care bifează modulele potrivite și pune numărul
+ *  de oameni din exemplu. Prețul e suma modulelor, fără reducere. */
+export interface TipFirma {
   key: string
   name: string
-  /** Pentru cine e, pe scurt. */
-  pentru: string
-  pret: number
+  /** Firme de felul ăsta, ca exemplu. */
+  exemple: string
+  /** Cazul concret de pe card. */
+  scenariu: string
+  oameni: number
   modules: ModulPlatit[]
-  /** Planul scos în față. */
+  /** Cardul scos în față. */
   recomandat?: boolean
 }
 
-const TOATE = Object.keys(PRETURI_MODULE) as ModulPlatit[]
-
-/**
- * Pachetele. Primele patru apar ca planuri pe /preturi, restul ca scurtături.
- * Pachetele pe tip de firmă de pe /erp (BUNDLES din erpModules.ts) au aceleași
- * module și aceleași prețuri: le iau de aici.
- */
-export const PLANURI: PlanErp[] = [
-  {
-    key: 'start',
-    name: 'Start',
-    pentru: 'Firmă mică: facturi, stoc și casă.',
-    pret: 25,
-    modules: ['gestiune', 'casierie', 'avize'],
-  },
+export const TIPURI_FIRMA: TipFirma[] = [
   {
     key: 'retail',
-    name: 'Retail',
-    pentru: 'Magazin fizic, cu casă de marcat.',
-    pret: 41,
+    name: 'Magazin cu tejghea',
+    exemple: 'Ex.: minimarket, florărie, farmacie, butic',
+    scenariu: 'Minimarket cu 3 oameni și o casă de marcat',
+    oameni: 3,
     modules: ['gestiune', 'achizitii', 'casierie', 'casa_marcat', 'avize'],
     recomandat: true,
   },
   {
     key: 'distributie',
-    name: 'Distribuție',
-    pentru: 'Depozit, agenți, prețuri pe client.',
-    pret: 55,
+    name: 'Distribuitor',
+    exemple: 'Ex.: distribuție alimentară, cosmetice, materiale',
+    scenariu: 'Depozit cu 6 oameni, din care 3 agenți pe teren',
+    oameni: 6,
     modules: ['gestiune', 'achizitii', 'avize', 'avansuri', 'casierie', 'reguli_vanzare', 'crm'],
-  },
-  {
-    key: 'complet',
-    name: 'Complet',
-    pentru: 'Tot programul, cu tot cu contabilitatea.',
-    pret: 109,
-    modules: TOATE,
-  },
-  {
-    key: 'servicii',
-    name: 'Servicii',
-    pentru: 'Fără marfă: consultanță, service.',
-    pret: 31,
-    modules: ['avansuri', 'casierie', 'crm', 'mijloace_fixe', 'chatbot'],
   },
   {
     key: 'magazin-online',
     name: 'Magazin online',
-    pentru: 'Vinzi pe site și prin curier.',
-    pret: 51,
+    exemple: 'Ex.: cosmetice, suplimente, piese, cu site și curier',
+    scenariu: 'Magazin online cu showroom, 3 oameni',
+    oameni: 3,
     modules: ['gestiune', 'achizitii', 'casierie', 'casa_marcat', 'avize', 'magazin_online'],
   },
   {
     key: 'productie',
-    name: 'Producție',
-    pentru: 'Faci produse din materie primă.',
-    pret: 55,
+    name: 'Producător',
+    exemple: 'Ex.: brutărie, atelier de mobilă, ambalare',
+    scenariu: 'Atelier cu 5 oameni, cu utilajele în evidență',
+    oameni: 5,
     modules: ['gestiune', 'achizitii', 'avize', 'casierie', 'transformari', 'mijloace_fixe'],
+  },
+  {
+    key: 'servicii',
+    name: 'Firmă de servicii',
+    exemple: 'Ex.: service auto, consultanță, agenție, IT',
+    scenariu: 'Service cu 4 oameni, avansuri pe lucrări',
+    oameni: 4,
+    modules: ['avansuri', 'casierie', 'mijloace_fixe'],
+  },
+  {
+    key: 'mica',
+    name: 'Firmă mică cu marfă',
+    exemple: 'Ex.: revânzător, depozit mic, PFA cu stoc',
+    scenariu: 'Un singur om, factură și stoc',
+    oameni: 1,
+    modules: ['gestiune', 'casierie', 'avize'],
   },
 ]
 
-export const PLANURI_PRINCIPALE = ['start', 'retail', 'distributie', 'complet']
+export const getTipFirma = (key: string): TipFirma | undefined =>
+  TIPURI_FIRMA.find((t) => t.key === key)
 
-export const getPlan = (key: string): PlanErp | undefined => PLANURI.find((p) => p.key === key)
+/** Toate modulele, cu prețul lor (pentru „de la … până la …”). */
+export const TOATE_MODULELE = Object.keys(PRETURI_MODULE) as ModulPlatit[]
+
+/** Fundația + modulele date, fără oameni și fără reducere. */
+export const pretModule = (keys: readonly ModulPlatit[]) =>
+  PRET_BAZA + keys.reduce((s, k) => s + PRETURI_MODULE[k].pret, 0)
 
 export interface PerioadaPlata {
   key: string
@@ -189,15 +192,8 @@ export function cuDependente(sel: Iterable<ModulPlatit>, necesita: (k: ModulPlat
 }
 
 export interface Calcul {
-  /** Baza + fiecare modul luat separat. */
-  separat: number
-  /** Cel mai ieftin drum: separat sau un pachet plus ce lipsește din el. */
-  pret: number
-  pachet: PlanErp | null
-  /** Ce dă pachetul peste ce ai ales. */
-  inPlus: ModulPlatit[]
-  /** Modulele alese care nu sunt în pachet. */
-  pestePachet: ModulPlatit[]
+  /** Prețul modulelor bifate (fără fundație). */
+  module: number
   extra: number
   oameni: number
   brut: number
@@ -206,7 +202,6 @@ export interface Calcul {
   /** Cât plătești o dată, pe toată perioada. */
   platit: number
   implementare: number
-  economiePachet: number
 }
 
 /** Calculul abonamentului. `sel` are deja dependențele (vezi cuDependente). */
@@ -216,32 +211,17 @@ export function calculeaza(
   perioadaKey: string,
   bucatiExtra: Partial<Record<ModulPlatit, number>>,
 ): Calcul {
-  const pretModule = (keys: ModulPlatit[]) => keys.reduce((s, k) => s + PRETURI_MODULE[k].pret, 0)
-  const separat = PRET_BAZA + pretModule([...sel])
-  let best: Pick<Calcul, 'pret' | 'pachet' | 'inPlus' | 'pestePachet'> = {
-    pret: separat,
-    pachet: null,
-    inPlus: [],
-    pestePachet: [...sel],
-  }
-  for (const P of PLANURI) {
-    const peste = [...sel].filter((k) => !P.modules.includes(k))
-    const pret = P.pret + pretModule(peste)
-    if (pret < best.pret) {
-      best = { pret, pachet: P, inPlus: P.modules.filter((k) => !sel.has(k)), pestePachet: peste }
-    }
-  }
+  const module = pretModule([...sel]) - PRET_BAZA
   const extra = [...sel].reduce(
     (s, k) => s + (PRETURI_MODULE[k].extra ? (bucatiExtra[k] ?? 0) * PRETURI_MODULE[k].extra!.pret : 0),
     0,
   )
   const oameni = costOameni(nrOameni)
-  const brut = best.pret + extra + oameni
+  const brut = PRET_BAZA + module + extra + oameni
   const perioada = PERIOADE.find((p) => p.key === perioadaKey) ?? PERIOADE[0]
   const lunar = brut * (1 - perioada.reducere)
   return {
-    separat,
-    ...best,
+    module,
     extra,
     oameni,
     brut,
@@ -249,19 +229,13 @@ export function calculeaza(
     lunar,
     platit: lunar * perioada.luni,
     implementare: perioada.luni >= LUNI_IMPLEMENTARE_GRATUITA ? 0 : PRET_IMPLEMENTARE,
-    economiePachet: separat - best.pret,
   }
 }
 
-/** Prețul unui plan, așa cum apare pe card: cu oamenii și reducerea alese. */
-export function pretPlan(P: PlanErp, nrOameni: number, perioadaKey: string): number {
+/** Prețul exemplului de pe card: modulele și oamenii lui, cu reducerea perioadei. */
+export function pretTip(T: TipFirma, perioadaKey: string): number {
   const perioada = PERIOADE.find((p) => p.key === perioadaKey) ?? PERIOADE[0]
-  return (P.pret + costOameni(nrOameni)) * (1 - perioada.reducere)
-}
-
-/** Baza + modulele planului luate separat (fără oameni). */
-export function pretSeparat(P: PlanErp): number {
-  return PRET_BAZA + P.modules.reduce((s, k) => s + PRETURI_MODULE[k].pret, 0)
+  return (pretModule(T.modules) + costOameni(T.oameni)) * (1 - perioada.reducere)
 }
 
 /** Euro în stil românesc: virgulă zecimală, punct la mii. */

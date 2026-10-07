@@ -462,12 +462,12 @@ const Preturi = () => {
           </h2>
           <Reveal delay={0.15}>
             <p className="mt-5 max-w-2xl text-sm leading-relaxed text-[color:var(--text-3)] md:text-base">
-              Fără licențe. Fundația, cu nomenclatoare, facturi și financiar,
-              costă {PRET_BAZA} € pe lună, cu primul om inclus. Adaugi doar
-              modulele de care ai nevoie, contabilitatea dacă o ții în program,
-              sau iei un pachet gata făcut, care iese mai ieftin. Asistentul AI
-              se plătește pe întrebare, iar aplicația ANDAXI CRM pentru agenții
-              de pe teren, separat.
+              Fără licențe și fără pachete. Fundația, cu nomenclatoare, facturi
+              și financiar, costă {PRET_BAZA} € pe lună, cu primul om inclus.
+              Adaugi doar modulele de care ai nevoie, fiecare la prețul lui, și
+              contabilitatea dacă o ții în program. Asistentul AI se plătește pe
+              întrebare, iar aplicația ANDAXI CRM pentru agenții de pe teren,
+              separat.
             </p>
           </Reveal>
 

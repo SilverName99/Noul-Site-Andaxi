@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { ERP_FAQ } from './data/erpFaq'
-import { PLANURI, PRET_BAZA } from './data/erpPricing'
+import { PRET_BAZA, TOATE_MODULELE, pretModule } from './data/erpPricing'
 
 /**
  * Titlul, descrierea, adresa canonică, Open Graph / Twitter și datele
@@ -57,10 +57,10 @@ const ERP_SOFTWARE: JsonLd = {
     '@type': 'AggregateOffer',
     priceCurrency: 'EUR',
     lowPrice: String(PRET_BAZA),
-    highPrice: String(Math.max(...PLANURI.map((p) => p.pret))),
-    offerCount: String(PLANURI.length + 1),
+    highPrice: String(pretModule(TOATE_MODULELE)),
+    offerCount: String(TOATE_MODULELE.length + 1),
     description:
-      'Abonament lunar pe module, fără TVA: fundația de la 12 €, pachete de la 25 €, plus oamenii în plus.',
+      'Abonament lunar pe module, fără TVA: fundația de la 12 €, plus modulele alese, fiecare la prețul lui, și oamenii în plus.',
   },
   publisher: ORGANIZATION_REF,
 }

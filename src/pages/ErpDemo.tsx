@@ -25,7 +25,7 @@ const SCRIPT: ModuleKey[] = [
 const STEP_MS = 2600
 const HOLD_MS = 4000
 
-/** Starea statică (fără animație): pachetul Retail. */
+/** Starea statică (fără animație): magazinul cu tejghea. */
 const STATIC_KEYS = withDependencies(BUNDLES[0].modules)
 
 const STEPS = [
@@ -157,7 +157,7 @@ const DemoPreview = () => {
                   ) : (
                     <>
                       <p className="text-sm font-medium text-[color:var(--text-1)]">
-                        {animated ? 'Pornești de la fundație.' : 'Pachetul Retail, pornit.'}
+                        {animated ? 'Pornești de la fundație.' : 'Magazin cu tejghea, pornit.'}
                       </p>
                       <p className="mt-2 text-sm leading-relaxed text-[color:var(--text-2)]">
                         {animated

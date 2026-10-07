@@ -15,7 +15,7 @@ import {
   Warehouse,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import { getPlan } from './erpPricing'
+import { getTipFirma, pretModule } from './erpPricing'
 
 /**
  * Modulele ANDAXI ERP, așa cum sunt în program.
@@ -27,7 +27,7 @@ import { getPlan } from './erpPricing'
  * schimbă și aici.
  *
  * Folosit de: secțiunea de module de pe /erp (ancorele paginii sunt cheile),
- * pachetele „Pe tipul tău de firmă”, /preturi și, mai târziu, demo-ul
+ * tipurile de firmă („Pe tipul tău de firmă”), /preturi și, mai târziu, demo-ul
  * interactiv de pe /erp/demo (unde fiecare card devine un comutator).
  */
 
@@ -372,7 +372,7 @@ export const buildMenu = (active: ModuleKey[]): BuiltMenuGroup[] => {
 }
 
 /* ------------------------------------------------------------------------ */
-/* Pachete pe tip de firmă                                                   */
+/* Module pe tip de firmă (/erp)                                            */
 /* ------------------------------------------------------------------------ */
 
 export interface ErpBundle {
@@ -380,65 +380,60 @@ export interface ErpBundle {
   name: string
   tagline: string
   description: string
-  /** Modulele pachetului (fundația e mereu inclusă). Vin din PLANURI
-   *  (erpPricing.ts), ca pachetul de pe /erp să fie același cu cel de pe
-   *  /preturi, cu același preț. */
+  /** Modulele tipului de firmă (fundația e mereu inclusă). Vin din
+   *  TIPURI_FIRMA (erpPricing.ts), ca /erp să arate ce bifează calculatorul. */
   modules: ModuleKey[]
-  /** Prețul pachetului, cu primul om, pe lună (din PLANURI). */
+  /** Fundația + modulele, la prețul lor, cu primul om, pe lună. Nu e un
+   *  pachet: e suma, fără reducere. */
   pret: number
   /** Bune de adăugat, dacă e cazul. */
   optional: ModuleKey[]
 }
 
-const dinPlan = (key: string): Pick<ErpBundle, 'modules' | 'pret'> => {
-  const plan = getPlan(key)!
-  return { modules: plan.modules, pret: plan.pret }
+const dinTip = (key: string): Pick<ErpBundle, 'name' | 'modules' | 'pret'> => {
+  const tip = getTipFirma(key)!
+  return { name: tip.name, modules: tip.modules, pret: pretModule(tip.modules) }
 }
 
 export const BUNDLES: ErpBundle[] = [
   {
     key: 'retail',
-    name: 'Retail',
     tagline: 'Magazin cu tejghea și raft plin.',
     description:
       'Bonul iese pe casa de marcat, stocul scade pe lot, iar NIR-ul îl faci din factura furnizorului.',
-    ...dinPlan('retail'),
+    ...dinTip('retail'),
     optional: ['reguli_vanzare', 'mijloace_fixe'],
   },
   {
     key: 'distributie',
-    name: 'Distribuție',
     tagline: 'Depozit, agenți și livrări cu aviz.',
     description:
       'Marfa pleacă cu aviz, fiecare client are prețul lui, iar agenții își văd vânzările.',
-    ...dinPlan('distributie'),
+    ...dinTip('distributie'),
     optional: ['mijloace_fixe', 'chatbot'],
   },
   {
     key: 'magazin-online',
-    name: 'Magazin online',
     tagline: 'Comenzi de pe site, facturate la aprobare.',
     description:
       'Comenzile intră singure, cu marfa rezervată, iar rambursurile se potrivesc singure pe facturi. Vinzi și la tejghea, pe casa de marcat.',
-    ...dinPlan('magazin-online'),
+    ...dinTip('magazin-online'),
     optional: ['avansuri', 'reguli_vanzare'],
   },
   {
     key: 'productie',
-    name: 'Producție',
     tagline: 'Din materie primă, produs finit cu cost real.',
     description:
       'Transformi materia primă în produs finit, cu lot și cost calculat, și ții registrul utilajelor.',
-    ...dinPlan('productie'),
+    ...dinTip('productie'),
     optional: ['reguli_vanzare', 'avansuri'],
   },
   {
     key: 'servicii',
-    name: 'Servicii',
     tagline: 'Fără stoc, cu facturi și bani la zi.',
     description:
       'Facturezi servicii, iei avansuri pe proiect, ții casa și echipamentele. Gestiunea nu-ți încurcă meniul.',
-    ...dinPlan('servicii'),
-    optional: ['achizitii'],
+    ...dinTip('servicii'),
+    optional: ['achizitii', 'crm'],
   },
 ]
