@@ -6,7 +6,7 @@ import type { ModuleKey } from './erpModules'
  * de aici. Prețurile sunt în euro, pe lună, fără TVA.
  *
  * Abonamentul = fundația (cu primul om) + modulele alese, fiecare la prețul
- * lui + aparatele și magazinele în plus + oamenii în plus, apoi reducerea
+ * lui + casele de marcat în plus + oamenii în plus, apoi reducerea
  * perioadei de plată. Fără pachete și fără reduceri de pachet: tipurile de
  * firmă de mai jos doar bifează modulele potrivite.
  */
@@ -28,7 +28,7 @@ export interface PretModul {
   pret: number
   /** O jumătate de rând, pentru lista din calculator. */
   scurt: string
-  /** Ce se mai poate adăuga la modul, pe bucată (aparate, magazine). */
+  /** Ce se mai poate adăuga la modul, pe bucată (case de marcat). */
   extra?: { eticheta: string; pret: number }
   /** Nu are preț lunar: se plătește fiecare întrebare reușită (asistentul AI).
    *  Prețul pe întrebare îl stabilim la ofertă, de aceea nu apare pe site. */
@@ -47,11 +47,7 @@ export const PRETURI_MODULE: Record<ModulPlatit, PretModul> = {
   },
   avize: { pret: 4, scurt: 'marfa pleacă înaintea facturii' },
   avansuri: { pret: 4, scurt: 'facturi de avans, scăzute la livrare' },
-  magazin_online: {
-    pret: 15,
-    scurt: 'comenzi de pe site, stoc rezervat, AWB',
-    extra: { eticheta: 'Magazine online în plus', pret: 8 },
-  },
+  magazin_online: { pret: 15, scurt: 'comenzi de pe site, stoc rezervat, AWB' },
   mijloace_fixe: { pret: 6, scurt: 'registru, amortizare lunară' },
   reguli_vanzare: { pret: 15, scurt: 'prețuri pe client, agenți, echipe' },
   transformari: { pret: 20, scurt: 'producție: rețete, lot și cost' },
