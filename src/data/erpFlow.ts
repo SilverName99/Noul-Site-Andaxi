@@ -33,7 +33,7 @@ export const FLOW: FlowStep[] = [
     icon: FileText,
     title: 'Factura pleacă în SPV din același ecran.',
     intro:
-      'Scrii factura, o emiți și o trimiți la ANAF fără să schimbi programul. Stocul scade singur, iar banii îi legi de factură pe loc.',
+      'Scrii factura, o emiți și o trimiți la ANAF.',
     points: [
       {
         title: 'e-Factura, cu răspunsul ANAF pe factură',
@@ -45,7 +45,7 @@ export const FLOW: FlowStep[] = [
       },
       {
         title: 'Bon fiscal la tejghea',
-        text: 'Scanezi, încasezi numerar, card sau amândouă, iar bonul iese pe casa Datecs.',
+        text: 'Scanezi, încasezi numerar, card sau amândouă, iar bonul iese pe casa.',
       },
       {
         title: 'Aviz azi, factură mâine',
@@ -66,7 +66,7 @@ export const FLOW: FlowStep[] = [
     id: 'cumperi',
     label: 'Cumperi',
     icon: ShoppingCart,
-    title: 'Factura furnizorului devine NIR, fără tastat.',
+    title: 'Factura furnizorului devine NIR, automat.',
     intro:
       'Aduci din SPV facturile primite și faci recepția direct din ele. Costul fiecărui produs iese corect, cu tot cu vamă și transport.',
     points: [
@@ -107,7 +107,7 @@ export const FLOW: FlowStep[] = [
     points: [
       {
         title: 'Gestiuni multiple',
-        text: 'Depozitul, magazinul, mașina agentului. Muți marfa între ele cu transfer.',
+        text: 'Depozitul, magazinul, mașina agentului.',
       },
       {
         title: 'Loturi cu data expirării (FEFO)',

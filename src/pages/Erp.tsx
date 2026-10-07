@@ -424,7 +424,7 @@ const Erp = () => {
           </Reveal>
           <Reveal delay={0.05}>
             <p className="mb-4 text-xs uppercase tracking-tight text-[color:var(--accent)] md:text-sm">
-              ANDAXI ERP · Online, din module, conform ANAF
+              ANDAXI ERP
             </p>
           </Reveal>
 
@@ -447,9 +447,7 @@ const Erp = () => {
 
           <Reveal delay={0.35}>
             <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-[color:var(--text-3)] md:text-base">
-              Trimiți facturile în e-Factura, ții stocul pe loturi, faci
-              contabilitatea și scoți declarațiile gata de depus. Folosești
-              doar modulele de care ai nevoie.
+              Un program pentru firma ta, la prețul CORECT.
             </p>
           </Reveal>
 
@@ -473,7 +471,7 @@ const Erp = () => {
           <Reveal delay={0.55}>
             <p className="mt-8 flex items-center justify-center gap-2 text-xs text-[color:var(--text-4)] md:text-sm">
               <ShieldCheck className="h-4 w-4 shrink-0 text-[color:var(--accent)]" />
-              e-Factura în SPV și declarații gata de depus. Instanță dedicată, cu baza ta de date.
+              Securizat, e-Factura în SPV și declarații gata de depus.
             </p>
           </Reveal>
         </div>
@@ -488,10 +486,8 @@ const Erp = () => {
           <Reveal delay={0.15}>
             <p className="text-sm leading-relaxed text-[color:var(--text-3)] md:text-base">
               Facturarea e doar începutul. ANDAXI ERP ține tot drumul firmei:
-              vinzi, cumperi, ții stocul, încasezi, faci contabilitatea și
-              depui declarațiile. Introduci datele o singură dată, restul se
-              leagă. Iar programul îl construiești din module, exact cât îți
-              trebuie.
+              vinzi, cumperi, ții stocul, încasezi, reguli de vânzare, agenți,
+              casă de marcat și contabilitate.
             </p>
           </Reveal>
         </div>
@@ -505,13 +501,11 @@ const Erp = () => {
           </Reveal>
           <div className="mt-4 flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-10">
             <h2 className="max-w-2xl text-3xl font-medium tracking-tight text-[color:var(--text-1)] md:text-5xl">
-              <AnimatedText text="De la factură la ANAF, în șase pași." />
+              <AnimatedText text="Intuitiv, modern, RAPID" />
             </h2>
             <Reveal delay={0.15}>
               <p className="max-w-sm text-sm leading-relaxed text-[color:var(--text-3)]">
-                Ecrane reale din program, pe o firmă demo. Se schimbă
-                singure; ține cursorul pe fereastră ca să te oprești, sau
-                alege tu pasul.
+                Ecrane reale din program, pe o firmă demo.
               </p>
             </Reveal>
           </div>

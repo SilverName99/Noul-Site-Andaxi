@@ -507,8 +507,7 @@ const ErpCalculator = () => {
         </li>
         <li>
           Implementarea, migrarea și instruirea sunt gratuite la plata pe 12 sau 24 de luni. Lunar sau pe 6
-          luni costă {eur(PRET_IMPLEMENTARE)} o singură dată, sumă care se scade dacă treci pe plata anuală în
-          90 de zile.
+          luni costă {eur(PRET_IMPLEMENTARE)} o singură dată.
         </li>
       </ul>
     </div>

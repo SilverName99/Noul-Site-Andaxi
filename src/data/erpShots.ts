@@ -117,7 +117,7 @@ export const ERP_SHOTS: ErpShot[] = [
     module: 'gestiune',
     title: 'Stoc pe gestiuni și loturi',
     caption:
-      'Stocul fiecărei gestiuni se desface pe loturi, cu data de expirare și cantitățile rezervate pentru comenzile online.',
+      'Stocul fiecărei gestiuni se desface pe loturi, cu data de expirare și cantități. Se poate conecta direct și la site.',
     path: '/gestiune/gestiuni',
     image: img('gestiune'),
     pill: 'Expiră primul',
