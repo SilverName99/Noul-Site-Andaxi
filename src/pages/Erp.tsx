@@ -142,7 +142,7 @@ const WHY = [
   },
   {
     title: 'Doar modulele tale',
-    text: 'Pornești ce folosești, restul nu-ți încurcă meniul. Te-ai extins? Mai pornim un modul, în câteva minute.',
+    text: 'Folosești doar ce-ți trebuie, restul nu-ți încurcă meniul. Te-ai extins? Mai pornim un modul, în câteva minute.',
   },
   {
     title: 'Conform ANAF',
