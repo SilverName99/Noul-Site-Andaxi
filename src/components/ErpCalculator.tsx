@@ -400,6 +400,29 @@ const ErpCalculator = () => {
         <div className="grid grid-cols-1 gap-6 p-5 sm:p-6 lg:grid-cols-[minmax(0,1fr)_300px]">
           {/* Bifele */}
           <div className="grid grid-cols-1 content-start gap-2 sm:grid-cols-2">
+            {/* Fundația: mereu bifată, nu se poate scoate */}
+            <div
+              role="checkbox"
+              aria-checked="true"
+              aria-disabled="true"
+              title="Fundația e mereu inclusă"
+              className="flex cursor-not-allowed items-start gap-3 rounded-xl border border-[color:var(--accent-border)] bg-[color:var(--accent-tint)] px-3 py-2.5 text-left"
+            >
+              <span
+                aria-hidden="true"
+                className="mt-0.5 flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-[5px] border border-[color:var(--accent-strong)] bg-[color:var(--accent-strong)] text-white opacity-70"
+              >
+                <Check className="h-3 w-3" strokeWidth={3} />
+              </span>
+              <span className="min-w-0">
+                <span className="block text-sm font-medium text-[color:var(--text-1)]">
+                  Fundația · <span className="tabular-nums">{eur(PRET_BAZA)}</span>
+                </span>
+                <span className="block text-xs text-[color:var(--text-4)]">
+                  nomenclatoare, facturi, financiar · mereu inclusă
+                </span>
+              </span>
+            </div>
             {MODULE_ORDINE.map((k) => {
               const on = sel.has(k)
               const cere = necesita(k)
