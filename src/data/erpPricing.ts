@@ -5,7 +5,7 @@ import type { ModuleKey } from './erpModules'
  * pe /preturi, cardurile pachetelor și datele structurate (src/seo.ts) citesc
  * de aici. Prețurile sunt în euro, pe lună, fără TVA.
  *
- * Abonamentul = baza (cu primul om) + modulele alese (sau un pachet, dacă iese
+ * Abonamentul = fundația (cu primul om) + modulele alese (sau un pachet, dacă iese
  * mai ieftin) + aparatele și magazinele în plus + oamenii în plus, apoi
  * reducerea perioadei de plată.
  */
@@ -13,13 +13,14 @@ import type { ModuleKey } from './erpModules'
 /** Cursul folosit doar ca să arătăm aproximativ și suma în lei. */
 export const CURS_EUR_LEI = 5.3
 
-/** Baza: facturi și e-Factura, contabilitate, bancă, declarații. Cu 1 om. */
-export const PRET_BAZA = 29
+/** Fundația: nomenclatoare, facturi cu e-Factura, financiar. Cu primul om.
+ *  Contabilitatea e modul separat (vezi PRETURI_MODULE). */
+export const PRET_BAZA = 12
 
 /** Implementarea, migrarea și instruirea, când plata e lunară sau pe 6 luni. */
 export const PRET_IMPLEMENTARE = 149
 
-/** Modulele care se pot alege (trunchiul e baza). */
+/** Modulele care se pot alege (fundația e mereu inclusă). */
 export type ModulPlatit = Exclude<ModuleKey, 'core'>
 
 export interface PretModul {
@@ -34,6 +35,7 @@ export interface PretModul {
 }
 
 export const PRETURI_MODULE: Record<ModulPlatit, PretModul> = {
+  contabilitate: { pret: 28, scurt: 'note, balanțe, decont TVA, declarații, bilanț' },
   gestiune: { pret: 15, scurt: 'stoc pe loturi, expirare, gestiuni' },
   achizitii: { pret: 8, scurt: 'NIR, e-Facturi primite din SPV' },
   casierie: { pret: 4, scurt: 'chitanțe, registru de casă' },
@@ -85,14 +87,14 @@ export const PLANURI: PlanErp[] = [
     key: 'start',
     name: 'Start',
     pentru: 'Firmă mică: facturi, stoc și casă.',
-    pret: 39,
+    pret: 25,
     modules: ['gestiune', 'casierie', 'avize'],
   },
   {
     key: 'retail',
     name: 'Retail',
     pentru: 'Magazin fizic, cu casă de marcat.',
-    pret: 55,
+    pret: 41,
     modules: ['gestiune', 'achizitii', 'casierie', 'casa_marcat', 'avize'],
     recomandat: true,
   },
@@ -100,13 +102,13 @@ export const PLANURI: PlanErp[] = [
     key: 'distributie',
     name: 'Distribuție',
     pentru: 'Depozit, agenți, prețuri pe client.',
-    pret: 69,
+    pret: 55,
     modules: ['gestiune', 'achizitii', 'avize', 'avansuri', 'casierie', 'reguli_vanzare', 'crm'],
   },
   {
     key: 'complet',
     name: 'Complet',
-    pentru: 'Tot programul, toate modulele.',
+    pentru: 'Tot programul, cu tot cu contabilitatea.',
     pret: 109,
     modules: TOATE,
   },
@@ -114,21 +116,21 @@ export const PLANURI: PlanErp[] = [
     key: 'servicii',
     name: 'Servicii',
     pentru: 'Fără marfă: consultanță, service.',
-    pret: 45,
+    pret: 31,
     modules: ['avansuri', 'casierie', 'crm', 'mijloace_fixe', 'chatbot'],
   },
   {
     key: 'magazin-online',
     name: 'Magazin online',
     pentru: 'Vinzi pe site și prin curier.',
-    pret: 65,
+    pret: 51,
     modules: ['gestiune', 'achizitii', 'casierie', 'casa_marcat', 'avize', 'magazin_online'],
   },
   {
     key: 'productie',
     name: 'Producție',
     pentru: 'Faci produse din materie primă.',
-    pret: 69,
+    pret: 55,
     modules: ['gestiune', 'achizitii', 'avize', 'casierie', 'transformari', 'mijloace_fixe'],
   },
 ]

@@ -146,7 +146,7 @@ const ERP_FREE = [
   {
     icon: ShieldCheck,
     title: 'e-Factura & declarații',
-    text: 'Facturile pleacă în SPV, iar declarațiile ies gata de depus. Actualizările de legislație sunt incluse.',
+    text: 'Facturile pleacă în SPV, iar cu modulul Contabilitate declarațiile ies gata de depus. Actualizările de legislație sunt incluse.',
     badge: 'inclus',
   },
   {
@@ -409,11 +409,12 @@ const Preturi = () => {
           </h2>
           <Reveal delay={0.15}>
             <p className="mt-5 max-w-2xl text-sm leading-relaxed text-[color:var(--text-3)] md:text-base">
-              Fără licențe. Baza cu facturi, contabilitate și declarații
+              Fără licențe. Fundația, cu nomenclatoare, facturi și financiar,
               costă {PRET_BAZA} € pe lună, cu primul om inclus. Adaugi doar
-              modulele de care ai nevoie sau iei un pachet gata făcut, care iese
-              mai ieftin. Asistentul AI se plătește pe întrebare, iar aplicația
-              ANDAXI CRM pentru agenții de pe teren, separat.
+              modulele de care ai nevoie, contabilitatea dacă o ții în program,
+              sau iei un pachet gata făcut, care iese mai ieftin. Asistentul AI
+              se plătește pe întrebare, iar aplicația ANDAXI CRM pentru agenții
+              de pe teren, separat.
             </p>
           </Reveal>
 
@@ -461,7 +462,7 @@ const Preturi = () => {
                     }`}
                   >
                     <m.icon className="h-4 w-4 text-[color:var(--accent)]" />
-                    {m.alwaysOn ? 'Baza (trunchiul ERP)' : m.name}
+                    {m.alwaysOn ? 'Fundația' : m.name}
                     <span className="text-xs tabular-nums text-[color:var(--accent)]">
                       · {m.key === 'core' ? `${PRET_BAZA} €` : etichetaPret(m.key)}
                     </span>

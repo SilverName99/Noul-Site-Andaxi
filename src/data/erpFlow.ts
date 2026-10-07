@@ -22,7 +22,7 @@ export interface FlowStep {
   title: string
   intro: string
   points: FlowPoint[]
-  /** Modulele care țin de pasul ăsta (trunchiul = 'core'). */
+  /** Modulele care țin de pasul ăsta (fundația = 'core'). */
   modules: ModuleKey[]
 }
 
@@ -168,7 +168,7 @@ export const FLOW: FlowStep[] = [
     modules: ['core', 'casierie', 'magazin_online'],
   },
   {
-    id: 'contabilitate',
+    id: 'conta',
     label: 'Contabilitate',
     icon: BookText,
     title: 'Documentele ajung singure în contabilitate. Sau cu un clic.',
@@ -192,7 +192,7 @@ export const FLOW: FlowStep[] = [
         text: 'Închidere de TVA, venituri și cheltuieli, reevaluări valutare, impozit pe profit sau pe venit, dividende.',
       },
     ],
-    modules: ['core', 'mijloace_fixe'],
+    modules: ['contabilitate', 'mijloace_fixe'],
   },
   {
     id: 'anaf',
@@ -215,6 +215,6 @@ export const FLOW: FlowStep[] = [
         text: 'Jurnalul de vânzări, jurnalul de cumpărări și decontul, în Excel și PDF.',
       },
     ],
-    modules: ['core'],
+    modules: ['core', 'contabilitate'],
   },
 ]

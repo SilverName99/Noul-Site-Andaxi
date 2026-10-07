@@ -8,7 +8,7 @@ interface MenuPreviewProps {
   highlight?: ModuleKey | null
 }
 
-/** Meniul lateral al programului, compus din trunchi și modulele pornite.
+/** Meniul lateral al programului, compus din fundație și modulele pornite.
  *  Rândurile noi intră animat. Folosit pe /erp/demo. */
 const MenuPreview = ({ active, highlight }: MenuPreviewProps) => {
   const reduceMotion = useReducedMotion()

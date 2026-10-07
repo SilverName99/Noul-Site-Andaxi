@@ -60,7 +60,7 @@ const ERP_SOFTWARE: JsonLd = {
     highPrice: String(Math.max(...PLANURI.map((p) => p.pret))),
     offerCount: String(PLANURI.length + 1),
     description:
-      'Abonament lunar pe module, fără TVA: baza de la 29 €, pachete de la 39 €, plus oamenii în plus.',
+      'Abonament lunar pe module, fără TVA: fundația de la 12 €, pachete de la 25 €, plus oamenii în plus.',
   },
   publisher: ORGANIZATION_REF,
 }
@@ -117,7 +117,7 @@ export const ROUTES: RouteMeta[] = [
     path: '/preturi',
     title: 'Prețuri — Website-uri, magazine online, ERP și CRM | Andaxi',
     description:
-      'Prețuri corecte, fără surprize: landing page 250€, site de prezentare 500€, magazin online 3.000€. ANDAXI ERP pe module, de la 29 €/lună: plătești doar ce folosești.',
+      'Prețuri corecte, fără surprize: landing page 250€, site de prezentare 500€, magazin online 3.000€. ANDAXI ERP pe module, de la 12 €/lună: plătești doar ce folosești.',
     changefreq: 'monthly',
     priority: 0.9,
   },

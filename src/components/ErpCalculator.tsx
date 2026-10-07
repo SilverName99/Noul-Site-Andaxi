@@ -215,7 +215,7 @@ const ErpCalculator = () => {
               <ul className="flex flex-1 flex-col gap-1.5 text-sm text-[color:var(--text-2)]">
                 <li className="flex gap-2">
                   <Check className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--accent)]" />
-                  Baza: facturi, contabilitate, ANAF
+                  Fundația: nomenclatoare, facturi, financiar
                 </li>
                 {P.modules.slice(0, 6).map((k) => (
                   <li key={k} className="flex gap-2">
@@ -230,6 +230,11 @@ const ErpCalculator = () => {
                   </li>
                 )}
               </ul>
+              {!P.modules.includes('contabilitate') && (
+                <p className="text-xs text-[color:var(--text-4)]">
+                  + Contabilitate {eur(PRETURI_MODULE.contabilitate.pret)}/lună, dacă o ții în program
+                </p>
+              )}
               <button
                 type="button"
                 onClick={() => alegePlan(P)}
@@ -349,23 +354,6 @@ const ErpCalculator = () => {
                       </button>
                     )
                   })}
-                  <div
-                    aria-disabled="true"
-                    className="flex items-start gap-3 rounded-xl border border-dashed border-[color:var(--border)] px-3 py-2.5 opacity-60"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="mt-0.5 h-[18px] w-[18px] shrink-0 rounded-[5px] border border-[color:var(--border-strong)]"
-                    />
-                    <span>
-                      <span className="block text-sm font-medium text-[color:var(--text-1)]">
-                        Plan Facturare · va urma
-                      </span>
-                      <span className="block text-xs text-[color:var(--text-4)]">
-                        fără contabilitate, pentru firmele cu contabil extern
-                      </span>
-                    </span>
-                  </div>
                 </div>
 
                 {/* Socoteala */}
@@ -385,7 +373,7 @@ const ErpCalculator = () => {
 
                   <div className="mt-2 flex justify-between gap-3 text-[color:var(--text-3)]">
                     <span>
-                      {r.pachet ? `Pachet ${r.pachet.name}` : 'Baza + module'}
+                      {r.pachet ? `Pachet ${r.pachet.name}` : 'Fundația + module'}
                       {r.pachet && r.pestePachet.length > 0 &&
                         ` + ${r.pestePachet.map(numeModul).join(', ')}`}
                     </span>
@@ -497,8 +485,8 @@ const ErpCalculator = () => {
       {/* ===== Regulile, pe scurt ===== */}
       <ul className="mt-6 flex flex-col gap-1.5 text-xs leading-relaxed text-[color:var(--text-4)]">
         <li>
-          Prețuri în euro, pe lună, fără TVA; în lei la aproximativ 5,30 lei/€. Baza ({eur(PRET_BAZA)})
-          include primul om. Oamenii în plus: 25 € al 2-lea–al 5-lea, 22 € al 6-lea–al 10-lea, 19 € de la
+          Prețuri în euro, pe lună, fără TVA; în lei la aproximativ 5,30 lei/€. Fundația ({eur(PRET_BAZA)}: nomenclatoare,
+          facturi, financiar) include primul om. Oamenii în plus: 25 € al 2-lea–al 5-lea, 22 € al 6-lea–al 10-lea, 19 € de la
           al 11-lea.
         </li>
         <li>

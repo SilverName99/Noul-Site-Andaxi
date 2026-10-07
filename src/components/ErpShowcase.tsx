@@ -402,7 +402,7 @@ const ErpShowcase = ({ shots, labels }: ErpShowcaseProps) => {
               className="group inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full border border-[color:var(--border)] px-4 py-2 text-sm text-[color:var(--text-3)] transition-colors hover:border-[color:var(--accent-border)] hover:text-[color:var(--text-1)]"
             >
               <mod.icon className="h-4 w-4 text-[color:var(--accent)]" />
-              {mod.alwaysOn ? 'Trunchiul ERP' : `Modulul ${mod.name}`}
+              {mod.alwaysOn ? 'Fundația' : `Modulul ${mod.name}`}
               <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
           </motion.div>

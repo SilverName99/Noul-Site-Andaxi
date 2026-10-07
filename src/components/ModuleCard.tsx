@@ -80,7 +80,7 @@ const ModuleCard = ({ module, toggle }: ModuleCardProps) => {
         ) : (
           <span className="rounded-full bg-[color:var(--accent-tint)] px-2.5 py-1 text-xs font-medium tabular-nums text-[color:var(--accent)]">
             {module.key === 'core'
-              ? `baza · ${PRET_BAZA} €/lună`
+              ? `fundația · ${PRET_BAZA} €/lună`
               : etichetaPret(module.key, true)}
           </span>
         )}

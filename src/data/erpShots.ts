@@ -161,8 +161,8 @@ export const ERP_SHOTS: ErpShot[] = [
   // 05 · Contabilitate
   {
     key: 'contabilitate',
-    flow: 'contabilitate',
-    module: 'core',
+    flow: 'conta',
+    module: 'contabilitate',
     title: 'Balanța de verificare',
     caption:
       'Balanța sintetică și analitică, din notele contabile: cele mai multe vin singure din documente, restul cu un clic pe „Contează”.',
@@ -173,7 +173,7 @@ export const ERP_SHOTS: ErpShot[] = [
   },
   {
     key: 'mijloace-fixe',
-    flow: 'contabilitate',
+    flow: 'conta',
     module: 'mijloace_fixe',
     title: 'Registrul mijloacelor fixe',
     caption:
@@ -183,7 +183,7 @@ export const ERP_SHOTS: ErpShot[] = [
   },
   {
     key: 'rapoarte',
-    flow: 'contabilitate',
+    flow: 'conta',
     module: 'core',
     title: 'Vânzări – Încasări – Datorii',
     caption:
@@ -196,7 +196,7 @@ export const ERP_SHOTS: ErpShot[] = [
   {
     key: 'declaratii',
     flow: 'anaf',
-    module: 'core',
+    module: 'contabilitate',
     title: 'Decontul de TVA (D300)',
     caption:
       'D300, D394, D390 și SAF-T (D406) se generează din jurnalele lunii, gata de depus la ANAF.',
@@ -208,7 +208,7 @@ export const ERP_SHOTS: ErpShot[] = [
   {
     key: 'declaratii-istoric',
     flow: 'anaf',
-    module: 'core',
+    module: 'contabilitate',
     title: 'Istoricul declarațiilor',
     caption:
       'Fiecare XML și PDF generat intră în istoric, de unde îl descarci din nou. Pe cele de care ai nevoie le marchezi „Păstrează” și nu se mai șterg.',

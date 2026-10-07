@@ -157,12 +157,12 @@ const DemoPreview = () => {
                   ) : (
                     <>
                       <p className="text-sm font-medium text-[color:var(--text-1)]">
-                        {animated ? 'Pornești de la trunchi.' : 'Pachetul Retail, pornit.'}
+                        {animated ? 'Pornești de la fundație.' : 'Pachetul Retail, pornit.'}
                       </p>
                       <p className="mt-2 text-sm leading-relaxed text-[color:var(--text-2)]">
                         {animated
-                          ? 'Facturi, contabilitate și financiar sunt mereu acolo. Restul îl adaugi tu.'
-                          : 'Gestiune, Achiziții, Casierie și Casă de marcat, peste trunchi.'}
+                          ? 'Nomenclatoarele, facturile și financiarul sunt mereu acolo. Restul îl adaugi tu.'
+                          : 'Gestiune, Achiziții, Casierie și Casă de marcat, peste fundație.'}
                       </p>
                     </>
                   )}

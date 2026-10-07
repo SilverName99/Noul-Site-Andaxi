@@ -1,4 +1,5 @@
 import {
+  BookOpenCheck,
   Calculator,
   ClipboardList,
   Coins,
@@ -32,6 +33,7 @@ import { getPlan } from './erpPricing'
 
 export type ModuleKey =
   | 'core'
+  | 'contabilitate'
   | 'gestiune'
   | 'achizitii'
   | 'casierie'
@@ -71,7 +73,7 @@ export interface ErpModule {
   screenshot?: string
   /** Capitolele din manualul programului (docs/manual/<capitol>.md). */
   manual: string[]
-  /** Trunchiul: mereu pornit, nu se oprește. */
+  /** Fundația: mereu pornită, nu se oprește. */
   alwaysOn?: boolean
   /** Pagină dedicată pe site, dacă are. */
   link?: string
@@ -79,20 +81,16 @@ export interface ErpModule {
 
 export const CORE: ErpModule = {
   key: 'core',
-  name: 'Trunchiul',
+  name: 'Fundația',
   icon: Calculator,
-  tagline: 'Facturi, bani și contabilitate. Baza pe care stă tot.',
+  tagline: 'Nomenclatoare, facturi și financiar. Baza pe care stă tot.',
   description:
-    'Facturile cu e-Factura, clienții, produsele și serviciile, banca, contabilitatea cu balanțe, închideri și declarații, rapoartele, utilizatorii și backup-ul.',
+    'Clienții, produsele și serviciile, facturile cu e-Factura, banca și sumele de repartizat, rapoartele, utilizatorii și backup-ul.',
   potrivitPentru: 'Orice firmă. De aici pornești.',
   necesita: [],
   menu: [
     { group: 'Nomenclatoare', items: ['Clienți', 'Produse', 'Servicii', 'Liste de referință'] },
     { group: 'Vânzări', items: ['Facturi'] },
-    {
-      group: 'Contabilitate',
-      items: ['Note contabile', 'Închideri', 'Balanțe și jurnale', 'Decont TVA', 'Declarații', 'Bilanț'],
-    },
     { group: 'Financiar', items: ['Banca', 'Sume nerepartizate'] },
     { group: 'Rapoarte', items: ['Rapoarte'] },
     {
@@ -101,11 +99,31 @@ export const CORE: ErpModule = {
     },
   ],
   screenshot: 'factura',
-  manual: ['facturare', 'note-contabile', 'balante', 'banca', 'utilizatori', 'backup'],
+  manual: ['facturare', 'banca', 'utilizatori', 'backup'],
   alwaysOn: true,
 }
 
 export const MODULES: ErpModule[] = [
+  {
+    // Pe site e modul separat. În program ține încă de fundație; modulul
+    // „contabilitate” din MODULE_KEYS vine odată cu separarea lui acolo.
+    key: 'contabilitate',
+    name: 'Contabilitate',
+    icon: BookOpenCheck,
+    tagline: 'Note, balanțe, TVA și declarații, din aceleași date.',
+    description:
+      'Notele contabile ies din documente, automat sau cu un clic. Închideri de lună și de an, balanțe, fișe și registre, decontul de TVA, declarațiile D300, D394, D390 și D406 gata de depus, plus bilanțul.',
+    potrivitPentru: 'Firme care țin contabilitatea în program, cu contabilul lor sau intern.',
+    necesita: [],
+    menu: [
+      {
+        group: 'Contabilitate',
+        items: ['Note contabile', 'Închideri', 'Balanțe și jurnale', 'Decont TVA', 'Declarații', 'Bilanț'],
+      },
+    ],
+    screenshot: 'contabilitate',
+    manual: ['note-contabile', 'balante'],
+  },
   {
     key: 'gestiune',
     name: 'Gestiune',
@@ -340,7 +358,7 @@ export interface BuiltMenuGroup {
   items: { label: string; module: ModuleKey }[]
 }
 
-/** Meniul programului cu trunchiul și modulele date pornite. */
+/** Meniul programului cu fundația și modulele date pornite. */
 export const buildMenu = (active: ModuleKey[]): BuiltMenuGroup[] => {
   const on = [CORE, ...MODULES.filter((m) => active.includes(m.key))]
   return MENU_ORDER.map((group) => ({
@@ -362,7 +380,7 @@ export interface ErpBundle {
   name: string
   tagline: string
   description: string
-  /** Modulele pachetului (trunchiul e mereu inclus). Vin din PLANURI
+  /** Modulele pachetului (fundația e mereu inclusă). Vin din PLANURI
    *  (erpPricing.ts), ca pachetul de pe /erp să fie același cu cel de pe
    *  /preturi, cu același preț. */
   modules: ModuleKey[]

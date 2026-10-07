@@ -35,6 +35,7 @@ import ModuleCard from '../components/ModuleCard'
 import FaqList from '../components/FaqList'
 import PermissionsPreview from '../components/PermissionsPreview'
 import { BUNDLES, CORE, MODULES, getModule, withDependencies } from '../data/erpModules'
+import { PRETURI_MODULE } from '../data/erpPricing'
 import type { ModuleKey } from '../data/erpModules'
 import { FLOW } from '../data/erpFlow'
 import { ERP_SHOTS } from '../data/erpShots'
@@ -183,7 +184,7 @@ const TECH = [
 
 /* ------------------------------------------------------------------------ */
 
-const moduleLabel = (k: ModuleKey) => (k === 'core' ? 'Trunchiul' : getModule(k).name)
+const moduleLabel = (k: ModuleKey) => (k === 'core' ? 'Fundația' : getModule(k).name)
 
 /** Navigatorul lipicios peste pașii firmei, cu pasul vizibil evidențiat. */
 const FlowNav = () => {
@@ -310,12 +311,17 @@ const Bundles = () => {
               {bundle.description}
             </p>
             <p className="mt-4 text-sm text-[color:var(--text-4)]">
-              Trunchiul + {keys.length} {keys.length === 1 ? 'modul' : 'module'}. Le schimbi oricând.
+              Fundația + {keys.length} {keys.length === 1 ? 'modul' : 'module'}. Le schimbi oricând.
             </p>
             <p className="mt-4 text-3xl font-medium tracking-tight text-[color:var(--text-1)]">
               {bundle.pret} €
               <span className="text-sm font-normal text-[color:var(--text-4)]"> / lună, cu primul om</span>
             </p>
+            {!bundle.modules.includes('contabilitate') && (
+              <p className="mt-1 text-sm text-[color:var(--text-4)]">
+                + Contabilitate {PRETURI_MODULE.contabilitate.pret} €/lună, dacă o ții în program
+              </p>
+            )}
             <Link
               to="/preturi#erp"
               className="mt-1 text-sm text-[color:var(--accent)] underline-offset-4 hover:underline"
@@ -341,10 +347,10 @@ const Bundles = () => {
                 </span>
                 <a href="#core" className="min-w-0 flex-1">
                   <span className="block text-sm font-medium text-[color:var(--text-1)]">
-                    Trunchiul ERP
+                    Fundația
                   </span>
                   <span className="block truncate text-sm text-[color:var(--text-4)]">
-                    Facturi, contabilitate, financiar
+                    Nomenclatoare, facturi, financiar
                   </span>
                 </a>
                 <span className="text-xs text-[color:var(--text-4)]">mereu</span>
@@ -595,14 +601,14 @@ const Erp = () => {
             </h2>
             <Reveal delay={0.15}>
               <p className="mt-6 max-w-2xl text-sm leading-relaxed text-[color:var(--text-3)] md:text-base">
-                Pornești de la trunchi și adaugi doar ce folosești. Nu vinzi la
+                Pornești de la fundație și adaugi doar ce folosești. Nu vinzi la
                 tejghea? Casa de marcat nu-ți apare în meniu. Ai deschis
                 magazin online? Îl pornim. Programul crește odată cu firma, nu
                 invers.
               </p>
             </Reveal>
 
-            {/* Trunchiul */}
+            {/* Fundația */}
             <Reveal delay={0.1} className="mt-14">
               <div
                 id="core"
@@ -615,10 +621,10 @@ const Erp = () => {
                         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[color:var(--accent)] opacity-60 motion-reduce:animate-none" />
                         <span className="relative inline-flex h-2 w-2 rounded-full bg-[color:var(--accent)]" />
                       </span>
-                      Mereu pornit
+                      Mereu pornită
                     </p>
                     <h3 className="mt-3 text-2xl font-medium tracking-tight text-white md:text-4xl">
-                      Trunchiul: facturi, contabilitate, financiar.
+                      Fundația: nomenclatoare, facturi, financiar.
                     </h3>
                     <p className="mt-3 text-sm leading-relaxed text-white/60 md:text-base">{CORE.description}</p>
                   </div>
@@ -636,7 +642,7 @@ const Erp = () => {
               </div>
             </Reveal>
 
-            {/* Cele 12 module */}
+            {/* Modulele */}
             <div className="mt-6 flex items-center gap-4" aria-hidden>
               <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[color:var(--border-strong)] to-transparent" />
               <span className="text-xs uppercase tracking-wider text-[color:var(--text-4)]">
