@@ -16,6 +16,10 @@
 
   # Pagini prerandate: /erp și /erp/ → pagini/erp.html (intern, fără redirect).
   # Dacă fișierul lipsește, cererea ajunge mai jos, la aplicație (index.html).
+  # Doar pe andaxi.ro și www.andaxi.ro: un subdomeniu găzduit într-un dosar de
+  # aici (de pildă crm.andaxi.ro în dosarul „crm”) moștenește fișierul ăsta, iar
+  # regula i-ar înlocui pagina de start cu pagini/crm.html.
+  RewriteCond %{HTTP_HOST} ^(www\.)?andaxi\.ro$ [NC]
   RewriteRule ^(erp|erp/demo|crm|preturi|contact)/?$ pagini/$1.html [L]
 
   # Aplicația (rutele fără fișier), ca înainte.
