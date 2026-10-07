@@ -1,7 +1,24 @@
+# Servirea site-ului pe Apache / LiteSpeed (ex. Hostinger).
+#
+# Build-ul prerandează fiecare pagină în pagini/<ruta>.html (scripts/prerender.mjs).
+# Fișierele stau în dosarul „pagini”, nu în dosare cu numele rutei: dacă /erp ar
+# fi un dosar real, Apache l-ar redirecționa la /erp/ (DirectorySlash), iar
+# „DirectorySlash Off” dă eroare 500 pe tot site-ul la gazdele care nu permit
+# AllowOverride Indexes. Așa nu e nevoie de niciun redirect.
+#
+# Lista de rute de mai jos trebuie să fie aceeași cu cea din src/seo.ts (fără /).
+# Prerandarea o verifică și oprește build-ul dacă diferă.
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
   RewriteRule ^index\.html$ - [L]
+
+  # Pagini prerandate: /erp și /erp/ → pagini/erp.html (intern, fără redirect).
+  # Dacă fișierul lipsește, cererea ajunge mai jos, la aplicație (index.html).
+  RewriteRule ^(erp|erp/demo|crm|preturi|contact)/?$ pagini/$1.html [L]
+
+  # Aplicația (rutele fără fișier), ca înainte.
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]

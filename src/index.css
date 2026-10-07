@@ -13,6 +13,7 @@
   --accent-tint: rgba(245, 137, 30, 0.15);
   --accent-border: rgba(245, 137, 30, 0.4);
   --shine: #ffc061;
+  --good: #15803d;
 
   --bg: #ffffff;
   --surface: rgba(10, 10, 10, 0.04);
@@ -45,6 +46,7 @@
   --accent-tint: rgba(31, 111, 235, 0.15);
   --accent-border: rgba(31, 111, 235, 0.4);
   --shine: #ffffff;
+  --good: #4ade80;
 
   --bg: #000000;
   --surface: rgba(255, 255, 255, 0.03);
@@ -65,8 +67,28 @@
   --hero-overlay: rgba(0, 0, 0, 0.4);
 }
 
+/* Controalele native (lista din <select>, bara de derulare) urmează tema. */
+:root,
+:root[data-theme='blue'] {
+  color-scheme: dark;
+}
+:root[data-theme='brand'] {
+  color-scheme: light;
+}
+
+select option {
+  background-color: var(--bg);
+  color: var(--text-1);
+}
+
 html {
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {

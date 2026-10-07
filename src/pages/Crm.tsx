@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
@@ -15,7 +14,7 @@ import {
   Layers,
 } from 'lucide-react'
 import ShinyText from '../components/ShinyText'
-import { setPageMeta } from '../seo'
+import { usePageMeta } from '../seo'
 import Reveal from '../components/motion/Reveal'
 import AnimatedText from '../components/motion/AnimatedText'
 import { StaggerContainer, StaggerItem } from '../components/motion/Stagger'
@@ -138,8 +137,8 @@ const TECH = [
   },
   {
     icon: Layers,
-    title: 'Același ecosistem cu ERP-ul',
-    text: 'Aceleași date, aceeași instalare — o singură sursă de adevăr.',
+    title: 'Conectat la ANDAXI ERP',
+    text: 'Aplicație separată, legată de ERP: vânzările vin din ERP, iar stocul agenților îl vezi și în ERP.',
   },
   {
     icon: ShieldCheck,
@@ -149,13 +148,7 @@ const TECH = [
 ]
 
 const Crm = () => {
-  useEffect(() => {
-    setPageMeta(
-      'ANDAXI CRM — Vânzări pe agent, cu hartă și rute, conectat la ERP',
-      'CRM pentru echipe de agenți pe teren: hartă interactivă cu stopuri și check-in, stocuri per agent, vânzări preluate automat din ERP, fișiere și chat integrat.',
-      '/crm',
-    )
-  }, [])
+  usePageMeta('/crm')
 
   return (
     <div className="bg-[color:var(--bg)] font-sans">
@@ -203,7 +196,7 @@ const Crm = () => {
 
           <Reveal delay={0.45} className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
             <Link
-              to="/contact"
+              to="/contact?interes=crm"
               className="group inline-flex items-center gap-2 rounded-full bg-[color:var(--accent-strong)] px-6 py-3 text-sm font-medium text-white transition-colors duration-300 hover:bg-[color:var(--accent-strong-hover)] md:px-8 md:py-4 md:text-base"
             >
               Cere o demonstrație
@@ -366,7 +359,7 @@ const Crm = () => {
             </Reveal>
             <Reveal delay={0.35} className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
               <Link
-                to="/contact"
+                to="/contact?interes=crm"
                 className="group inline-flex items-center gap-2 rounded-full bg-[color:var(--accent-strong)] px-8 py-4 text-sm font-medium text-white transition-colors duration-300 hover:bg-[color:var(--accent-strong-hover)] md:text-base"
               >
                 Cere o demonstrație

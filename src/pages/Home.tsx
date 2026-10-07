@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
@@ -15,7 +14,7 @@ import {
   Tag,
 } from 'lucide-react'
 import ShinyText from '../components/ShinyText'
-import { setPageMeta } from '../seo'
+import { usePageMeta } from '../seo'
 import Reveal from '../components/motion/Reveal'
 import AnimatedText from '../components/motion/AnimatedText'
 import { StaggerContainer, StaggerItem } from '../components/motion/Stagger'
@@ -48,18 +47,18 @@ const SERVICES = [
     icon: LayoutTemplate,
     title: 'Website-uri',
     text: 'De prezentare, pentru evenimente, cu rezervări sau interactive — personalizate 100%, gata în câteva săptămâni.',
-    to: '/contact',
+    to: '/contact?interes=website',
   },
   {
     icon: ShoppingBag,
     title: 'Magazine online',
     text: 'Vinzi simplu: magazin ușor de administrat, optimizat pentru mobil și gândit să transforme vizitele în comenzi.',
-    to: '/contact',
+    to: '/contact?interes=magazin',
   },
   {
     icon: Calculator,
     title: 'ANDAXI ERP',
-    text: 'Facturare, gestiune și contabilitate — într-un singur program, conform cu legislația din România.',
+    text: 'Facturare cu e-Factura, gestiune pe loturi și contabilitate — un program online pe care îl construiești din module.',
     to: '/erp',
   },
   {
@@ -77,13 +76,7 @@ const SERVICES = [
 ]
 
 const Home = () => {
-  useEffect(() => {
-    setPageMeta(
-      'Andaxi — Creare website-uri, ERP și CRM pentru firme din România',
-      'Soluții web complete: website-uri personalizate, magazine online, ANDAXI ERP (facturare, gestiune, contabilitate conform ANAF) și ANDAXI CRM pentru echipe de vânzări.',
-      '/',
-    )
-  }, [])
+  usePageMeta('/')
 
   return (
     <div className="bg-[color:var(--bg)] font-sans">
@@ -268,6 +261,20 @@ const Home = () => {
                 funcționalitate.
               </p>
             </Reveal>
+            <Reveal delay={0.3}>
+              <p>
+                Și pentru că știm cât de greu e să ții o firmă în Excel-uri, ne
+                construim și propriul program de facturare, gestiune și
+                contabilitate:{' '}
+                <Link
+                  to="/erp"
+                  className="text-[color:var(--text-1)] underline decoration-[color:var(--accent)] underline-offset-4 transition-colors hover:text-[color:var(--accent)]"
+                >
+                  ANDAXI ERP
+                </Link>
+                .
+              </p>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -281,11 +288,12 @@ const Home = () => {
           >
             <p className="text-xs uppercase tracking-wider text-[color:var(--accent)]">ANDAXI ERP</p>
             <h2 className="mt-4 text-3xl font-medium tracking-tight text-white md:text-4xl">
-              Facturare, gestiune și contabilitate — într-un singur program.
+              Facturare, gestiune și contabilitate — din module.
             </h2>
             <p className="mt-4 text-sm text-white/60 md:text-base">
-              ERP online, complet și conform cu legislația din România. De la
-              factură la bilanț și declarații ANAF — automat.
+              ERP online, conform cu legislația din România: e-Factura direct
+              în SPV, stoc pe loturi, declarații gata de depus. Pornești doar
+              ce folosești.
             </p>
             <span className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-white md:text-base">
               Descoperă ANDAXI ERP

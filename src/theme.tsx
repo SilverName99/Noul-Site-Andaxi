@@ -12,8 +12,13 @@ const ThemeContext = createContext<{
 }>({ theme: 'brand', setTheme: () => {} })
 
 const getInitialTheme = (): Theme => {
-  const stored = localStorage.getItem(STORAGE_KEY)
-  return stored === 'brand' ? 'brand' : 'blue'
+  // Pe server (prerandare) nu există localStorage: tema implicită.
+  if (typeof window === 'undefined') return 'blue'
+  try {
+    return localStorage.getItem(STORAGE_KEY) === 'brand' ? 'brand' : 'blue'
+  } catch {
+    return 'blue'
+  }
 }
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
@@ -25,7 +30,11 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
     const apply = () => {
       document.documentElement.dataset.theme = next
-      localStorage.setItem(STORAGE_KEY, next)
+      try {
+        localStorage.setItem(STORAGE_KEY, next)
+      } catch {
+        // Fereastră privată / stocare blocată: tema se schimbă doar acum.
+      }
       setThemeState(next)
     }
 

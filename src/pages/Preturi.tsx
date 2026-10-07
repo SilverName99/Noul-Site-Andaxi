@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
@@ -21,13 +20,17 @@ import {
   Server,
   ShieldCheck,
   ShoppingBag,
+  Users,
 } from 'lucide-react'
 import Reveal from '../components/motion/Reveal'
 import AnimatedText from '../components/motion/AnimatedText'
 import ShinyText from '../components/ShinyText'
-import { setPageMeta } from '../seo'
+import { usePageMeta } from '../seo'
+import { CORE, MODULES } from '../data/erpModules'
+import { PRETURI_MODULE, PRET_BAZA } from '../data/erpPricing'
 import { StaggerContainer, StaggerItem } from '../components/motion/Stagger'
 import ErpCalculator from '../components/ErpCalculator'
+import NoWrapDomain from '../components/NoWrapDomain'
 
 const PACKAGES = [
   {
@@ -83,7 +86,7 @@ const PACKAGES = [
       'Coș & checkout optimizat pentru conversie (și comandă fără cont)',
       'Plăți online: card, ramburs, transfer',
       'Integrare curieri — AWB generat automat',
-      'Facturare automată — se integrează nativ cu ANDAXI ERP',
+      'Legat direct de ANDAXI ERP — comenzile intră singure, factura se emite la aprobare',
       'Vouchere și coduri de reducere',
       'Feed Google Shopping & Facebook/Instagram',
       'Email-uri automate: confirmare comandă, expediere, coș abandonat',
@@ -120,36 +123,43 @@ const MAINTENANCE = [
   },
 ]
 
+/** Ce primești pe lângă module. `badge` spune în ce condiții. */
 const ERP_FREE = [
   {
     icon: Gift,
     title: 'Implementare & customizare',
-    text: 'Le facem noi, gratuit — programul se adaptează firmei tale, nu invers.',
-  },
-  {
-    icon: Check,
-    title: 'Toate modulele incluse',
-    text: 'Facturare, stocuri, casă & bancă, contabilitate — nimic nu se plătește separat.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'e-Factura, SAF-T & declarații',
-    text: 'Conform ANAF, cu actualizări de legislație incluse permanent.',
-  },
-  {
-    icon: Server,
-    title: 'Server dedicat',
-    text: 'Datele firmei tale, izolate — nu la comun cu alte firme.',
+    text: 'Le facem noi: programul se adaptează firmei tale, nu invers. Lunar sau pe 6 luni costă 149 €, o singură dată.',
+    badge: 'gratis la 12+ luni',
   },
   {
     icon: RefreshCw,
     title: 'Migrarea datelor + instruire',
-    text: 'Îți aducem datele și îți învățăm echipa, fără costuri suplimentare.',
+    text: 'Îți aducem datele din programul vechi și îți învățăm echipa.',
+    badge: 'gratis la 12+ luni',
+  },
+  {
+    icon: Users,
+    title: 'Contul contabilului',
+    text: 'Contabilul tău primește cont fără cost, iar la cerere și un cont de vizualizare.',
+    badge: 'gratis',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'e-Factura & declarații',
+    text: 'Facturile pleacă în SPV, iar declarațiile ies gata de depus. Actualizările de legislație sunt incluse.',
+    badge: 'inclus',
+  },
+  {
+    icon: Server,
+    title: 'Instanță dedicată',
+    text: 'Baza ta de date, la firma-ta.erp.andaxi.ro — nu se amestecă cu datele altor firme.',
+    badge: 'inclus',
   },
   {
     icon: LifeBuoy,
     title: 'Backup & suport',
     text: 'Copii de siguranță automate și oameni care răspund când ai nevoie.',
+    badge: 'inclus',
   },
 ]
 
@@ -157,7 +167,7 @@ const ERP_BENEFITS = [
   {
     icon: BadgeCheck,
     title: 'Fără contract pe termen lung',
-    text: 'Anulezi oricând.',
+    text: 'Plătești lunar și anulezi oricând, sau pe 12–24 de luni, cu reducere.',
   },
   {
     icon: PlayCircle,
@@ -191,13 +201,7 @@ const NOTES = [
 ]
 
 const Preturi = () => {
-  useEffect(() => {
-    setPageMeta(
-      'Prețuri — Website-uri, magazine online, ERP și CRM | Andaxi',
-      'Prețuri corecte, fără surprize: landing page de la 250€, site de prezentare de la 500€, magazin online 3.000€ și ANDAXI ERP gratuit — plătești doar utilizatorii.',
-      '/preturi',
-    )
-  }, [])
+  usePageMeta('/preturi')
 
   return (
     <div className="bg-[color:var(--bg)] font-sans">
@@ -331,7 +335,7 @@ const Preturi = () => {
                 </ul>
 
                 <Link
-                  to="/contact"
+                  to={`/contact?interes=${name === 'Magazin online' ? 'magazin' : 'website'}`}
                   className={`group mt-8 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-medium transition-colors duration-300 ${
                     featured
                       ? 'bg-[color:var(--accent-strong)] text-white hover:bg-[color:var(--accent-strong-hover)]'
@@ -392,10 +396,10 @@ const Preturi = () => {
           </Reveal>
           <h2 className="mt-4 max-w-4xl text-3xl font-medium tracking-tight md:text-5xl">
             <span className="block text-[color:var(--text-1)]">
-              <AnimatedText text="Programul e gratis." />
+              <AnimatedText text="Alegi modulele." />
             </span>
             <ShinyText
-              text="Plătești doar utilizatorii."
+              text="Plătești doar ce folosești."
               color="var(--accent-strong)"
               shineColor="var(--shine)"
               speed={3}
@@ -405,32 +409,76 @@ const Preturi = () => {
           </h2>
           <Reveal delay={0.15}>
             <p className="mt-5 max-w-2xl text-sm leading-relaxed text-[color:var(--text-3)] md:text-base">
-              Fără licențe, fără costuri de implementare, fără module plătite
-              separat. Alegi câți utilizatori are firma ta — atât plătești,
-              restul e inclus.
+              Fără licențe. Baza cu facturi, contabilitate și declarații
+              costă {PRET_BAZA} € pe lună, cu primul om inclus. Adaugi doar
+              modulele de care ai nevoie sau iei un pachet gata făcut, care iese
+              mai ieftin. Aplicația ANDAXI CRM pentru agenții de pe teren se
+              plătește separat.
             </p>
           </Reveal>
 
-          {/* Ce e gratis */}
+          {/* Ce primești pe lângă module */}
           <StaggerContainer className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {ERP_FREE.map(({ icon: Icon, title, text }) => (
+            {ERP_FREE.map(({ icon: Icon, title, text, badge }) => (
               <StaggerItem key={title}>
                 <div className="h-full rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] p-6">
                   <Icon className="h-6 w-6 text-[color:var(--accent)]" />
                   <h3 className="mt-4 text-base font-medium text-[color:var(--text-1)]">
                     {title}
                     <span className="ml-2 rounded-full bg-[color:var(--accent-tint)] px-2.5 py-0.5 text-xs font-medium text-[color:var(--accent)]">
-                      gratis
+                      {badge}
                     </span>
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[color:var(--text-3)]">{text}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-[color:var(--text-3)]">
+                    <NoWrapDomain text={text} />
+                  </p>
                 </div>
               </StaggerItem>
             ))}
           </StaggerContainer>
 
-          {/* Calculator */}
+          {/* Modulele și prețurile lor (informativ) */}
           <Reveal delay={0.1} className="mt-12">
+            <div className="rounded-3xl border border-[color:var(--border)] p-6 md:p-8">
+              <div className="flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between">
+                <h3 className="text-lg font-medium text-[color:var(--text-1)]">
+                  Modulele, pe lună
+                </h3>
+                <Link
+                  to="/erp#module"
+                  className="group inline-flex items-center gap-1 text-sm text-[color:var(--text-3)] transition-colors hover:text-[color:var(--text-1)]"
+                >
+                  Vezi ce face fiecare modul
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </Link>
+              </div>
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {[CORE, ...MODULES].map((m) => (
+                  <li
+                    key={m.key}
+                    className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-sm text-[color:var(--text-2)] ${
+                      m.alwaysOn ? 'border-[color:var(--accent-border)]' : 'border-[color:var(--border)]'
+                    }`}
+                  >
+                    <m.icon className="h-4 w-4 text-[color:var(--accent)]" />
+                    {m.alwaysOn ? 'Baza (trunchiul ERP)' : m.name}
+                    <span className="text-xs tabular-nums text-[color:var(--accent)]">
+                      · {m.key === 'core' ? PRET_BAZA : PRETURI_MODULE[m.key].pret} €
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 flex items-start gap-2 text-sm leading-relaxed text-[color:var(--text-3)]">
+                <Users className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--accent)]" />
+                Plătești doar conturile active: un cont dezactivat nu se mai
+                numără. Pornești doar modulele de care ai nevoie, iar restul nu-ți
+                încurcă meniul.
+              </p>
+            </div>
+          </Reveal>
+
+          {/* Calculator */}
+          <Reveal delay={0.1} className="mt-8">
             <ErpCalculator />
           </Reveal>
 
@@ -479,7 +527,7 @@ const Preturi = () => {
                 </Link>
               </div>
               <Link
-                to="/contact"
+                to="/contact?interes=crm"
                 className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-medium text-black transition-colors duration-300 hover:bg-gray-200 md:text-base"
               >
                 Cere o ofertă personalizată
