@@ -8,6 +8,8 @@ import AnimatedText from '../components/motion/AnimatedText'
 import { usePageMeta } from '../seo'
 import { getModule, isModuleKey } from '../data/erpModules'
 import type { ModuleKey } from '../data/erpModules'
+import { getPachet, getPlugin, isPachetKey, isPluginKey } from '../data/cmsPlugins'
+import type { PachetKey, PluginKey } from '../data/cmsPlugins'
 
 const CONTACT_EMAIL = 'contact@andaxi.ro'
 
@@ -42,6 +44,14 @@ const parseInterest = (raw: string | null): Interest => {
   return INTEREST_ALIASES[v] ?? ''
 }
 
+/** Din calculatorul ANDAXI CMS: &pachet=magazin&pluginuri=recenzii,newsletter. */
+const parsePachet = (raw: string | null): PachetKey | null => {
+  const v = (raw ?? '').trim()
+  return isPachetKey(v) ? v : null
+}
+const parsePluginuri = (raw: string | null): PluginKey[] =>
+  [...new Set((raw ?? '').split(',').map((s) => s.trim()))].filter(isPluginKey)
+
 const parseModules = (raw: string | null): ModuleKey[] =>
   [...new Set((raw ?? '').split(',').map((s) => s.trim()))].filter(isModuleKey).filter((k) => k !== 'core')
 
@@ -55,6 +65,8 @@ const Contact = () => {
   const [phone, setPhone] = useState('')
   const [interest, setInterest] = useState<Interest>(() => parseInterest(searchParams.get('interes')))
   const [modules, setModules] = useState<ModuleKey[]>(() => parseModules(searchParams.get('module')))
+  const [pachet, setPachet] = useState<PachetKey | null>(() => parsePachet(searchParams.get('pachet')))
+  const [pluginuri, setPluginuri] = useState<PluginKey[]>(() => parsePluginuri(searchParams.get('pluginuri')))
   const [message, setMessage] = useState('')
   const [status, setStatus] = useState<Status>('idle')
 
@@ -64,16 +76,23 @@ const Contact = () => {
   useEffect(() => {
     setInterest(parseInterest(searchParams.get('interes')))
     setModules(parseModules(searchParams.get('module')))
+    setPachet(parsePachet(searchParams.get('pachet')))
+    setPluginuri(parsePluginuri(searchParams.get('pluginuri')))
   }, [searchParams])
 
   const interestInfo = INTERESTS.find((i) => i.value === interest)
   const showModules = (interest === 'erp' || interest === 'demo') && modules.length > 0
+  const pentruSite = interest === 'website' || interest === 'magazin'
+  const showPachet = pentruSite && pachet !== null
+  const showPluginuri = pentruSite && pluginuri.length > 0
 
   /** Mesajul care pleacă: interesul și modulele, apoi textul omului. */
   const fullMessage = () => {
     const header = [
       interestInfo ? `Interes: ${interestInfo.label}` : null,
       showModules ? `Module: ${modules.map((k) => getModule(k).name).join(', ')}` : null,
+      showPachet && pachet ? `Pachet: ${getPachet(pachet).name}` : null,
+      showPluginuri ? `Plugin-uri: ${pluginuri.map((k) => getPlugin(k).name).join(', ')}` : null,
     ].filter(Boolean)
     return header.length ? `${header.join('\n')}\n\n${message}` : message
   }
@@ -305,6 +324,34 @@ const Contact = () => {
                           </select>
                           <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[color:var(--text-4)]" />
                         </div>
+                        {(showPachet || showPluginuri) && (
+                          <div className="mt-3">
+                            <p className="text-xs text-[color:var(--text-4)]">
+                              {showPachet && pachet ? `Pachet: ${getPachet(pachet).name}` : 'Plugin-uri alese'}
+                              {showPachet && showPluginuri ? ' · plugin-uri alese' : ''}
+                            </p>
+                            {showPluginuri && (
+                              <div className="mt-2 flex flex-wrap gap-2">
+                                {pluginuri.map((k) => (
+                                  <span
+                                    key={k}
+                                    className="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--accent-border)] bg-[color:var(--accent-tint)] py-1 pl-3 pr-1.5 text-xs text-[color:var(--text-1)]"
+                                  >
+                                    {getPlugin(k).name}
+                                    <button
+                                      type="button"
+                                      onClick={() => setPluginuri((m) => m.filter((x) => x !== k))}
+                                      aria-label={`Scoate ${getPlugin(k).name}`}
+                                      className="flex h-5 w-5 items-center justify-center rounded-full text-[color:var(--text-3)] transition-colors hover:bg-[color:var(--surface-hover)] hover:text-[color:var(--text-1)]"
+                                    >
+                                      <X className="h-3 w-3" />
+                                    </button>
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        )}
                         {showModules && (
                           <div className="mt-3">
                             <p className="text-xs text-[color:var(--text-4)]">Module alese</p>
