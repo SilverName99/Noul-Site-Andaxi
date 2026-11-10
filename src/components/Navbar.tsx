@@ -6,6 +6,7 @@ const NAV_LINKS = [
   { to: '/', label: 'ACASĂ' },
   { to: '/erp', label: 'ANDAXI ERP' },
   { to: '/crm', label: 'ANDAXI CRM' },
+  { to: '/cms', label: 'ANDAXI CMS' },
   { to: '/preturi', label: 'PREȚURI' },
 ]
 

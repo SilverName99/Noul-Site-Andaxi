@@ -114,10 +114,18 @@ export const ROUTES: RouteMeta[] = [
     priority: 0.9,
   },
   {
+    path: '/cms',
+    title: 'ANDAXI CMS — Site-uri și magazine online cu plugin-uri, calculator de preț live',
+    description:
+      'CMS-ul nostru, construit de la zero: rapid, sigur, legat de ANDAXI ERP. Pornești plugin-uri (plăți cu cardul, FAN Courier, recenzii, newsletter, statistici) și vezi prețul live.',
+    changefreq: 'monthly',
+    priority: 0.9,
+  },
+  {
     path: '/preturi',
     title: 'Prețuri — Website-uri, magazine online, ERP și CRM | Andaxi',
     description:
-      'Prețuri corecte, fără surprize: landing page 250€, site de prezentare 500€, magazin online 3.000€. ANDAXI ERP pe module, de la 12 €/lună: plătești doar ce folosești.',
+      'Prețuri corecte, fără surprize: landing page 250€, site de prezentare 500€, magazin online 3.000€, plus plugin-urile ANDAXI CMS. ANDAXI ERP pe module, de la 12 €/lună.',
     changefreq: 'monthly',
     priority: 0.9,
   },
