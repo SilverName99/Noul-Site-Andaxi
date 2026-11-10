@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { ArrowRight, Check, Lock, MonitorSmartphone, RotateCcw, Sparkles, X } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Check, Lock, MonitorSmartphone, RotateCcw, Sparkles, X } from 'lucide-react'
 import {
   CATEGORII,
   PACHETE,
@@ -21,7 +21,9 @@ import {
   type PluginKey,
 } from '../../data/cmsPlugins'
 import { HlContext } from './Hl'
-import MockSite, { BulaChat, PanouOferte } from './MockSite'
+import MockSite, { BulaChat, NotificareDemo, PanouOferte } from './MockSite'
+import { DemoContext, PAGINA_PLUGIN, paginaValida, useSiteDemo } from './demo'
+import type { RefObject } from 'react'
 import MockAdmin from './MockAdmin'
 
 /**
@@ -40,15 +42,16 @@ const LATIME_MOBIL = 400
 const Previzualizare = ({
   nou,
   semnal,
+  scrollRef,
   children,
 }: {
+  scrollRef: RefObject<HTMLDivElement | null>
   nou: PluginKey | null
   /** Se schimbă la fiecare bifă: derulăm la ce s-a evidențiat. */
   semnal: unknown
   children: (mobil: boolean) => ReactNode
 }) => {
   const reduce = useReducedMotion()
-  const scrollRef = useRef<HTMLDivElement>(null)
   const interiorRef = useRef<HTMLDivElement>(null)
   const [latime, setLatime] = useState(0)
   const [inaltime, setInaltime] = useState(0)
@@ -64,7 +67,7 @@ const Previzualizare = ({
     ro.observe(s)
     ro.observe(i)
     return () => ro.disconnect()
-  }, [])
+  }, [scrollRef])
 
   const mobil = latime > 0 && latime < 640
   const design = mobil ? LATIME_MOBIL : LATIME_DESKTOP
@@ -75,7 +78,8 @@ const Previzualizare = ({
     if (!nou) return
     const t = window.setTimeout(() => {
       const s = scrollRef.current
-      const el = interiorRef.current?.querySelector('[data-hl="on"]')
+      // Elementul cu eticheta „NOU” (cel principal), altfel primul evidențiat.
+      const el = interiorRef.current?.querySelector('[data-hl-eticheta]') ?? interiorRef.current?.querySelector('[data-hl="on"]')
       if (!s || !el) return
       const r = el.getBoundingClientRect()
       const rs = s.getBoundingClientRect()
@@ -84,10 +88,10 @@ const Previzualizare = ({
       s.scrollTo({ top: Math.max(0, tinta), behavior: reduce ? 'auto' : 'smooth' })
     }, 140)
     return () => window.clearTimeout(t)
-  }, [nou, semnal, reduce])
+  }, [nou, semnal, reduce, scrollRef])
 
   return (
-    <div ref={scrollRef} className="absolute inset-0 overflow-y-auto overflow-x-hidden overscroll-contain">
+    <div ref={scrollRef as RefObject<HTMLDivElement>} className="absolute inset-0 overflow-y-auto overflow-x-hidden overscroll-contain">
       <div style={{ height: inaltime * scara || undefined }}>
         <div
           ref={interiorRef}
@@ -117,6 +121,9 @@ const SiteBuilder = ({ open, onClose, pachetInitial = 'magazin', pluginStart = n
   const [vedere, setVedere] = useState<'site' | 'admin'>('site')
   const [mesaj, setMesaj] = useState<string | null>(null)
   const dialogRef = useRef<HTMLDivElement>(null)
+  const ecranRef = useRef<HTMLDivElement>(null)
+  const demo = useSiteDemo(ecranRef)
+  const { deschide: demoDeschide, reseteaza: demoReseteaza, inlocuieste: demoInlocuieste } = demo
 
   // La fiecare deschidere: pachetul cerut de butonul apăsat și, de pe un card, plugin-ul lui.
   useEffect(() => {
@@ -125,11 +132,14 @@ const SiteBuilder = ({ open, onClose, pachetInitial = 'magazin', pluginStart = n
     setPachet(p)
     setVedere(pluginStart ? getPlugin(pluginStart).zona : 'site')
     setNou(pluginStart)
+    demoReseteaza()
     if (pluginStart) {
       setAles((a) => new Set([...a, pluginStart]))
       setSemnal((s) => s + 1)
+      const pg = PAGINA_PLUGIN[pluginStart]
+      if (pg) demoDeschide(pg)
     }
-  }, [open, pachetInitial, pluginStart])
+  }, [open, pachetInitial, pluginStart, demoReseteaza, demoDeschide])
 
   // Pagina de dedesubt nu se derulează; Escape închide. O singură dată pe deschidere.
   const onCloseRef = useRef(onClose)
@@ -158,10 +168,18 @@ const SiteBuilder = ({ open, onClose, pachetInitial = 'magazin', pluginStart = n
   const calc = useMemo(() => calculeazaCms(sel, pachet), [sel, pachet])
   const on = useCallback((k: PluginKey) => sel.has(k), [sel])
 
+  // O pagină care nu mai există pe site (plugin oprit, alt pachet): înapoi pe prima pagină.
+  useEffect(() => {
+    if (!paginaValida(demo.pagina, on, pachet)) demoInlocuieste({ p: 'acasa' })
+  }, [demo.pagina, on, pachet, demoInlocuieste])
+
   const arata = (k: PluginKey) => {
     setNou(k)
     setSemnal((s) => s + 1)
     setVedere(getPlugin(k).zona)
+    // Pagina pe care se vede plugin-ul (produsul, coșul, blogul…).
+    const pg = PAGINA_PLUGIN[k]
+    if (pg) demoDeschide(pg)
   }
 
   const schimbaPachet = (p: PachetKey) => {
@@ -429,8 +447,18 @@ const SiteBuilder = ({ open, onClose, pachetInitial = 'magazin', pluginStart = n
                   <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
                   <span className="h-3 w-3 rounded-full bg-[#28c840]" />
                 </span>
+                <button
+                  type="button"
+                  onClick={demo.inapoi}
+                  disabled={vedere === 'admin' || !demo.poateInapoi}
+                  aria-label="Înapoi"
+                  title="Înapoi"
+                  className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-slate-600 transition-colors hover:bg-white hover:text-slate-900 disabled:opacity-30"
+                >
+                  <ArrowLeft className="h-4 w-4" />
+                </button>
                 <span className="min-w-0 flex-1 truncate rounded-lg bg-white px-3 py-1 text-xs text-slate-500">
-                  🔒 firma-ta.ro{vedere === 'admin' ? '/admin' : ''}
+                  🔒 firma-ta.ro{vedere === 'admin' ? '/admin' : demo.cale === '/' ? '' : demo.cale}
                 </span>
                 <div role="tablist" aria-label="Ce vezi" className="flex rounded-lg bg-white p-0.5 text-xs">
                   {(['site', 'admin'] as const).map((v) => (
@@ -461,15 +489,18 @@ const SiteBuilder = ({ open, onClose, pachetInitial = 'magazin', pluginStart = n
               {/* Ecranul */}
               <div className="relative min-h-0 flex-1 overflow-hidden rounded-b-2xl border border-black/10 bg-white">
                 <HlContext.Provider value={{ nou, on, pachet }}>
-                  <Previzualizare nou={nou} semnal={`${semnal}-${vedere}`}>
-                    {(mobil) => (vedere === 'site' ? <MockSite pachet={pachet} mobil={mobil} /> : <MockAdmin mobil={mobil} />)}
-                  </Previzualizare>
-                  {vedere === 'site' && (
-                    <>
-                      <BulaChat />
-                      {pachet === 'magazin' && <PanouOferte />}
-                    </>
-                  )}
+                  <DemoContext.Provider value={demo}>
+                    <Previzualizare nou={nou} semnal={`${semnal}-${vedere}`} scrollRef={ecranRef}>
+                      {(mobil) => (vedere === 'site' ? <MockSite mobil={mobil} /> : <MockAdmin mobil={mobil} />)}
+                    </Previzualizare>
+                    {vedere === 'site' && (
+                      <>
+                        <BulaChat />
+                        {pachet === 'magazin' && <PanouOferte />}
+                        <NotificareDemo />
+                      </>
+                    )}
+                  </DemoContext.Provider>
                 </HlContext.Provider>
 
                 {/* Mesajul scurt */}

@@ -40,6 +40,7 @@ export const Hl = ({ k, children, className = '', inline, fara_eticheta }: HlPro
   return (
     <Tag
       data-hl={evidentiat ? 'on' : undefined}
+      data-hl-eticheta={evidentiat && !fara_eticheta ? '' : undefined}
       initial={reduce ? false : { opacity: 0, scale: 0.96 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
