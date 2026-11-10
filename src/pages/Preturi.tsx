@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
 import {
@@ -16,13 +16,11 @@ import {
   Mail,
   Map,
   PlayCircle,
-  Plug,
   RefreshCw,
   Rocket,
   Server,
   ShieldCheck,
   ShoppingBag,
-  Sparkles,
   Users,
 } from 'lucide-react'
 import Reveal from '../components/motion/Reveal'
@@ -34,20 +32,13 @@ import { PRET_BAZA, etichetaPret } from '../data/erpPricing'
 import { StaggerContainer, StaggerItem } from '../components/motion/Stagger'
 import ErpCalculator from '../components/ErpCalculator'
 import NoWrapDomain from '../components/NoWrapDomain'
-import SiteBuilder from '../components/cms/SiteBuilder'
-import { CATEGORII, PLUGINS, euro, getPachet, type PachetKey, type PluginKey } from '../data/cmsPlugins'
-
-/** Prețul pachetului ca pe carduri: „3.000€”. Prețurile stau în src/data/cmsPlugins.ts. */
-const pretPachet = (k: PachetKey) => euro(getPachet(k).oData).replace(' ', '')
-const lunarPachet = (k: PachetKey) => euro(getPachet(k).lunar).replace(' ', '')
 
 const PACKAGES = [
   {
     icon: Rocket,
-    pachet: 'landing' as PachetKey,
     name: 'Landing page',
-    price: pretPachet('landing'),
-    monthly: `+${lunarPachet('landing')}/lună găzduire & mentenanță`,
+    price: '250€',
+    monthly: '+50€/lună găzduire & mentenanță',
     tagline: 'O singură pagină care convinge — perfectă pentru lansări, servicii sau campanii.',
     featured: false,
     features: [
@@ -66,10 +57,9 @@ const PACKAGES = [
   },
   {
     icon: LayoutTemplate,
-    pachet: 'prezentare' as PachetKey,
     name: 'Site de prezentare',
-    price: pretPachet('prezentare'),
-    monthly: `+${lunarPachet('prezentare')}/lună găzduire & mentenanță`,
+    price: '500€',
+    monthly: '+100€/lună găzduire & mentenanță',
     tagline: 'Până la 7 pagini — cartea de vizită completă a afacerii tale.',
     featured: true,
     features: [
@@ -86,10 +76,9 @@ const PACKAGES = [
   },
   {
     icon: ShoppingBag,
-    pachet: 'magazin' as PachetKey,
     name: 'Magazin online',
-    price: pretPachet('magazin'),
-    monthly: `găzduire & mentenanță de la ${lunarPachet('magazin')}/lună*`,
+    price: '3.000€',
+    monthly: 'găzduire & mentenanță de la 150€/lună*',
     tagline: 'E-commerce complet, cu produse nelimitate — gândit să vândă.',
     featured: false,
     features: [
@@ -200,7 +189,6 @@ const ERP_BENEFITS = [
 
 const PRICE_NAV = [
   { href: '#website-uri', label: 'Website-uri', icon: LayoutTemplate },
-  { href: '#cms', label: 'Plugin-uri', icon: Plug },
   { href: '#erp', label: 'ANDAXI ERP', icon: Calculator },
   { href: '#crm', label: 'ANDAXI CRM', icon: Map },
 ]
@@ -252,8 +240,6 @@ const Preturi = () => {
   usePageMeta('/preturi')
   const reduceMotion = useReducedMotion()
   const zona = useZonaActiva(PRICE_NAV.map((n) => n.href.slice(1)))
-  const [calculator, setCalculator] = useState<{ pachet: PachetKey; plugin: PluginKey | null } | null>(null)
-  const inchideCalculator = useCallback(() => setCalculator(null), [])
 
   return (
     <div className="bg-[color:var(--bg)] font-sans">
@@ -311,13 +297,7 @@ const Preturi = () => {
                 </h2>
                 <p className="mt-1 text-sm leading-relaxed text-[color:var(--text-3)]">
                   Încărcare fulgerătoare, fără licențe lunare ca la
-                  platformele mari — și actualizări incluse.{' '}
-                  <Link
-                    to="/cms"
-                    className="text-[color:var(--text-1)] underline decoration-[color:var(--accent)] underline-offset-4 transition-colors hover:text-[color:var(--accent)]"
-                  >
-                    Descoperă ANDAXI CMS
-                  </Link>
+                  platformele mari — și actualizări incluse.
                 </p>
               </div>
             </div>
@@ -364,7 +344,7 @@ const Preturi = () => {
         className="mx-auto w-full max-w-7xl scroll-mt-24 px-6 pb-24 pt-10 lg:px-8"
       >
         <StaggerContainer className="grid grid-cols-1 items-start gap-6 lg:grid-cols-3">
-          {PACKAGES.map(({ icon: Icon, pachet, name, price, monthly, tagline, featured, features }) => (
+          {PACKAGES.map(({ icon: Icon, name, price, monthly, tagline, featured, features }) => (
             <StaggerItem key={name}>
               <motion.div
                 whileHover={{ y: -6 }}
@@ -418,85 +398,10 @@ const Preturi = () => {
                   Cere o ofertă
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
-                <button
-                  type="button"
-                  onClick={() => setCalculator({ pachet, plugin: null })}
-                  className="mt-3 inline-flex items-center justify-center gap-2 text-sm text-[color:var(--text-3)] transition-colors hover:text-[color:var(--text-1)]"
-                >
-                  <Sparkles className="h-4 w-4 text-[color:var(--accent)]" />
-                  Adaugă plugin-uri și vezi live
-                </button>
               </motion.div>
             </StaggerItem>
           ))}
         </StaggerContainer>
-      </section>
-
-      {/* ===== Plugin-urile ANDAXI CMS ===== */}
-      <section id="cms" className="scroll-mt-24 border-t border-[color:var(--border)]">
-        <div className="mx-auto w-full max-w-7xl px-6 py-24 lg:px-8">
-          <Reveal>
-            <p className="text-xs uppercase tracking-wider text-[color:var(--accent)]">ANDAXI CMS</p>
-          </Reveal>
-          <h2 className="mt-4 max-w-4xl text-3xl font-medium tracking-tight md:text-5xl">
-            <span className="block text-[color:var(--text-1)]">
-              <AnimatedText text="Plugin-uri pentru site." />
-            </span>
-            <ShinyText
-              text="Le adaugi când ai nevoie."
-              color="var(--accent-strong)"
-              shineColor="var(--shine)"
-              speed={3}
-              spread={100}
-              className="font-medium"
-            />
-          </h2>
-          <Reveal delay={0.15}>
-            <p className="mt-5 max-w-2xl text-sm leading-relaxed text-[color:var(--text-3)] md:text-base">
-              Fiecare plugin se adaugă la abonamentul lunar al site-ului, la prețul lui. Unele sunt deja
-              incluse în pachet, iar pe celelalte le pornești sau le oprești oricând.
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.1} className="mt-10">
-            <div className="rounded-3xl border border-[color:var(--border)] p-6 md:p-8">
-              {CATEGORII.map((C) => (
-                <div key={C.key} className="mb-6 last:mb-0">
-                  <p className="mb-3 text-xs uppercase tracking-wider text-[color:var(--text-4)]">{C.name}</p>
-                  <ul className="flex flex-wrap gap-2">
-                    {PLUGINS.filter((p) => p.categorie === C.key).map((P) => (
-                      <li key={P.key}>
-                        <button
-                          type="button"
-                          onClick={() => setCalculator({ pachet: P.doarMagazin ? 'magazin' : 'prezentare', plugin: P.key })}
-                          className="inline-flex items-center gap-2 rounded-full border border-[color:var(--border)] px-3.5 py-2 text-sm text-[color:var(--text-2)] transition-colors hover:border-[color:var(--accent-border)] hover:text-[color:var(--text-1)]"
-                        >
-                          <P.icon className="h-4 w-4 text-[color:var(--accent)]" />
-                          {P.name}
-                          <span className="text-xs tabular-nums text-[color:var(--accent)]">· {euro(P.pret)}</span>
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-              <div className="mt-8 flex flex-col items-start justify-between gap-4 border-t border-[color:var(--border)] pt-6 md:flex-row md:items-center">
-                <p className="max-w-xl text-sm leading-relaxed text-[color:var(--text-3)]">
-                  În Magazin online sunt deja incluse catalogul, blogul, livrarea FAN Courier, o plată cu
-                  cardul, cupoanele și legătura cu ANDAXI ERP. Prețuri pe lună, fără TVA.
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setCalculator({ pachet: 'magazin', plugin: null })}
-                  className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-[color:var(--accent-strong)] px-6 py-3 text-sm font-medium text-white transition-colors duration-300 hover:bg-[color:var(--accent-strong-hover)]"
-                >
-                  <Sparkles className="h-4 w-4" />
-                  Deschide calculatorul live
-                </button>
-              </div>
-            </div>
-          </Reveal>
-        </div>
       </section>
 
       {/* ===== Ce înseamnă găzduire & mentenanță ===== */}
@@ -735,12 +640,6 @@ const Preturi = () => {
           </Reveal>
         </div>
       </section>
-      <SiteBuilder
-        open={calculator !== null}
-        onClose={inchideCalculator}
-        pachetInitial={calculator?.pachet ?? 'magazin'}
-        pluginStart={calculator?.plugin ?? null}
-      />
     </div>
   )
 }

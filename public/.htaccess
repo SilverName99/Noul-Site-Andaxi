@@ -20,7 +20,7 @@
   # aici (de pildă crm.andaxi.ro în dosarul „crm”) moștenește fișierul ăsta, iar
   # regula i-ar înlocui pagina de start cu pagini/crm.html.
   RewriteCond %{HTTP_HOST} ^(www\.)?andaxi\.ro$ [NC]
-  RewriteRule ^(erp|erp/demo|crm|cms|preturi|contact)/?$ pagini/$1.html [L]
+  RewriteRule ^(erp|erp/demo|crm|preturi|contact)/?$ pagini/$1.html [L]
 
   # Aplicația (rutele fără fișier), ca înainte.
   RewriteCond %{REQUEST_FILENAME} !-f

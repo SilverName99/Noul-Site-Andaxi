@@ -10,7 +10,6 @@ import Home from './pages/Home'
 import Erp from './pages/Erp'
 import ErpDemo from './pages/ErpDemo'
 import Crm from './pages/Crm'
-import Cms from './pages/Cms'
 import Preturi from './pages/Preturi'
 import Contact from './pages/Contact'
 
@@ -53,7 +52,6 @@ const AnimatedRoutes = () => {
       <Route path="/erp" element={page(<Erp />)} />
       <Route path="/erp/demo" element={page(<ErpDemo />)} />
       <Route path="/crm" element={page(<Crm />)} />
-      <Route path="/cms" element={page(<Cms />)} />
       <Route path="/preturi" element={page(<Preturi />)} />
       <Route path="/contact" element={page(<Contact />)} />
       <Route path="*" element={page(<Home />)} />
